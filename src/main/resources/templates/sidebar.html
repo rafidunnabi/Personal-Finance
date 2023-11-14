@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sidebar</title>
+</head>
+<body>
+<!-- sidebar.html -->
+<div class="sidebar">
+    <div class="user-info" style="margin-left: 23px; margin-top: 35px; margin-bottom: 15px">
+        <h5 class="username">John Doe</h5>
+    </div>
+    <div class="user-info" style="margin-left: 24px; margin-bottom: 30px">
+        <h6 class="username">Balance: $34534</h6>
+    </div>
+    <a href="#">Home</a>
+    <a href="#">Add Income</a>
+    <a href="#">Income Record</a>
+    <a th:href="@{/addTransaction}">Add Expense</a>
+    <a href="#">Expense Record</a>
+    <a href="#">About</a>
+    <a href="#">Logout</a>
+</div>
+
+</body>
+</html>
