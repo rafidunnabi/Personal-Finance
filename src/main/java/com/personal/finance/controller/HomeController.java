@@ -11,8 +11,12 @@ public class HomeController {
         model.addAttribute("something", "this is coming from the controller.");
         return "homePage";
     }
-    @GetMapping("/addTransaction")
-    public String addTransactionPage() {
-        return "addTransaction";
+    @GetMapping("/addExpense")
+    public String addExpensePage() {
+        return "addExpense";
+    }
+    @GetMapping("/addIncome")
+    public String addIncomePage() {
+        return "addIncome";
     }
 }

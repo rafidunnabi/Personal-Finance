@@ -1,9 +1,9 @@
-const barCanvas = document.getElementById('barMonth');
-        const ctxBar = barCanvas.getContext('2d');
-        const barChart = new Chart(ctxBar, {
+const barCanvasDay = document.getElementById('barDay');
+        const ctxBarDay = barCanvasDay.getContext('2d');
+        const barChartDay = new Chart(ctxBarDay, {
             type: 'bar',
             data: {
-                labels: ['This Month', 'Last Month'],
+                labels: ['Today', 'Yesterday'],
                 datasets: [{
                     label: 'Income',
                     data: [2000, 1500],
@@ -25,7 +25,7 @@ const barCanvas = document.getElementById('barMonth');
                 maintainAspectRatio: false,
                 title: {
                     display: true,
-                    text: 'Monthly Update',
+                    text: 'Daily Update',
                     fontSize: 26
                 },
                 scales: {

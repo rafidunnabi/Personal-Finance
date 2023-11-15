@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Sidebar</title>
-</head>
-<body>
-<!-- sidebar.html -->
-<div class="sidebar">
+<div class="sidebar" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="user-info" style="margin-left: 23px; margin-top: 35px; margin-bottom: 15px">
-        <h5 class="username">John Doe</h5>
+        <h5 class="username" style="color: orange">John Doe</h5>
     </div>
     <div class="user-info" style="margin-left: 24px; margin-bottom: 30px">
-        <h6 class="username">Balance: $34534</h6>
+        <h6 class="username">Balance: <span style="color: #FF5733">$34534</span></h6>
     </div>
-    <a href="#">Home</a>
-    <a href="#">Add Income</a>
-    <a href="#">Income Record</a>
-    <a th:href="@{/addTransaction}">Add Expense</a>
-    <a href="#">Expense Record</a>
-    <a href="#">About</a>
-    <a href="#">Logout</a>
+    <a th:href="@{/}"> <i class="fa-solid fa-house" style="margin-right: 5px;"></i> Home</a>
+    <a href="#"> <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add Income</a>
+    <a th:href="@{/addTransaction}"> <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add Expense</a>
+    <a href="#"><i class="fa-solid fa-timeline" style="margin-right: 5px;"></i> Income Record</a>
+    <a href="#"><i class="fa-solid fa-clipboard-list" style="margin-right: 5px;"></i> Expense Record</a>
+    <a href="#"><i class="fa-solid fa-circle-info" style="margin-right: 5px;"></i>About</a>
+    <a href="#"><i class="fa-solid fa-right-from-bracket" style="margin-right: 8px;"></i>Logout</a>
 </div>
-
-</body>
-</html>

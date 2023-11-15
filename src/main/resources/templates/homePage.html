@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/sidebar.css">
     <link rel="stylesheet" href="/center.css">
     <link rel="stylesheet" href="/expenseModal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .content {
         margin-left: 250px;
@@ -15,8 +16,34 @@
     }
         canvas {
             margin: 0 auto;
-            height: 600px;
+            height: 350px;
         }
+        .dropdown-content {
+      display: none;
+      background-color: #333;
+      position: absolute;
+      left: 90%;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      display: block;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #555;
+    }
+
+    /* Show the dropdown when the 'Income Record' link is hovered or focused */
+    #RecordDropdown:hover .dropdown-content, #RecordDropdown:focus .dropdown-content {
+      display: block;
+    }
+
+
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
@@ -28,15 +55,22 @@
             <h5 class="username" style="color: orange">John Doe</h5>
         </div>
         <div class="user-info" style="margin-left: 24px; margin-bottom: 30px">
-            <h6 class="username">Balance: $34534</h6>
+            <h6 class="username">Balance: <span style="color: #FF5733">$34534</span></h6>
         </div>
-        <a th:href="@{/}">Home</a>
-        <a href="#">Add Income</a>
-        <a href="#">Income Record</a>
-        <a th:href="@{/addTransaction}">Add Expense</a>
-        <a href="#">Expense Record</a>
-        <a href="#">About</a>
-        <a href="#">Logout</a>
+        <a th:href="@{/}"> <i class="fa-solid fa-house" style="margin-right: 5px;"></i> Home</a>
+        <a th:href="@{/addIncome}"> <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add Income</a>
+        <a th:href="@{/addExpense}"> <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add Expense</a>
+        <a href="#"><i class="fa-solid fa-timeline" style="margin-right: 5px;"></i> Income Record</a>
+        <div id="RecordDropdown">
+        <a href="#"><i class="fa-solid fa-clipboard-list" style="margin-right: 5px;"></i> Expense Record</a>
+            <div class="dropdown-content">
+                <a href="#">Income Record</a>
+                <a href="#">Expense Record</a>
+            </div>
+        </div>
+
+        <a href="#"><i class="fa-solid fa-circle-info" style="margin-right: 5px;"></i>About</a>
+        <a href="#"><i class="fa-solid fa-right-from-bracket" style="margin-right: 8px;"></i>Logout</a>
     </div>
 
     <div class="content">
@@ -53,12 +87,42 @@
 
                 <img style="width: 400px; height: 250px; margin-top: 60px" src="/images/home_money.png">
             </div>
+            <div style="margin-top: 100px; width: 900px; display: flex; flex-direction: row; justify-content: space-around;">
+                <div class="card" style="width: 400px; background-color: white; border-radius: 5px; box-shadow: 4 4px 6px 0 rgba(0, 0, 0, 0.5);">
+                    <div class="card-body" style="display: flex; align-items: center; flex-direction: column">
+                        <h3>Wallet Balance</h3>
+                        <h1 style="color: #FF5733">$234523</h1>
+                    </div>
+                </div>
+                <div class="card" style="display: flex; align-items: center; width: 400px; background-color: white; border-radius: 5px; box-shadow: 4 4px 6px 0 rgba(0, 0, 0, 0.5);">
+                    <div class="card-body" style="display: flex; align-items: center; flex-direction: column">
+                        <h3>Total Expense</h3>
+                        <h1 style="color: #50C878">$2344</h1>
+                    </div>
+                </div>
+            </div>
+
+            <canvas id="myChart" style="width:10px; height:7px; max-width: 50%; margin-top: 100px;"></canvas>
+            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 100px;">
+                <div style="width: 400px; height: 350px; margin-right: 100px;">
+                    <canvas id="barDay" style="margin-top: 40px;  height: 400px"></canvas>
+                </div>
+                <div style="width: 400px; height: 350px;">
+                    <canvas id="barWeek" style="margin-top: 40px;  height: 400px"></canvas>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 100px;">
+                <div style="width: 400px; height: 350px; margin-right: 100px;">
+                    <canvas id="barMonth" style="margin-top: 40px;  height: 400px"></canvas>
+                </div>
+                <div style="width: 400px; height: 350px;">
+                    <canvas id="barYear" style="margin-top: 40px;  height: 400px"></canvas>
+                </div>
+            </div>
+
         </div>
-        <canvas id="myChart" style="width:10px; height:7px; max-width: 50%; margin-top: 40px;"></canvas>
-        <div style="display: flex; flex-direction: row; justify-content: space-evenly">
-            <canvas id="barMonth" style="width: -500px; margin-top: 40px;"></canvas>
-            <canvas id="barYear" style="width: 10px; margin-top: 40px;"></canvas>
-        </div>
+
     </div>
 </div>
 <div id="expenseModal" class="overlay">
@@ -87,12 +151,25 @@
         </form>
     </div>
 </div>
+<script>
 
+
+    document.getElementById('RecordDropdown').addEventListener('click', function () {
+      toggleDropdown('RecordDropdown');
+    });
+
+    function toggleDropdown(dropdownId) {
+      var dropdownContent = document.getElementById(dropdownId).getElementsByClassName('dropdown-content')[0];
+      dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8NbTov4+1p" crossorigin="anonymous"></script>
 <script src="script.js" defer></script>
 <script src="financeMonthlyChart.js" defer></script>
 <script src="barChartMonth.js" defer></script>
 <script src="barChartYear.js" defer></script>
+<script src="barChartDay.js" defer></script>
+<script src="barChartWeek.js" defer></script>
 
 </body>
 </html>

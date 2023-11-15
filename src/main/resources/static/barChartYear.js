@@ -8,19 +8,22 @@ const barCanvasYear = document.getElementById('barYear');
                 datasets: [{
                     label: 'Income',
                     data: [2000, 1500],
-                    backgroundColor: '#FF5733',
-                    borderColor: '#FF5733',
-                    barThickness: 40,
+                    backgroundColor: '#ED1D24',
+                    borderColor: '#ED1D24',
+                    categoryPercentage: 0.7,
+                    barPercentage: 0.5,
                 }, {
                     label: 'Expense',
                     data: [1200, 1000],
-                    backgroundColor: '#ddc9b0',
-                    borderColor: '#ddc9b0',
-                    barThickness: 40,
+                    backgroundColor: 'cyan',
+                    borderColor: 'cyan',
+                    categoryPercentage: 0.7,
+                    barPercentage: 0.5,
                 }]
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 title: {
                     display: true,
                     text: 'Yearly Update',
@@ -32,9 +35,6 @@ const barCanvasYear = document.getElementById('barYear');
                             beginAtZero: true
                         }
                     }],
-                    xAxes: [{
-                                barPercentage: 0.4
-                            }]
                 }
             }
         });

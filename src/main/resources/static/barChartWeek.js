@@ -1,14 +1,14 @@
-const barCanvas = document.getElementById('barMonth');
-        const ctxBar = barCanvas.getContext('2d');
-        const barChart = new Chart(ctxBar, {
+const barCanvasWeek = document.getElementById('barWeek');
+        const ctxBarWeek = barCanvasWeek.getContext('2d');
+        const barChartWeek = new Chart(ctxBarWeek, {
             type: 'bar',
             data: {
-                labels: ['This Month', 'Last Month'],
+                labels: ['This Week', 'Last Week'],
                 datasets: [{
                     label: 'Income',
                     data: [2000, 1500],
-                    backgroundColor: '#FF5733',
-                    borderColor: '#FF5733',
+                    backgroundColor: '#50C878',
+                    borderColor: '#50C878',
                     categoryPercentage: 0.7,
                     barPercentage: 0.5,
                 }, {
@@ -25,7 +25,7 @@ const barCanvas = document.getElementById('barMonth');
                 maintainAspectRatio: false,
                 title: {
                     display: true,
-                    text: 'Monthly Update',
+                    text: 'Weekly Update',
                     fontSize: 26
                 },
                 scales: {
