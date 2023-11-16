@@ -19,4 +19,12 @@ public class HomeController {
     public String addIncomePage() {
         return "addIncome";
     }
+    @GetMapping("/chooseDate")
+    public String chooseDatePage() {
+        return "chooseDate";
+    }
+    @GetMapping("/exam")
+    public String exam() {
+        return "exam";
+    }
 }

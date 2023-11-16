@@ -2,12 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Test</title>
+    <title>Bootstrap Sidebar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="/sidebar.css">
     <link rel="stylesheet" href="/center.css">
     <link rel="stylesheet" href="/expenseModal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
         .content {
         margin-left: 250px;
@@ -17,88 +18,10 @@
             margin: 0 auto;
             height: 350px;
         }
-        .accordion-item {
-            background: none;
-            border: none;
-        }
-
-        .accordion-button {
-            background-color: transparent;
-            color: inherit;
-            border: none;
-            border-radius: 0;
-            padding: 1rem;
-            margin: 0;
-            text-align: left;
-        }
-        .accordion-item:first-child .accordion-button {
-    background-color: transparent;
-}
-        .accordion-button:focus {
-            box-shadow: none;
-            outline: none;
-        }
-        .accordion-button:hover {
-            color: #FF5733;
-        }
-        .accordion-collapse {
-            border-top: 1px solid #dee2e6;
-        }
-
-        .accordion-body {
-            padding: 1rem;
-        }
-        .modal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 650px;
-        }
     </style>
 </head>
 <body>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h3>Choose Date</h3>
-                <form action="#" style="margin-top: 30px">
-                    <div class="mb-3">
-                        <label for="startDateInput" class="form-label">Start Date</label>
-                        <input type="date" class="form-control" id="startDateInput" placeholder="Enter date">
-                    </div>
-                    <div class="mb-3">
-                        <label for="endDateInput" class="form-label">End Date</label>
-                        <input type="date" class="form-control" id="endDateInput" placeholder="Enter date">
-                    </div>
-                    <div class="mb-3">
-                        <label for="categorySelect" class="form-label">Category (Optional)</label>
-                        <select class="form-select" id="categorySelect">
-                            <option value="food">Food</option>
-                            <option value="transportation">Transportation</option>
-                            <option value="housing">Housing</option>
-                            <option value="utilities">Utilities</option>
-                            <option value="entertainment">Entertainment</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn" style="margin-left: 5px; margin-right: 5px">Go</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div>
     <div class="sidebar">
         <div class="user-info" style="margin-left: 23px; margin-top: 35px; margin-bottom: 15px">
@@ -110,15 +33,7 @@
         <a th:href="@{/}"> <i class="fa-solid fa-house" style="margin-right: 5px;"></i> HOME</a>
         <a th:href="@{/addIncome}"> <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> ADD INCOME</a>
         <a th:href="@{/addExpense}"> <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> ADD EXPENSE</a>
-        <!--
-        <div id="RecordDropdown">
-        <a href="#"><i class="fa-solid fa-clipboard-list" style="margin-right: 5px;"></i>Record</a>
-            <div class="dropdown-content">
-                <a href="#">Income Record</a>
-                <a href="#">Expense Record</a>
-            </div>
-        </div>
-        -->
+
 
         <div>
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -137,7 +52,7 @@
             </a>
 
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">CHOOSE DATE</a></li>
+                <li><a class="dropdown-item" href="#">CHOOSE DATE</a></li>
                 <li><a class="dropdown-item" href="#">CURRENT WEEK</a></li>
                 <li><a class="dropdown-item" href="#">CURRENT MONTH</a></li>
                 <li><a class="dropdown-item" href="#">LAST 6 MONTHS</a></li>
@@ -145,14 +60,14 @@
             </ul>
         </div>
 
-        <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
+        <div id="accordionExample">
+            <div>
                 <h2 id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <i class="fa-solid fa-clipboard-list" style="margin-right: 10px;"></i>RECORD BY DATE
+                    <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <i class="fa-solid fa-plus" style="margin-right: 5px;"></i>Record By Date
                     </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                     </div>
@@ -240,13 +155,38 @@
     </div>
 
 </div>
+
+<div class="modal-container">
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8NbTov4+1p" crossorigin="anonymous"></script>
+
 <script src="script.js" defer></script>
 <script src="financeMonthlyChart.js" defer></script>
 <script src="barChartMonth.js" defer></script>
 <script src="barChartYear.js" defer></script>
 <script src="barChartDay.js" defer></script>
 <script src="barChartWeek.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </body>
 </html>
