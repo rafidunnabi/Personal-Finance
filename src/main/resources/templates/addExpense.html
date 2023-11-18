@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/table.css">
+    <link rel="stylesheet" href="/sidebar.css">
+    <style>
+        .content {
+        margin-left: 250px;
+        margin-top: 40px;
+        }
+        canvas {
+            margin: 0 auto;
+            width: 100%;
+            height: 500px;
+        }
+        .total-expense-container {
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .total-expense-amount {
+            font-size: 30px;
+            color: #dc3545;
+        }
+        .form-expense-container {
+            width: 40%;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            background-color: #dc3545;
+            color: white;
+            border-radius: 4px;
+            opacity: 0.9;
+            height: 30px;
+        }
+
+        .btn:hover {
+            background-color: #ddc9b0;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <div class="user-info" style="margin-left: 23px; margin-top: 35px; margin-bottom: 15px">
+        <h5 class="username">John Doe</h5>
+    </div>
+    <div class="user-info" style="margin-left: 24px; margin-bottom: 30px">
+        <h6 class="username">Balance: $34534</h6>
+    </div>
+    <a th:href="@{/}">Home</a>
+    <a href="#">Add Income</a>
+    <a href="#">Income Record</a>
+    <a th:href="@{/addExpense}">Add Expense</a>
+    <a href="#">Expense Record</a>
+    <a href="#">About</a>
+    <a href="#">Logout</a>
+</div>
+<div class="content">
+    <div class="total-expense-container">
+        <span style="font-size: 26px;">Total Expense:   </span>
+        <span class="total-expense-amount">$1,200.00</span>
+    </div>
+
+    <div  style="display: flex; flex-direction: row; justify-content: space-evenly">
+        <div class="form-expense-container" style="margin-top: 40px;">
+            <h3>Add Expense</h3>
+            <form action="#" style="margin-top: 30px">
+                <div class="mb-3">
+                    <label for="amountInput" class="form-label">Amount</label>
+                    <input type="number" class="form-control" id="amountInput" placeholder="Enter amount">
+                </div>
+
+                <div class="mb-3">
+                    <label for="categorySelect" class="form-label">Category</label>
+                    <select class="form-select" id="categorySelect">
+                        <option value="food">Food</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="housing">Housing</option>
+                        <option value="utilities">Utilities</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="dateInput" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="dateInput" placeholder="Enter date">
+                </div>
+
+                <div class="mb-3">
+                    <label for="descriptionInput" class="form-label">Description</label>
+                    <textarea class="form-control" id="descriptionInput" rows="3" placeholder="Enter description"></textarea>
+                </div>
+
+                <button type="submit" class="btn" style="margin-left: 5px; margin-right: 5px">Submit</button>
+            </form>
+        </div>
+
+        <div style="display: flex; flex-direction: column; margin-top: 40px; padding: 20px;">
+            <h3>All Expenses</h3>
+            <section class="intro">
+                <div class="bg-image h-100" style="margin-top: 10px;">
+                    <div class="mask d-flex align-items-center h-100">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <div class="card shadow-2-strong">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-borderless mb-0">
+                                                    <thead>
+                                                    <tr>
+
+                                                        <th scope="col">Category</th>
+                                                        <th scope="col">Description</th>
+                                                        <th scope="col">Date</th>
+                                                        <th scope="col">Amount</th>
+                                                        <th scope="col">Edit</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Tiger Nixon</td>
+                                                        <td>System Architect</td>
+                                                        <td>61</td>
+                                                        <td>Edinburgh</td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-danger btn-sm px-3">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sonya Frost</td>
+                                                        <td>Software Engineer</td>
+                                                        <td>23</td>
+                                                        <td>Edinburgh</td>
+                                                        <td>
+                                                            <span id="boot-icon" class="bi bi-trash-fill" style="font-size: 18px; color: rgb(255, 0, 0); opacity: 0.7; -webkit-text-stroke-width: 0px;"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jena Gaines</td>
+                                                        <td>Office Manager</td>
+                                                        <td>30</td>
+                                                        <td>London</td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-danger btn-sm px-3">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Quinn Flynn</td>
+                                                        <td>Support Lead</td>
+                                                        <td>22</td>
+                                                        <td>Edinburgh</td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-danger btn-sm px-3">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Charde Marshall</td>
+                                                        <td>Regional Director</td>
+                                                        <td>36</td>
+                                                        <td>San Francisco</td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-danger btn-sm px-3">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Haley Kennedy</td>
+                                                        <td>Senior Marketing Designer</td>
+                                                        <td>43</td>
+                                                        <td>London</td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-danger btn-sm px-3">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tatyana Fitzpatrick</td>
+                                                        <td>Regional Director</td>
+                                                        <td>19</td>
+                                                        <td>Warsaw</td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-danger btn-sm px-3">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
