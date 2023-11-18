@@ -21,8 +21,11 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+<<<<<<< HEAD
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	runtimeOnly 'org.postgresql:postgresql'
+=======
+>>>>>>> ca9d13969b0b00cc5d95d771eedc208a31166201
 }
 
 tasks.named('bootBuildImage') {
