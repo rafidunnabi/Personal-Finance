@@ -23,14 +23,9 @@ public class HomeController {
     public String chooseDatePage() {
         return "chooseDate";
     }
-<<<<<<< HEAD
+
     @GetMapping("/register")
     public String register() {
         return "register";
-=======
-    @GetMapping("/exam")
-    public String exam() {
-        return "exam";
->>>>>>> ca9d13969b0b00cc5d95d771eedc208a31166201
     }
 }
