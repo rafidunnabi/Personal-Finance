@@ -18,7 +18,7 @@
                     <h4>Login</h4>
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/login}" method="post">
+                    <form th:action="@{/login}" method="post" th:object="${loginForm}">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username" required>

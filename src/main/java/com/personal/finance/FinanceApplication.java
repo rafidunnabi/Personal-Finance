@@ -12,8 +12,5 @@ public class FinanceApplication {
 		SpringApplication.run(FinanceApplication.class, args);
 	}
 
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+
 }

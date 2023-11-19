@@ -20,7 +20,7 @@ public class RegistrationController {
     public String registerUser(@ModelAttribute("user") User user, Model model) {
         try {
             userService.registerUser(user);
-            return "redirect:/homePage";
+            return "redirect:/";
         } catch (DuplicateKeyException e) {
             model.addAttribute("error", "Email address already exists");
             return "register";

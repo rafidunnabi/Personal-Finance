@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     @GetMapping
     String getPeople(Model model) {
-        model.addAttribute("something", "this is coming from the controller.");
         return "homePage";
     }
     @GetMapping("/addExpense")
