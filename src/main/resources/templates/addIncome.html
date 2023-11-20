@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/table.css">
     <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/body.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .content {
         margin-left: 250px;
@@ -46,15 +52,19 @@
         }
 
         .btn {
-            background-color: #FF5733;
+            background-color: #50C878;
             color: white;
             border-radius: 4px;
             opacity: 0.9;
             height: 30px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            padding-left: 14px;
+            padding-right: 14px;
         }
 
         .btn:hover {
-            background-color: #ddc9b0;
+            background-color: #FFA500;
             color: white;
         }
     </style>
@@ -62,23 +72,46 @@
 <body>
 <div class="sidebar">
     <div class="user-info" style="margin-left: 23px; margin-top: 35px; margin-bottom: 15px">
-        <h5 class="username">John Doe</h5>
+        <h5 class="username" style="color: white"><i class="fa-solid fa-user" style="margin-right: 15px"> </i>John Doe</h5>
     </div>
     <div class="user-info" style="margin-left: 24px; margin-bottom: 30px">
-        <h6 class="username">Balance: $34534</h6>
+        <h6 class="username" style="color: white">Balance: <span style="color: orange">$34534</span></h6>
     </div>
-    <a th:href="@{/}">Home</a>
-    <a href="@{/addIncome}">Add Income</a>
-    <a href="#">Income Record</a>
-    <a th:href="@{/addExpense}">Add Expense</a>
-    <a href="#">Expense Record</a>
-    <a href="#">About</a>
-    <a href="#">Logout</a>
+    <a th:href="@{/}"> <i class="fa-solid fa-house" style="margin-right: 5px;"></i> Home</a>
+    <a th:href="@{/addIncome}"> <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add Income</a>
+    <a th:href="@{/addExpense}"> <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add Expense</a>
+
+    <div>
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-clipboard-list" style="margin-right: 10px;"></i>Record
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Income Record</a>
+            <a class="dropdown-item" href="#">Expense Record</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-clipboard-list" style="margin-right: 10px;"></i>Record By Date
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Choose Date</a></li>
+            <li><a class="dropdown-item" href="#">Current Week</a></li>
+            <li><a class="dropdown-item" href="#">Current Month</a></li>
+            <li><a class="dropdown-item" href="#">Last 6 Months</a></li>
+            <li><a class="dropdown-item" href="#">Current Year</a></li>
+        </ul>
+    </div>
+    <a href="#"><i class="fa-solid fa-circle-info" style="margin-right: 5px;"></i>About</a>
+    <a href="#"><i class="fa-solid fa-right-from-bracket" style="margin-right: 8px;"></i>Logout</a>
 </div>
 <div class="content">
-    <div class="total-expense-container">
-        <span style="font-size: 26px;">Total Income:   </span>
-        <span class="total-expense-amount">$1,200.00</span>
+    <div>
+        <span style="font-size: 40px;">Total Income:   </span>
+        <span style="color: orange; font-size: 40px;">$1,200.00</span>
     </div>
 
     <div  style="display: flex; flex-direction: row; justify-content: space-evenly">
@@ -118,7 +151,7 @@
                     <textarea class="form-control" th:field="*{description}" id="descriptionInput" rows="3" placeholder="Enter description"></textarea>
                 </div>
 
-                <button type="submit" class="btn" style="margin-left: 5px; margin-right: 5px">Submit</button>
+                <button type="submit" class="btn" style="margin-left: 5px; margin-right: 5px; font-size: 15px;">Submit</button>
             </form>
         </div>
 
@@ -145,78 +178,14 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>Tiger Nixon</td>
-                                                        <td>System Architect</td>
-                                                        <td>61</td>
-                                                        <td>Edinburgh</td>
+                                                    <tr th:each="income : ${recentIncomes}">
+                                                        <td th:text="${income.category}"></td>
+                                                        <td th:text="${income.description}"></td>
+                                                        <td th:text="${income.date}"></td>
+                                                        <td th:text="${income.amount}"></td>
                                                         <td>
                                                             <button type="button" class="btn btn-danger btn-sm px-3">
-                                                                <i class="fas fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Sonya Frost</td>
-                                                        <td>Software Engineer</td>
-                                                        <td>23</td>
-                                                        <td>Edinburgh</td>
-                                                        <td>
-                                                            <span id="boot-icon" class="bi bi-trash-fill" style="font-size: 18px; color: rgb(255, 0, 0); opacity: 0.7; -webkit-text-stroke-width: 0px;"></span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Jena Gaines</td>
-                                                        <td>Office Manager</td>
-                                                        <td>30</td>
-                                                        <td>London</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-danger btn-sm px-3">
-                                                                <i class="fas fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Quinn Flynn</td>
-                                                        <td>Support Lead</td>
-                                                        <td>22</td>
-                                                        <td>Edinburgh</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-danger btn-sm px-3">
-                                                                <i class="fas fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Charde Marshall</td>
-                                                        <td>Regional Director</td>
-                                                        <td>36</td>
-                                                        <td>San Francisco</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-danger btn-sm px-3">
-                                                                <i class="fas fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Haley Kennedy</td>
-                                                        <td>Senior Marketing Designer</td>
-                                                        <td>43</td>
-                                                        <td>London</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-danger btn-sm px-3">
-                                                                <i class="fas fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Tatyana Fitzpatrick</td>
-                                                        <td>Regional Director</td>
-                                                        <td>19</td>
-                                                        <td>Warsaw</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-danger btn-sm px-3">
-                                                                <i class="fas fa-times"></i>
+                                                                <i class="fa-regular fa-pen-to-square"></i>
                                                             </button>
                                                         </td>
                                                     </tr>

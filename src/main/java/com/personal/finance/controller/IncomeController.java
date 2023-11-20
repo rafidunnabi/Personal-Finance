@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 public class IncomeController {
@@ -28,7 +29,13 @@ public class IncomeController {
     @GetMapping("/addIncome")
     public String showAddIncomeForm(Model model) {
         model.addAttribute("income", new Income());
-        return "addIncome"; // Assuming the template name is "addIncome.html"
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+
+        List<Income> recentIncomes = incomeService.getRecentIncomes(userId);
+
+        model.addAttribute("recentIncomes", recentIncomes);
+        return "addIncome";
     }
     @PostMapping("/addIncome")
     public String addIncomeRecord(
@@ -45,6 +52,18 @@ public class IncomeController {
             model.addAttribute("userId", userId);
         } else {
         }
+        return "redirect:/addIncome";
+    }
+
+    @GetMapping("/recentIncomes")
+    public String showRecentIncomes(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+
+        List<Income> recentIncomes = incomeService.getRecentIncomes(userId);
+
+        model.addAttribute("recentIncomes", recentIncomes);
+
         return "redirect:/addIncome";
     }
 }
