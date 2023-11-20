@@ -84,32 +84,38 @@
     <div  style="display: flex; flex-direction: row; justify-content: space-evenly">
         <div class="form-expense-container" style="margin-top: 40px;">
             <h3>Add Income</h3>
-            <form action="#" style="margin-top: 30px">
+            <form style="margin-top: 30px" method="post" th:action="@{/addIncome}" th:object="${income}">
                 <div class="mb-3">
                     <label for="amountInput" class="form-label">Amount</label>
-                    <input type="number" class="form-control" id="amountInput" placeholder="Enter amount">
+                    <input type="number" th:field="*{amount}" class="form-control" id="amountInput" placeholder="Enter amount">
                 </div>
 
                 <div class="mb-3">
                     <label for="categorySelect" class="form-label">Category</label>
-                    <select class="form-select" id="categorySelect">
-                        <option value="food">Food</option>
-                        <option value="transportation">Transportation</option>
-                        <option value="housing">Housing</option>
-                        <option value="utilities">Utilities</option>
-                        <option value="entertainment">Entertainment</option>
-                        <option value="other">Other</option>
+                    <select class="form-select" id="categorySelect" th:field="*{category}">
+                        <option value="Capital Gains">Capital Gains</option>
+                        <option value="Passive Income">Passive Income</option>
+                        <option value="Active Income">Active Income</option>
+                        <option value="Rental Income">Rental Income</option>
+                        <option value="Royalty Income">Royalty Income</option>
+                        <option value="Dividends">Dividends</option>
+                        <option value="Interest">Interest</option>
+                        <option value="Profit Income">Profit Income</option>
+                        <option value="Salary">Salary</option>
+                        <option value="Commission">Commission</option>
+                        <option value="Government Payments">Government Payments</option>
+                        <option value="Others">Others</option>
                     </select>
                 </div>
 
                 <div class="mb-3">
                     <label for="dateInput" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="dateInput" placeholder="Enter date">
+                    <input type="date" th:field="*{date}" class="form-control" id="dateInput" placeholder="Enter date">
                 </div>
 
                 <div class="mb-3">
                     <label for="descriptionInput" class="form-label">Description</label>
-                    <textarea class="form-control" id="descriptionInput" rows="3" placeholder="Enter description"></textarea>
+                    <textarea class="form-control" th:field="*{description}" id="descriptionInput" rows="3" placeholder="Enter description"></textarea>
                 </div>
 
                 <button type="submit" class="btn" style="margin-left: 5px; margin-right: 5px">Submit</button>

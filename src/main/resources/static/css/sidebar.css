@@ -2,14 +2,14 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 250px;
-  background-color: #f2f2f2;
+  width: 230px;
+  background-color: #24272e;
   height: 100%;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar a {
-  color: black;
+  color: white;
   text-decoration: none;
   padding-left: 26px;
   padding-top: 8px;
@@ -24,7 +24,7 @@
 }
 
 .sidebar a:hover {
-  background-color: #eee;
+  background-color: #24272e;
   color: #FF5733;
 }
 

@@ -14,10 +14,6 @@ public class HomeController {
     public String addExpensePage() {
         return "addExpense";
     }
-    @GetMapping("/addIncome")
-    public String addIncomePage() {
-        return "addIncome";
-    }
     @GetMapping("/chooseDate")
     public String chooseDatePage() {
         return "chooseDate";

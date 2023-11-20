@@ -52,4 +52,14 @@ public class UserRepositoryImpl implements UserRepository{
         String sql = "INSERT INTO users (user_name, email, password) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, user.getUsername(), user.getEmail(), bCryptPasswordEncoder.encode(user.getPassword()));
     }
+
+    @Override
+        public Integer findUserIdByEmail(String email) {
+            String sql = "SELECT id FROM users WHERE email = ?";
+            try {
+                return jdbcTemplate.queryForObject(sql, Integer.class, email);
+            } catch (Exception e) {
+                return null;
+            }
+        }
 }

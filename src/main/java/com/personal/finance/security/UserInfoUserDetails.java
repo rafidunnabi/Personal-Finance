@@ -3,18 +3,15 @@ package com.personal.finance.security;
 import com.personal.finance.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 public class UserInfoUserDetails implements UserDetails {
 
-    private String user_name;
+    private String email;
     private String password;
 
     public UserInfoUserDetails(User user) {
-        user_name=user.getUsername();
+        email=user.getEmail();
         password=user.getPassword();
     }
     @Override
@@ -29,7 +26,7 @@ public class UserInfoUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user_name;
+        return email;
     }
 
     @Override
