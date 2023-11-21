@@ -1,209 +1,409 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Test</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/sidebar.css">
-    <link rel="stylesheet" href="/css/center.css">
-    <link rel="stylesheet" href="/css/expenseModal.css">
-    <link rel="stylesheet" href="/css/body.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/sidebar.css" />
+    <link rel="stylesheet" href="/css/center.css" />
+    <link rel="stylesheet" href="/css/expenseModal.css" />
+    <link rel="stylesheet" href="/css/body.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <style>
-        .content {
+      #openPopup:focus {
+        outline: none;
+      }
+      .content {
         margin-left: 250px;
         margin-top: 40px;
-        }
-        canvas {
-            margin: 0 auto;
-            height: 350px;
-        }
-        .accordion-item {
-            background: none;
-            border: none;
-        }
+      }
+      canvas {
+        margin: 0 auto;
+        height: 350px;
+      }
+      .accordion-item {
+        background: none;
+        border: none;
+      }
 
-        .accordion-button {
-            background-color: transparent;
-            color: inherit;
-            border: none;
-            border-radius: 0;
-            padding: 1rem;
-            margin: 0;
-            text-align: left;
-        }
-        .accordion-item:first-child .accordion-button {
-            background-color: transparent;
-        }
-        .accordion-button:focus {
-            box-shadow: none;
-            outline: none;
-        }
-        .accordion-button:hover {
-            color: #FF5733;
-        }
-        .accordion-collapse {
-            border-top: 1px solid #dee2e6;
-        }
+      .accordion-button {
+        background-color: transparent;
+        color: inherit;
+        border: none;
+        border-radius: 0;
+        padding: 1rem;
+        margin: 0;
+        text-align: left;
+      }
+      .accordion-item:first-child .accordion-button {
+        background-color: transparent;
+      }
+      .accordion-button:focus {
+        box-shadow: none;
+        outline: none;
+      }
+      .accordion-button:hover {
+        color: #ff5733;
+      }
+      .accordion-collapse {
+        border-top: 1px solid #dee2e6;
+      }
 
-        .accordion-body {
-            padding: 1rem;
-        }
-        .modal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 650px;
-        }
+      .accordion-body {
+        padding: 1rem;
+      }
+      .modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 650px;
+      }
     </style>
-</head>
-<body>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+  </head>
+  <body>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h3>Choose Date</h3>
-                <form action="#" style="margin-top: 30px">
-                    <div class="mb-3">
-                        <label for="startDateInput" class="form-label">Start Date</label>
-                        <input type="date" class="form-control" id="startDateInput" placeholder="Enter date">
-                    </div>
-                    <div class="mb-3">
-                        <label for="endDateInput" class="form-label">End Date</label>
-                        <input type="date" class="form-control" id="endDateInput" placeholder="Enter date">
-                    </div>
-                    <div class="mb-3">
-                        <label for="categorySelect" class="form-label">Category (Optional)</label>
-                        <select class="form-select" id="categorySelect">
-                            <option value="food">Food</option>
-                            <option value="transportation">Transportation</option>
-                            <option value="housing">Housing</option>
-                            <option value="utilities">Utilities</option>
-                            <option value="entertainment">Entertainment</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn" style="margin-left: 5px; margin-right: 5px">Go</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">See History</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <h3>Choose Date</h3>
+            <form
+              th:action="@{/customHistory}"
+              method="post"
+              style="margin-top: 30px"
+            >
+              <div class="mb-3">
+                <label for="startDateInput" class="form-label"
+                  >Start Date</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="startDateInput"
+                  placeholder="Enter date"
+                  th:name="startDate"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="endDateInput" class="form-label">End Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="endDateInput"
+                  placeholder="Enter date"
+                  th:name="endDate"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="categorySelect" class="form-label"
+                  >Category (Optional)</label
+                >
+                <select
+                  class="form-select"
+                  id="categorySelect"
+                  th:name="category"
+                >
+                  <option value="food">Food</option>
+                  <option value="transportation">Transportation</option>
+                  <option value="housing">Housing</option>
+                  <option value="utilities">Utilities</option>
+                  <option value="entertainment">Entertainment</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <button
+                type="submit"
+                class="btn"
+                style="margin-left: 5px; margin-right: 5px"
+              >
+                Go
+              </button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn">Go</button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<div>
-    <div class="sidebar">
-        <div class="user-info" style="margin-left: 23px; margin-top: 35px; margin-bottom: 15px">
-            <h5 class="username" style="color: white"><i class="fa-solid fa-user" style="margin-right: 15px"> </i>John Doe</h5>
+    <div>
+      <div class="sidebar">
+        <div
+          class="user-info"
+          style="margin-left: 23px; margin-top: 35px; margin-bottom: 15px"
+        >
+          <h5 class="username" style="color: white">
+            <i class="fa-solid fa-user" style="margin-right: 15px"> </i>John Doe
+          </h5>
         </div>
         <div class="user-info" style="margin-left: 24px; margin-bottom: 30px">
-            <h6 class="username" style="color: white">Balance: <span style="color: orange">$34534</span></h6>
+          <h6 class="username" style="color: white">
+            Balance: <span style="color: orange">$34534</span>
+          </h6>
         </div>
-        <a th:href="@{/}"> <i class="fa-solid fa-house" style="margin-right: 5px;"></i> Home</a>
-        <a th:href="@{/addIncome}"> <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add Income</a>
-        <a th:href="@{/addExpense}"> <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add Expense</a>
+        <a th:href="@{/}">
+          <i class="fa-solid fa-house" style="margin-right: 5px"></i> Home</a
+        >
+        <a th:href="@{/addIncome}">
+          <i class="fa-solid fa-plus" style="margin-right: 5px"></i> Add
+          Income</a
+        >
+        <a th:href="@{/addExpense}">
+          <i class="fa-solid fa-plus" style="margin-right: 5px"></i> Add
+          Expense</a
+        >
 
         <div>
-            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa-solid fa-clipboard-list" style="margin-right: 10px;"></i>Record
-            </a>
+          <a
+            class="dropdown-toggle"
+            href="#"
+            role="button"
+            id="dropdownMenuLink5"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i
+            >Record
+          </a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Income Record</a>
-                <a class="dropdown-item" href="#">Expense Record</a>
-            </div>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Income Record</a>
+            <a class="dropdown-item" href="#">Expense Record</a>
+          </div>
         </div>
-
-        <div class="dropdown">
-            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-clipboard-list" style="margin-right: 10px;"></i>Record By Date
-            </a>
-
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Choose Date</a></li>
-                <li><a class="dropdown-item" href="#">Current Week</a></li>
-                <li><a class="dropdown-item" href="#">Current Month</a></li>
-                <li><a class="dropdown-item" href="#">Last 6 Months</a></li>
-                <li><a class="dropdown-item" href="#">Current Year</a></li>
-            </ul>
+        <!-- Default dropend button -->
+        <div
+          class="dropend"
+          style="display: flex; justify-content: left; width: 230px"
+        >
+          <a
+            href="#"
+            class="dropdown-toggle border-0"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            style="width: 230px; background: none; border: none; outline: none"
+          >
+            <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i
+            >Record By Date
+          </a>
+          <ul class="dropdown-menu" style="background-color: #24272e">
+            <li>
+              <a
+                href="#"
+                class="dropdown-item"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                >Choose Date</a
+              >
+            </li>
+            <li><a class="dropdown-item" href="#">Current Week</a></li>
+            <li><a class="dropdown-item" href="#">Current Month</a></li>
+            <li><a class="dropdown-item" href="#">Last 6 Months</a></li>
+            <li><a class="dropdown-item" href="#">Current Year</a></li>
+          </ul>
         </div>
-        <a href="#"><i class="fa-solid fa-circle-info" style="margin-right: 5px;"></i>About</a>
-        <a href="#"><i class="fa-solid fa-right-from-bracket" style="margin-right: 8px;"></i>Logout</a>
-    </div>
+        <a href="#"
+          ><i class="fa-solid fa-circle-info" style="margin-right: 5px"></i
+          >About</a
+        >
+        <a href="#"
+          ><i
+            class="fa-solid fa-right-from-bracket"
+            style="margin-right: 8px"
+          ></i
+          >Logout</a
+        >
+      </div>
 
-    <div class="content">
+      <div class="content">
         <div class="centering">
-            <h2 style="font-size: 40px"><strong>Empower Your Financial Journey</strong></h2>
-            <p>Your Personalized Gateway to Smart Money Management</p>
-            <div style="width: 1000px; display: flex; flex-direction: row; justify-content: space-between; align-items: center">
-                <div style="width: 500px; display: flex; flex-direction: column;">
-
-                    <h2><i class="fa-solid fa-coins" style="margin-right: 5px"></i> SAVE YOUR <span style="color: orange;">MONEY</span></h2>
-                    <h5 style="color: grey">Empower your financial journey with our personal finance application and
-                        take control of your expenses effortlessly.</h5>
-                </div>
-
-                <img style="width: 400px; height: 250px; margin-top: 60px" src="/images/home_money.png">
-            </div>
-            <div style="margin-top: 100px; width: 900px; display: flex; flex-direction: row; justify-content: space-around;">
-                <div class="card" style="width: 400px; background-color: white; border-radius: 5px; box-shadow: 4 4px 6px 0 rgba(0, 0, 0, 0.5);">
-                    <div class="card-body" style="display: flex; align-items: center; flex-direction: column">
-                        <h3>Balance</h3>
-                        <h1 style="color: #FF5733">$234523</h1>
-                    </div>
-                </div>
-                <div class="card" style="display: flex; align-items: center; width: 400px; background-color: white; border-radius: 5px; box-shadow: 4 4px 6px 0 rgba(0, 0, 0, 0.5);">
-                    <div class="card-body" style="display: flex; align-items: center; flex-direction: column">
-                        <h3>Total Expense</h3>
-                        <h1 style="color: #50C878">$2344</h1>
-                    </div>
-                </div>
+          <h2 style="font-size: 40px">
+            <strong>Empower Your Financial Journey</strong>
+          </h2>
+          <p>Your Personalized Gateway to Smart Money Management</p>
+          <div
+            style="
+              width: 1000px;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <div style="width: 500px; display: flex; flex-direction: column">
+              <h2>
+                <i class="fa-solid fa-coins" style="margin-right: 5px"></i> SAVE
+                YOUR <span style="color: orange">MONEY</span>
+              </h2>
+              <h5 style="color: grey">
+                Empower your financial journey with our personal finance
+                application and take control of your expenses effortlessly.
+              </h5>
             </div>
 
-            <canvas id="myChart" style="width:10px; height:7px; max-width: 50%; margin-top: 100px;"></canvas>
-            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 100px;">
-                <div style="width: 400px; height: 350px; margin-right: 100px;">
-                    <canvas id="barDay" style="margin-top: 40px;  height: 400px"></canvas>
-                </div>
-                <div style="width: 400px; height: 350px;">
-                    <canvas id="barWeek" style="margin-top: 40px;  height: 400px"></canvas>
-                </div>
+            <img
+              style="width: 400px; height: 250px; margin-top: 60px"
+              src="/images/home_money.png"
+            />
+          </div>
+          <div
+            style="
+              margin-top: 100px;
+              width: 900px;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-around;
+            "
+          >
+            <div
+              class="card"
+              style="
+                width: 400px;
+                background-color: white;
+                border-radius: 5px;
+                box-shadow: 4 4px 6px 0 rgba(0, 0, 0, 0.5);
+              "
+            >
+              <div
+                class="card-body"
+                style="
+                  display: flex;
+                  align-items: center;
+                  flex-direction: column;
+                "
+              >
+                <h3>Balance</h3>
+                <h1 style="color: #04bade">$234523</h1>
+              </div>
             </div>
-
-            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 100px;">
-                <div style="width: 400px; height: 350px; margin-right: 100px;">
-                    <canvas id="barMonth" style="margin-top: 40px;  height: 400px"></canvas>
-                </div>
-                <div style="width: 400px; height: 350px;">
-                    <canvas id="barYear" style="margin-top: 40px;  height: 400px"></canvas>
-                </div>
+            <div
+              class="card"
+              style="
+                display: flex;
+                align-items: center;
+                width: 400px;
+                background-color: white;
+                border-radius: 5px;
+                box-shadow: 4 4px 6px 0 rgba(0, 0, 0, 0.5);
+              "
+            >
+              <div
+                class="card-body"
+                style="
+                  display: flex;
+                  align-items: center;
+                  flex-direction: column;
+                "
+              >
+                <h3>Total Expense</h3>
+                <h1 style="color: #50c878">$2344</h1>
+              </div>
             </div>
+          </div>
 
+          <canvas
+            id="myChart"
+            style="width: 10px; height: 7px; max-width: 50%; margin-top: 100px"
+          ></canvas>
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              margin-top: 100px;
+            "
+          >
+            <div style="width: 400px; height: 350px; margin-right: 100px">
+              <canvas
+                id="barDay"
+                style="margin-top: 40px; height: 400px"
+              ></canvas>
+            </div>
+            <div style="width: 400px; height: 350px">
+              <canvas
+                id="barWeek"
+                style="margin-top: 40px; height: 400px"
+              ></canvas>
+            </div>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              margin-top: 100px;
+            "
+          >
+            <div style="width: 400px; height: 350px; margin-right: 100px">
+              <canvas
+                id="barMonth"
+                style="margin-top: 40px; height: 400px"
+              ></canvas>
+            </div>
+            <div style="width: 400px; height: 350px">
+              <canvas
+                id="barYear"
+                style="margin-top: 40px; height: 400px"
+              ></canvas>
+            </div>
+          </div>
         </div>
-
+      </div>
     </div>
-
-</div>
-<script src="js/script.js" defer></script>
-<script src="js/financeMonthlyChart.js" defer></script>
-<script src="js/barChartMonth.js" defer></script>
-<script src="js/barChartYear.js" defer></script>
-<script src="js/barChartDay.js" defer></script>
-<script src="js/barChartWeek.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-</body>
+    <script src="js/script.js" defer></script>
+    <script src="js/financeMonthlyChart.js" defer></script>
+    <script src="js/barChartMonth.js" defer></script>
+    <script src="js/barChartYear.js" defer></script>
+    <script src="js/barChartDay.js" defer></script>
+    <script src="js/barChartWeek.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  </body>
 </html>

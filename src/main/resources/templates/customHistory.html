@@ -71,7 +71,7 @@
       }
 
       .btn {
-        background-color: rgb(240, 42, 7);
+        background-color: #04bade;
         color: white;
         border-radius: 4px;
         opacity: 0.9;
@@ -84,7 +84,7 @@
       }
 
       .btn:hover {
-        background-color: red;
+        background-color: #0497c7;
         color: white;
       }
     </style>
@@ -130,7 +130,7 @@
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">Expense Record</a>
+          <a class="dropdown-item" href="#">Income Record</a>
           <a class="dropdown-item" href="#">Expense Record</a>
         </div>
       </div>
@@ -173,17 +173,26 @@
       >
     </div>
     <div class="content">
-      <div>
-        <span style="font-size: 40px; margin-left: 40px"
-          ><strong
-            ><i
-              class="fa-solid fa-hand-holding-dollar"
-              style="margin-right: 20px"
-            ></i
-            >Total Expense:</strong
-          >
-        </span>
-        <span style="color: rgb(240, 42, 7); font-size: 40px">$1,200.00</span>
+      <div
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+        "
+      >
+        <div>
+          <span style="font-size: 40px; margin-left: 40px"
+            ><strong>Income:</strong>
+          </span>
+          <span style="color: #04bade; font-size: 40px">$1,200.00</span>
+        </div>
+
+        <div>
+          <span style="font-size: 40px; margin-left: 40px"
+            ><strong>Expense:</strong>
+          </span>
+          <span style="color: rgb(240, 42, 7); font-size: 40px">$1,200.00</span>
+        </div>
       </div>
 
       <div
@@ -194,103 +203,6 @@
         "
       >
         <div
-          class="form-expense-container"
-          style="margin-top: 40px; width: 420px"
-        >
-          <h3>
-            <strong
-              ><i
-                class="fa-regular fa-square-plus"
-                style="margin-right: 5px"
-              ></i>
-              Add Expense</strong
-            >
-          </h3>
-          <form
-            style="margin-top: 30px"
-            method="post"
-            th:action="@{/addExpense}"
-            th:object="${expense}"
-          >
-            <div class="mb-3">
-              <label for="amountInput" class="form-label">Amount</label>
-              <input
-                type="number"
-                th:field="*{amount}"
-                class="form-control"
-                id="amountInput"
-                placeholder="Enter amount"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="categorySelect" class="form-label">Category</label>
-              <select
-                class="form-select"
-                id="categorySelect"
-                th:field="*{category}"
-              >
-                <option value="Education">Education</option>
-                <option value="Electricity Bill">Electricity Bill</option>
-                <option value="Fitness">Fitness</option>
-                <option value="Food & Beverage">Food & Beverage</option>
-                <option value="Fun & Entertainment">Fun & Entertainment</option>
-                <option value="Gas Bill">Gas Bill</option>
-                <option value="Gifts & Donations">Gifts & Donations</option>
-                <option value="Home Maintenance">Home Maintenance</option>
-                <option value="Home Services">Home Services</option>
-                <option value="Houseware">Houseware</option>
-                <option value="Insurances">Insurances</option>
-                <option value="Internet Bill">Internet Bill</option>
-                <option value="Investment">Investment</option>
-                <option value="Makeup">Makeup</option>
-                <option value="Medical Check-up">Medical Check-up</option>
-                <option value="Utility Bills">Utility Bills</option>
-                <option value="Outgoing Transfer">Outgoing Transfer</option>
-                <option value="Pay Interest">Pay Interest</option>
-                <option value="Personal Items">Personal Items</option>
-                <option value="Pets">Pets</option>
-                <option value="Phone Bill">Phone Bill</option>
-                <option value="Rentals">Rentals</option>
-                <option value="Streaming Service">Streaming Service</option>
-                <option value="Television Bill">Television Bill</option>
-                <option value="Transportation">Transportation</option>
-                <option value="Vehicle Maintenance">Vehicle Maintenance</option>
-                <option value="Water Bills">Water Bills</option>
-                <option value="Others">Others</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="dateInput" class="form-label">Date</label>
-              <input
-                type="date"
-                th:field="*{date}"
-                class="form-control"
-                id="dateInput"
-                placeholder="Enter date"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="descriptionInput" class="form-label"
-                >Description</label
-              >
-              <textarea
-                class="form-control"
-                th:field="*{description}"
-                id="descriptionInput"
-                rows="3"
-                placeholder="Enter description"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              class="btn"
-              style="margin-left: 5px; margin-right: 5px; font-size: 15px"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-        <div
           style="
             display: flex;
             flex-direction: column;
@@ -299,7 +211,12 @@
             width: 800px;
           "
         >
-          <h3 style="margin-left: 10px"><strong>Recent Expenses</strong></h3>
+          <h3 style="margin-left: 10px">
+            <strong>Incomes </strong
+            ><span style="font-size: 14px" th:text="${startDate}"></span>
+            -
+            <span style="font-size: 14px" th:text="${endDate}"></span>
+          </h3>
           <section class="intro">
             <div class="bg-image h-100" style="margin-top: 10px">
               <div
@@ -323,11 +240,11 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr th:each="expense : ${recentExpenses}">
-                                  <td th:text="${expense.category}"></td>
-                                  <td th:text="${expense.description}"></td>
-                                  <td th:text="${expense.date}"></td>
-                                  <td th:text="${expense.amount}"></td>
+                                <tr th:each="income : ${recentIncomes}">
+                                  <td th:text="${income.category}"></td>
+                                  <td th:text="${income.description}"></td>
+                                  <td th:text="${income.date}"></td>
+                                  <td th:text="${income.amount}"></td>
                                   <td>
                                     <button
                                       type="button"

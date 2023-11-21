@@ -10,10 +10,6 @@ public class HomeController {
     String getPeople(Model model) {
         return "homePage";
     }
-    @GetMapping("/addExpense")
-    public String addExpensePage() {
-        return "addExpense";
-    }
     @GetMapping("/chooseDate")
     public String chooseDatePage() {
         return "chooseDate";

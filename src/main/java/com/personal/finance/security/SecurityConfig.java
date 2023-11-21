@@ -20,11 +20,13 @@ public class SecurityConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
-    //authentication
+    // authentication
     public UserDetailsService userDetailsService() {
         return new UserInfoUserDetailsService();
     }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -33,9 +35,8 @@ public class SecurityConfig {
                         form -> form
                                 .loginPage("/login")
                                 .defaultSuccessUrl("/")
-                                .permitAll()
-                )
-                .authorizeHttpRequests(auth->{
+                                .permitAll())
+                .authorizeHttpRequests(auth -> {
                     auth
                             .requestMatchers("/register").permitAll()
                             .requestMatchers("/login").permitAll()
@@ -50,8 +51,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
         return authenticationProvider;

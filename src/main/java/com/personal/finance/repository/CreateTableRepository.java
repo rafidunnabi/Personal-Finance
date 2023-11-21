@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 public interface CreateTableRepository {
     void createUsersTable();
     void createIncomeTable();
-
     void createIncomeCategoriesTable();
+
+    void createExpenseTable();
+    void createExpenseCategoriesTable();
 }

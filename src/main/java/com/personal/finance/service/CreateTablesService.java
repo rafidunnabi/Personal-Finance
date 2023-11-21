@@ -17,5 +17,7 @@ public class CreateTablesService {
         createTableRepository.createUsersTable();
         createTableRepository.createIncomeCategoriesTable();
         createTableRepository.createIncomeTable();
+        createTableRepository.createExpenseCategoriesTable();
+        createTableRepository.createExpenseTable();
     }
 }
