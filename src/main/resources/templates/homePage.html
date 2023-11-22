@@ -33,7 +33,7 @@
       }
       .content {
         margin-left: 250px;
-        margin-top: 40px;
+        margin-top: 50px;
       }
       canvas {
         margin: 0 auto;
@@ -78,10 +78,44 @@
         width: 600px;
         height: 650px;
       }
+      .btn {
+        background-color: #04bade;
+        color: white;
+        border-radius: 4px;
+        opacity: 0.9;
+        height: 30px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 14px;
+        padding-right: 14px;
+        border: none;
+      }
+
+      .btn:hover {
+        background-color: #0497c7;
+        color: white;
+      }
+      .btn-expense {
+        background-color: #e92a32;
+        color: white;
+        border-radius: 4px;
+        opacity: 0.9;
+        height: 30px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 14px;
+        padding-right: 14px;
+        border: none;
+      }
+
+      .btn-expense:hover {
+        background-color: #e92a32;
+        color: white;
+      }
     </style>
   </head>
   <body>
-    <!-- Modal -->
+    <!-- Modal Income-->
     <div
       class="modal fade"
       id="exampleModal"
@@ -91,7 +125,9 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">See History</h5>
+            <h5 class="modal-title" id="exampleModalLabel">
+              <strong>See Income History</strong>
+            </h5>
             <button
               type="button"
               class="btn-close"
@@ -100,11 +136,116 @@
             ></button>
           </div>
           <div class="modal-body">
-            <h3>Choose Date</h3>
+            <h3 style="color: #04bade">
+              <i
+                class="fa-solid fa-calendar-days"
+                style="margin-right: 13px"
+              ></i
+              >Choose Date
+            </h3>
             <form
-              th:action="@{/customHistory}"
+              th:action="@{/customHistoryIncome}"
               method="post"
               style="margin-top: 30px"
+              onsubmit="return validateDates()"
+            >
+              <div class="mb-3">
+                <label for="startDateInput" class="form-label"
+                  ><storng>Start Date</storng></label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="startDateInput"
+                  placeholder="Enter date"
+                  th:name="startDate"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="endDateInput" class="form-label"><storng>End Date</storng></label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="endDateInput"
+                  placeholder="Enter date"
+                  th:name="endDate"
+                />
+              </div>
+              <div class="mb-3">
+                <input type="checkbox" id="enableCategory">
+                <label for="enableCategory" class="form-label"
+                  ><storng>Category (Optional)</storng></label
+                >
+                <select
+                  class="form-select"
+                  id="categorySelect"
+                  th:name="category"
+                  disabled
+                >
+                  <option value="Capital Gains">Capital Gains</option>
+                  <option value="Passive Income">Passive Income</option>
+                  <option value="Active Income">Active Income</option>
+                  <option value="Rental Income">Rental Income</option>
+                  <option value="Royalty Income">Royalty Income</option>
+                  <option value="Dividends">Dividends</option>
+                  <option value="Interest">Interest</option>
+                  <option value="Profit Income">Profit Income</option>
+                  <option value="Salary">Salary</option>
+                  <option value="Commission">Commission</option>
+                  <option value="Government Payments">Government Payments</option>
+                  <option value="Others">Others</option>
+                </select>
+              </div>
+              <div class="modal-footer" style="justify-content: left; margin-top: 30px;">
+                <button type="submit" class="btn">Go</button>
+                <button
+                  type="button"
+                  class="btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div>
+      <!-- Modal Expense-->
+      <div
+      class="modal fade"
+      id="exampleModalExpense"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              <strong>See Expense History</strong>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <h3 style="color: #e92a32">
+              <i
+                class="fa-solid fa-calendar-days"
+                style="margin-right: 13px"
+              ></i
+              >Choose Date
+            </h3>
+            <form
+              th:action="@{/customHistoryExpense}"
+              method="post"
+              style="margin-top: 30px"
+              onsubmit="return validateDates()"
             >
               <div class="mb-3">
                 <label for="startDateInput" class="form-label"
@@ -137,37 +278,56 @@
                   id="categorySelect"
                   th:name="category"
                 >
-                  <option value="food">Food</option>
-                  <option value="transportation">Transportation</option>
-                  <option value="housing">Housing</option>
-                  <option value="utilities">Utilities</option>
-                  <option value="entertainment">Entertainment</option>
-                  <option value="other">Other</option>
+                  <option value="Education">Education</option>
+                  <option value="Electricity Bill">Electricity Bill</option>
+                  <option value="Fitness">Fitness</option>
+                  <option value="Food & Beverage">Food & Beverage</option>
+                  <option value="Fun & Entertainment">Fun & Entertainment</option>
+                  <option value="Gas Bill">Gas Bill</option>
+                  <option value="Gifts & Donations">Gifts & Donations</option>
+                  <option value="Home Maintenance">Home Maintenance</option>
+                  <option value="Home Services">Home Services</option>
+                  <option value="Houseware">Houseware</option>
+                  <option value="Insurances">Insurances</option>
+                  <option value="Internet Bill">Internet Bill</option>
+                  <option value="Investment">Investment</option>
+                  <option value="Makeup">Makeup</option>
+                  <option value="Medical Check-up">Medical Check-up</option>
+                  <option value="Utility Bills">Utility Bills</option>
+                  <option value="Outgoing Transfer">Outgoing Transfer</option>
+                  <option value="Pay Interest">Pay Interest</option>
+                  <option value="Personal Items">Personal Items</option>
+                  <option value="Pets">Pets</option>
+                  <option value="Phone Bill">Phone Bill</option>
+                  <option value="Rentals">Rentals</option>
+                  <option value="Streaming Service">Streaming Service</option>
+                  <option value="Television Bill">Television Bill</option>
+                  <option value="Transportation">Transportation</option>
+                  <option value="Vehicle Maintenance">Vehicle Maintenance</option>
+                  <option value="Water Bills">Water Bills</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
-              <button
-                type="submit"
-                class="btn"
-                style="margin-left: 5px; margin-right: 5px"
-              >
-                Go
-              </button>
+              <div class="modal-footer" style="justify-content: left; margin-top: 30px;">
+                <button type="submit" class="btn-expense">Go</button>
+                <button
+                  type="button"
+                  class="btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                
+              </div>
             </form>
           </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn">Go</button>
-          </div>
+          
         </div>
       </div>
     </div>
     <div>
+
+
       <div class="sidebar">
         <div
           class="user-info"
@@ -226,7 +386,7 @@
             style="width: 230px; background: none; border: none; outline: none"
           >
             <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i
-            >Record By Date
+            >Income By Date
           </a>
           <ul class="dropdown-menu" style="background-color: #24272e">
             <li>
@@ -235,6 +395,36 @@
                 class="dropdown-item"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
+                >Choose Date</a
+              >
+            </li>
+            <li><a class="dropdown-item" href="#">Current Week</a></li>
+            <li><a class="dropdown-item" href="#">Current Month</a></li>
+            <li><a class="dropdown-item" href="#">Last 6 Months</a></li>
+            <li><a class="dropdown-item" href="#">Current Year</a></li>
+          </ul>
+        </div>
+        <div
+          class="dropend"
+          style="display: flex; justify-content: left; width: 230px"
+        >
+          <a
+            href="#"
+            class="dropdown-toggle border-0"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            style="width: 230px; background: none; border: none; outline: none"
+          >
+            <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i
+            >Expense By Date
+          </a>
+          <ul class="dropdown-menu" style="background-color: #24272e">
+            <li>
+              <a
+                href="#"
+                class="dropdown-item"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModalExpense"
                 >Choose Date</a
               >
             </li>
@@ -259,9 +449,13 @@
 
       <div class="content">
         <div class="centering">
-          <h2 style="font-size: 40px">
-            <strong>Empower Your Financial Journey</strong>
-          </h2>
+          <div style="display: flex; flex-direction: row;">
+            <img style="width: 60px; height: 60px; margin-right: 27px;" src="/images/title_money.png">
+            <h2 style="font-size: 40px;">
+            <strong>EMPOWER YOUR <span style="color: #e92a32">FINANCIAL</span> JOURNEY</strong>
+            </h2>
+          </div>
+          
           <p>Your Personalized Gateway to Smart Money Management</p>
           <div
             style="
@@ -274,9 +468,9 @@
           >
             <div style="width: 500px; display: flex; flex-direction: column">
               <h2>
-                <i class="fa-solid fa-coins" style="margin-right: 5px"></i> SAVE
+                <i class="fa-solid fa-coins" style="margin-right: 5px"></i> <strong>SAVE
                 YOUR <span style="color: orange">MONEY</span>
-              </h2>
+              </strong></h2>
               <h5 style="color: grey">
                 Empower your financial journey with our personal finance
                 application and take control of your expenses effortlessly.
@@ -284,7 +478,7 @@
             </div>
 
             <img
-              style="width: 400px; height: 250px; margin-top: 60px"
+              style="width: 400px; height: 235px; margin-top: 60px"
               src="/images/home_money.png"
             />
           </div>
@@ -314,7 +508,10 @@
                   flex-direction: column;
                 "
               >
-                <h3>Balance</h3>
+                <div style="display: flex; flex-direction: row;">
+                  <img src="images/balance.png" style="width: 35px; height: 35px; margin-right: 10px;">
+                  <h3><strong>Balance</strong> </h3>
+                </div>
                 <h1 style="color: #04bade">$234523</h1>
               </div>
             </div>
@@ -337,8 +534,11 @@
                   flex-direction: column;
                 "
               >
-                <h3>Total Expense</h3>
-                <h1 style="color: #50c878">$2344</h1>
+                <div style="display: flex; flex-direction: row;">
+                  <img src="images/total_expense.png" style="width: 35px; height: 35px; margin-right: 10px;">
+                  <h3><strong>Total Expense</strong></h3>
+                </div>
+                <h1 style="color: #e92a32">$2344</h1>
               </div>
             </div>
           </div>
@@ -393,6 +593,24 @@
         </div>
       </div>
     </div>
+    <script>
+      function validateDates() {
+        var startDate = document.getElementById("startDateInput").value;
+        var endDate = document.getElementById("endDateInput").value;
+
+        if (startDate > endDate) {
+          alert("End date must be equal to or after the start date.");
+          return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission
+      }
+
+      document.getElementById('enableCategory').addEventListener('change', function () {
+        var categorySelect = document.getElementById('categorySelect');
+        categorySelect.disabled = !this.checked;
+    });
+    </script>
     <script src="js/script.js" defer></script>
     <script src="js/financeMonthlyChart.js" defer></script>
     <script src="js/barChartMonth.js" defer></script>

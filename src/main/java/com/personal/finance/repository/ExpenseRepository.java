@@ -13,4 +13,9 @@ public interface ExpenseRepository {
     void addExpense(double amount, String category, LocalDate date, String description, Integer userId);
 
     List<Expense> getRecentExpenses(Integer userId);
+
+    List<Expense> getExpenseByCustomDate(LocalDate startDate, LocalDate endDate, Integer user_Id);
+
+    List<Expense> getExpenseByCustomDateAndCategory(LocalDate startDate, LocalDate endDate, String category,
+                                                  Integer user_Id);
 }

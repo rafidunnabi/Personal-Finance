@@ -177,21 +177,19 @@
         style="
           display: flex;
           flex-direction: row;
-          justify-content: space-evenly;
+          justify-content: center;
+          align-items: center;
         "
       >
-        <div>
-          <span style="font-size: 40px; margin-left: 40px"
-            ><strong>Income:</strong>
+        <div style="display: flex; align-items: center">
+          <img src="images/expense.png" style="width: 50px; height: 50px" />
+          <span style="font-size: 40px; margin-left: 20px"
+            ><strong>Total Expense:</strong>
           </span>
-          <span style="color: #04bade; font-size: 40px">$1,200.00</span>
-        </div>
-
-        <div>
-          <span style="font-size: 40px; margin-left: 40px"
-            ><strong>Expense:</strong>
-          </span>
-          <span style="color: rgb(240, 42, 7); font-size: 40px">$1,200.00</span>
+          <span
+            style="color: #e92a32; font-size: 40px; margin-left: 10px"
+            th:text="'$'+ ${totalExpense}"
+          ></span>
         </div>
       </div>
 
@@ -208,14 +206,22 @@
             flex-direction: column;
             margin-top: 40px;
             padding-left: 40px;
-            width: 800px;
+            width: 1200px;
           "
         >
-          <h3 style="margin-left: 10px">
-            <strong>Incomes </strong
-            ><span style="font-size: 14px" th:text="${startDate}"></span>
-            -
-            <span style="font-size: 14px" th:text="${endDate}"></span>
+          <h3 style="margin-left: 30px; margin-right: 30px">
+            <strong
+              >Expenses
+              <span
+                style="font-size: 14px; color: #04bade; margin-left: 20px"
+                th:text="${startDate}"
+              ></span>
+              -
+              <span
+                style="font-size: 14px; color: #04bade"
+                th:text="${endDate}"
+              ></span>
+            </strong>
           </h3>
           <section class="intro">
             <div class="bg-image h-100" style="margin-top: 10px">
@@ -228,7 +234,16 @@
                     <div class="col-12">
                       <div class="card shadow-2-strong">
                         <div class="card-body">
-                          <div class="table-responsive">
+                          <div
+                            class="table-responsive"
+                            th:if="${#lists.isEmpty(expenseList)}"
+                          >
+                            <p>No expense records found</p>
+                          </div>
+                          <div
+                            class="table-responsive"
+                            th:unless="${#lists.isEmpty(expenseList)}"
+                          >
                             <table class="table table-borderless mb-0">
                               <thead>
                                 <tr>
@@ -240,11 +255,11 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr th:each="income : ${recentIncomes}">
-                                  <td th:text="${income.category}"></td>
-                                  <td th:text="${income.description}"></td>
-                                  <td th:text="${income.date}"></td>
-                                  <td th:text="${income.amount}"></td>
+                                <tr th:each="expense : ${expenseList}">
+                                  <td th:text="${expense.category}"></td>
+                                  <td th:text="${expense.description}"></td>
+                                  <td th:text="${expense.date}"></td>
+                                  <td th:text="${expense.amount}"></td>
                                   <td>
                                     <button
                                       type="button"

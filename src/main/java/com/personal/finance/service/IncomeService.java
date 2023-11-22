@@ -26,4 +26,13 @@ public class IncomeService {
     public List<Income> getRecentIncomes(Integer userId) {
         return incomeRepository.getRecentIncomes(userId);
     }
+
+    public List<Income> findIncomeByCustomDate(LocalDate startDate, LocalDate endDate, Integer user_id) {
+        return incomeRepository.getIncomeByCustomDate(startDate, endDate, user_id);
+    }
+
+    public List<Income> findIncomeByCustomDateAndCategory(LocalDate startDate, LocalDate endDate, String category,
+            Integer user_id) {
+        return incomeRepository.getIncomeByCustomDateAndCategory(startDate, endDate, category, user_id);
+    }
 }

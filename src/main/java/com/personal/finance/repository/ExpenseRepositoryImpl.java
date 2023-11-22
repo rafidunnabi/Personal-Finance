@@ -2,6 +2,7 @@ package com.personal.finance.repository;
 
 import com.personal.finance.model.Expense;
 import com.personal.finance.model.Income;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -45,5 +46,28 @@ public class ExpenseRepositoryImpl implements ExpenseRepository{
             expense.setCategory(rs.getString("expense_category_name"));
             return expense;
         }, userId);
+    }
+
+    @Override
+    public List<Expense> getExpenseByCustomDate(LocalDate startDate, LocalDate endDate, Integer user_Id) {
+        String sql = "SELECT e.amount, ec.expense_category_name as category, e.description, e.expense_date as date " +
+                "FROM expense e" +
+                "JOIN expense_categories ec ON e.expense_category_id = ec.id " +
+                "WHERE e.expense_date BETWEEN ? AND ? AND e.user_id = ?";
+        return jdbcTemplate.query(sql, new Object[] { startDate, endDate, user_Id },
+                new BeanPropertyRowMapper<>(Expense.class));
+    }
+
+    @Override
+    public List<Expense> getExpenseByCustomDateAndCategory(LocalDate startDate, LocalDate endDate, String category,
+                                                         Integer user_Id) {
+        String sql = "SELECT e.id, e.amount, ec.expense_category_name as category, e.description, e.expense_date as date "
+                +
+                "FROM expense e " +
+                "JOIN expense_categories ec ON e.expense_category_id = ec.id " +
+                "WHERE e.expense_date BETWEEN ? AND ? AND ec.expense_category_name = ? AND e.user_id = ? ";
+
+        return jdbcTemplate.query(sql, new Object[] { startDate, endDate, category, user_Id },
+                new BeanPropertyRowMapper<>(Expense.class));
     }
 }

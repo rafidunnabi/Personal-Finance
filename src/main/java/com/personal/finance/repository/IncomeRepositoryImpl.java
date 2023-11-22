@@ -46,4 +46,28 @@ public class IncomeRepositoryImpl implements IncomeRepository {
             return income;
         }, userId);
     }
+
+    @Override
+    public List<Income> getIncomeByCustomDate(LocalDate startDate, LocalDate endDate, Integer user_Id) {
+        String sql = "SELECT i.amount, ic.income_category_name as category, i.description, i.income_date as date " +
+                "FROM income i " +
+                "JOIN income_categories ic ON i.income_category_id = ic.id " +
+                "WHERE i.income_date BETWEEN ? AND ? AND i.user_id = ?";
+        return jdbcTemplate.query(sql, new Object[] { startDate, endDate, user_Id },
+                new BeanPropertyRowMapper<>(Income.class));
+    }
+
+    @Override
+    public List<Income> getIncomeByCustomDateAndCategory(LocalDate startDate, LocalDate endDate, String category,
+            Integer user_Id) {
+        String sql = "SELECT i.id, i.amount, ic.income_category_name as category, i.description, i.income_date as date "
+                +
+                "FROM income i " +
+                "JOIN income_categories ic ON i.income_category_id = ic.id " +
+                "WHERE i.income_date BETWEEN ? AND ? AND ic.income_category_name = ? AND i.user_id = ? ";
+
+        return jdbcTemplate.query(sql, new Object[] { startDate, endDate, category, user_Id },
+                new BeanPropertyRowMapper<>(Income.class));
+    }
+
 }

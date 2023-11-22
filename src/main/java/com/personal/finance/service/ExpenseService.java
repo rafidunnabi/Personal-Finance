@@ -28,4 +28,12 @@ public class ExpenseService {
     public List<Expense> getRecentExpenses(Integer userId) {
         return expenseRepository.getRecentExpenses(userId);
     }
+    public List<Expense> findExpenseByCustomDate(LocalDate startDate, LocalDate endDate, Integer user_id) {
+        return expenseRepository.getExpenseByCustomDate(startDate, endDate, user_id);
+    }
+
+    public List<Expense> findExpenseByCustomDateAndCategory(LocalDate startDate, LocalDate endDate, String category,
+                                                          Integer user_id) {
+        return expenseRepository.getExpenseByCustomDateAndCategory(startDate, endDate, category, user_id);
+    }
 }
