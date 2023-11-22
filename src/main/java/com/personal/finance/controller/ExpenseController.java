@@ -31,8 +31,10 @@ public class ExpenseController {
         Integer userId = userRepository.findUserIdByEmail(authentication.getName());
 
         List<Expense> recentExpenses = expenseService.getRecentExpenses(userId);
-
         model.addAttribute("recentExpenses", recentExpenses);
+
+        Double totalExpense = recentExpenses.stream().mapToDouble(Expense::getAmount).sum();
+        model.addAttribute("totalExpense", totalExpense);
         return "addExpense";
     }
 

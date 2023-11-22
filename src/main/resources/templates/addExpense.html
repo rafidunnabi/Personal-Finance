@@ -87,6 +87,10 @@
         background-color: red;
         color: white;
       }
+      table {
+        table-layout: fixed;
+        width: 100px;
+      }
     </style>
   </head>
   <body>
@@ -183,7 +187,9 @@
             >Total Expense:</strong
           >
         </span>
-        <span style="color: #e92a32; font-size: 40px">$1,200.00</span>
+        <span style="color: #e92a32; font-size: 40px" th:text="${totalExpense}"
+          >$1,200.00</span
+        >
       </div>
 
       <div
@@ -315,11 +321,15 @@
                             <table class="table table-borderless mb-0">
                               <thead>
                                 <tr>
-                                  <th scope="col">Category</th>
-                                  <th scope="col">Description</th>
-                                  <th scope="col">Date</th>
-                                  <th scope="col">Amount</th>
-                                  <th scope="col">Edit</th>
+                                  <th scope="col" style="width: 7%">
+                                    Category
+                                  </th>
+                                  <th scope="col" style="width: 7%">
+                                    Description
+                                  </th>
+                                  <th scope="col" style="width: 7%">Date</th>
+                                  <th scope="col" style="width: 7%">Amount</th>
+                                  <th scope="col" style="width: 7%">Edit</th>
                                 </tr>
                               </thead>
                               <tbody>

@@ -33,8 +33,10 @@ public class IncomeController {
         Integer userId = userRepository.findUserIdByEmail(authentication.getName());
 
         List<Income> recentIncomes = incomeService.getRecentIncomes(userId);
-
         model.addAttribute("recentIncomes", recentIncomes);
+        double totalIncome = recentIncomes.stream().mapToDouble(Income::getAmount).sum();
+        model.addAttribute("totalIncome", totalIncome);
+
         return "addIncome";
     }
     @PostMapping("/addIncome")

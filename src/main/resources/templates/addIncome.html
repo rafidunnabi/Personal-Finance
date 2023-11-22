@@ -183,7 +183,10 @@
             >Total Income:</strong
           >
         </span>
-        <span style="color: #04bade; font-size: 40px">$1,200.00</span>
+        <span
+          style="color: #04bade; font-size: 40px"
+          th:text="${totalIncome}"
+        ></span>
       </div>
 
       <div
@@ -308,11 +311,11 @@
                               </thead>
                               <tbody>
                                 <tr th:each="income : ${recentIncomes}">
-                                  <td th:text="${income.category}"></td>
-                                  <td th:text="${income.description}"></td>
-                                  <td th:text="${income.date}"></td>
-                                  <td th:text="${income.amount}"></td>
-                                  <td>
+                                  <td th:text="${income.category}" style="width: 10px;"></td>
+                                  <td th:text="${income.description}" style="width: 10px;"></td>
+                                  <td th:text="${income.date}" style="width: 10px;"></td>
+                                  <td th:text="${income.amount}" style="width: 10px;"></td>
+                                  <td style="width: 10px;">
                                     <button
                                       type="button"
                                       class="btn btn-danger btn-sm px-3"
