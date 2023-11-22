@@ -25,7 +25,7 @@
 
 .sidebar a:hover {
   background-color: #24272e;
-  color: #fce101;
+  color: orange;
 }
 
 .sidebar a:hover #dropdown {

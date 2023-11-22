@@ -334,12 +334,12 @@
           style="margin-left: 23px; margin-top: 35px; margin-bottom: 15px"
         >
           <h5 class="username" style="color: white">
-            <i class="fa-solid fa-user" style="margin-right: 15px"> </i>John Doe
+            <i class="fa-solid fa-user" style="margin-right: 15px"> </i><span th:text="${username}">John Doe</span>
           </h5>
         </div>
         <div class="user-info" style="margin-left: 24px; margin-bottom: 30px">
           <h6 class="username" style="color: white">
-            Balance: <span style="color: orange">$34534</span>
+            Balance: <span style="color: #04bade">$34534</span>
           </h6>
         </div>
         <a th:href="@{/}">
