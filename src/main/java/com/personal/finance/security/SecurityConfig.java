@@ -36,11 +36,16 @@ public class SecurityConfig {
                                 .loginPage("/login")
                                 .defaultSuccessUrl("/")
                                 .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID"))
+
                 .authorizeHttpRequests(auth -> {
                     auth
                             .requestMatchers("/register").permitAll()
                             .requestMatchers("/login").permitAll()
-                            .requestMatchers("/user/login").permitAll()
                             .requestMatchers("/js/**").permitAll()
                             .requestMatchers("/css/**").permitAll()
                             .anyRequest()
