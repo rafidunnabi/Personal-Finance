@@ -21,6 +21,7 @@ public class HomeController {
     String getPeople(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = userRepository.findUserNameByEmail(authentication.getName());
+        System.out.println(userName);
         model.addAttribute("username", userName);
         return "homePage";
     }

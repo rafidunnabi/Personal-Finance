@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="/css/center.css" />
     <link rel="stylesheet" href="/css/expenseModal.css" />
     <link rel="stylesheet" href="/css/body.css" />
+    <link rel="stylesheet" href="/css/modal.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -34,49 +35,6 @@
       .content {
         margin-left: 250px;
         margin-top: 50px;
-      }
-      canvas {
-        margin: 0 auto;
-        height: 350px;
-      }
-      .accordion-item {
-        background: none;
-        border: none;
-      }
-
-      .accordion-button {
-        background-color: transparent;
-        color: inherit;
-        border: none;
-        border-radius: 0;
-        padding: 1rem;
-        margin: 0;
-        text-align: left;
-      }
-      .accordion-item:first-child .accordion-button {
-        background-color: transparent;
-      }
-      .accordion-button:focus {
-        box-shadow: none;
-        outline: none;
-      }
-      .accordion-button:hover {
-        color: #ff5733;
-      }
-      .accordion-collapse {
-        border-top: 1px solid #dee2e6;
-      }
-
-      .accordion-body {
-        padding: 1rem;
-      }
-      .modal {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 600px;
-        height: 650px;
       }
       .btn {
         background-color: #04bade;
@@ -330,11 +288,13 @@
 
       <div class="sidebar">
         <div
-          class="user-info"
-          style="margin-left: 23px; margin-top: 35px; margin-bottom: 15px"
+                class="user-info"
+                style="margin-left: 23px; margin-top: 35px; margin-bottom: 15px"
+                xmlns:th="http://www.thymeleaf.org"
         >
           <h5 class="username" style="color: white">
-            <i class="fa-solid fa-user" style="margin-right: 15px"> </i><span th:text="${username}">John Doe</span>
+            <i class="fa-solid fa-user" style="margin-right: 15px"> </i
+            ><span th:text="${username}"></span>
           </h5>
         </div>
         <div class="user-info" style="margin-left: 24px; margin-bottom: 30px">
@@ -346,26 +306,23 @@
           <i class="fa-solid fa-house" style="margin-right: 5px"></i> Home</a
         >
         <a th:href="@{/addIncome}">
-          <i class="fa-solid fa-plus" style="margin-right: 5px"></i> Add
-          Income</a
+          <i class="fa-solid fa-plus" style="margin-right: 5px"></i> Add Income</a
         >
         <a th:href="@{/addExpense}">
-          <i class="fa-solid fa-plus" style="margin-right: 5px"></i> Add
-          Expense</a
+          <i class="fa-solid fa-plus" style="margin-right: 5px"></i> Add Expense</a
         >
 
         <div>
           <a
-            class="dropdown-toggle"
-            href="#"
-            role="button"
-            id="dropdownMenuLink5"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
+                  class="dropdown-toggle"
+                  href="#"
+                  role="button"
+                  id="dropdownMenuLink5"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
           >
-            <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i
-            >Record
+            <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i>Record
           </a>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -374,28 +331,25 @@
           </div>
         </div>
         <!-- Default dropend button -->
-        <div
-          class="dropend"
-          style="display: flex; justify-content: left; width: 230px"
-        >
+        <div class="dropend" style="display: flex; justify-content: left; width: 230px">
           <a
-            href="#"
-            class="dropdown-toggle border-0"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            style="width: 230px; background: none; border: none; outline: none"
+                  href="#"
+                  class="dropdown-toggle border-0"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style="width: 230px; background: none; border: none; outline: none"
           >
-            <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i
-            >Income By Date
+            <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i>Income
+            By Date
           </a>
           <ul class="dropdown-menu" style="background-color: #24272e">
             <li>
               <a
-                href="#"
-                class="dropdown-item"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                >Choose Date</a
+                      href="#"
+                      class="dropdown-item"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+              >Choose Date</a
               >
             </li>
             <li><a class="dropdown-item" href="#">Current Week</a></li>
@@ -404,28 +358,25 @@
             <li><a class="dropdown-item" href="#">Current Year</a></li>
           </ul>
         </div>
-        <div
-          class="dropend"
-          style="display: flex; justify-content: left; width: 230px"
-        >
+        <div class="dropend" style="display: flex; justify-content: left; width: 230px">
           <a
-            href="#"
-            class="dropdown-toggle border-0"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            style="width: 230px; background: none; border: none; outline: none"
+                  href="#"
+                  class="dropdown-toggle border-0"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style="width: 230px; background: none; border: none; outline: none"
           >
-            <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i
-            >Expense By Date
+            <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i>Expense
+            By Date
           </a>
           <ul class="dropdown-menu" style="background-color: #24272e">
             <li>
               <a
-                href="#"
-                class="dropdown-item"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModalExpense"
-                >Choose Date</a
+                      href="#"
+                      class="dropdown-item"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModalExpense"
+              >Choose Date</a
               >
             </li>
             <li><a class="dropdown-item" href="#">Current Week</a></li>
@@ -435,16 +386,13 @@
           </ul>
         </div>
         <a href="#"
-          ><i class="fa-solid fa-circle-info" style="margin-right: 5px"></i
-          >About</a
+        ><i class="fa-solid fa-circle-info" style="margin-right: 5px"></i>About</a
         >
         <a href="/logout"
-          ><i
-            class="fa-solid fa-right-from-bracket"
-            style="margin-right: 8px"
-          ></i
-          >Logout</a
+        ><i class="fa-solid fa-right-from-bracket" style="margin-right: 8px"></i
+        >Logout</a
         >
+
       </div>
 
       <div class="content">
