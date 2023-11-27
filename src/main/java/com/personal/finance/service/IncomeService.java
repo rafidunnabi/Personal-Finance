@@ -35,4 +35,12 @@ public class IncomeService {
             Integer user_id) {
         return incomeRepository.getIncomeByCustomDateAndCategory(startDate, endDate, category, user_id);
     }
+
+    public void editIncomeRecord(Integer id, Double amount, String category, LocalDate localDate, String description, Integer userId) {
+        incomeRepository.editIncome(id, amount, category, localDate, description, userId);
+    }
+
+    public void deleteIncomeRecord(Integer id, Integer userId) {
+        incomeRepository.deleteIncome(id, userId);
+    }
 }

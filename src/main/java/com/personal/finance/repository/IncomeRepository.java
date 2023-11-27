@@ -17,4 +17,8 @@ public interface IncomeRepository {
 
     List<Income> getIncomeByCustomDateAndCategory(LocalDate startDate, LocalDate endDate, String category,
             Integer user_Id);
+
+    void editIncome(Integer id, Double amount, String category, LocalDate localDate, String description, Integer userId);
+
+    void deleteIncome(Integer id, Integer userId);
 }

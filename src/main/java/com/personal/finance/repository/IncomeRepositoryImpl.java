@@ -39,6 +39,7 @@ public class IncomeRepositoryImpl implements IncomeRepository {
                 "ORDER BY i.income_date DESC";
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             Income income = new Income();
+            income.setId(rs.getInt("id"));
             income.setAmount(rs.getDouble("amount"));
             income.setDescription(rs.getString("description"));
             income.setDate(rs.getString("income_date")); // You might need to convert this to LocalDate
@@ -68,6 +69,19 @@ public class IncomeRepositoryImpl implements IncomeRepository {
 
         return jdbcTemplate.query(sql, new Object[] { startDate, endDate, category, user_Id },
                 new BeanPropertyRowMapper<>(Income.class));
+    }
+
+    @Override
+    public void editIncome(Integer id, Double amount, String category, LocalDate localDate, String description, Integer userId) {
+        String sql = "UPDATE income SET amount = ?, income_category_id = (SELECT id FROM income_categories WHERE income_category_name = ?), " +
+                "description = ?, income_date = ?, user_id = ? WHERE id = ?";
+        jdbcTemplate.update(sql, amount, category, description, localDate, userId, id);
+    }
+
+    @Override
+    public void deleteIncome(Integer id, Integer userId) {
+        String sql = "DELETE FROM income WHERE id = ? AND user_id = ?";
+        jdbcTemplate.update(sql, id, userId);
     }
 
 }

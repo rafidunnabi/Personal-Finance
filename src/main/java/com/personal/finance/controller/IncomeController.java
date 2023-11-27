@@ -8,9 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -65,6 +63,39 @@ public class IncomeController {
         List<Income> recentIncomes = incomeService.getRecentIncomes(userId);
 
         model.addAttribute("recentIncomes", recentIncomes);
+
+        return "redirect:/addIncome";
+    }
+
+    @PostMapping("/editIncome")
+    public String editIncome(@ModelAttribute("income") Income income,
+                             Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+        if (userId != null) {
+            LocalDate localDate = LocalDate.parse(income.getDate());
+            System.out.println(income.getId());
+            incomeService.editIncomeRecord(income.getId(), income.getAmount(), income.getCategory(), localDate, income.getDescription(), userId);
+            model.addAttribute("userId", userId);
+        } else {
+        }
+        return "redirect:/addIncome";
+    }
+
+    @PostMapping("/deleteIncome")
+    public String deleteIncome(@ModelAttribute("income") Income income,
+                               Model model)
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+        System.out.println("Delete controller e ashche.");
+        System.out.println(income.getId());
+        if (userId != null) {
+            incomeService.deleteIncomeRecord(income.getId(), userId);
+            model.addAttribute("userId", userId);
+        } else {
+            // Handle the case where the user ID is null
+        }
 
         return "redirect:/addIncome";
     }

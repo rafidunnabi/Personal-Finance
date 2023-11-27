@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="/css/table.css" />
     <link rel="stylesheet" href="/css/sidebar.css" />
     <link rel="stylesheet" href="/css/body.css" />
+    <link rel="stylesheet" href="/css/buttonRed.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -90,6 +91,124 @@
     </style>
   </head>
   <body>
+    <!--Modal Edit-->
+    <div
+      class="modal fade"
+      id="exampleModalEdit"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div
+            class="modal-body"
+            style="
+              padding-top: 20px;
+              padding-left: 40px;
+              padding-right: 40px;
+              padding-bottom: 70px;
+            "
+          >
+            <h3>
+              <strong
+                ><i
+                  class="fa-solid fa-money-check-dollar"
+                  style="margin-right: 17px"
+                ></i
+                >Edit Income</strong
+              >
+            </h3>
+            <form
+              style="margin-top: 30px"
+              method="post"
+              th:action="@{/editIncome}"
+              th:object="${income}"
+              id="exampleModalEditForm"
+            >
+              <input type="hidden" id="idInput" th:field="*{id}" th:name="id" />
+              <div class="mb-3">
+                <label for="amountInput" class="form-label">Amount</label>
+                <input
+                  type="number"
+                  th:field="*{amount}"
+                  class="form-control"
+                  id="amountInput"
+                  placeholder="Enter amount"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="categorySelect" class="form-label">Category</label>
+                <select
+                  class="form-select"
+                  id="categorySelect"
+                  th:field="*{category}"
+                >
+                  <option value="Capital Gains">Capital Gains</option>
+                  <option value="Passive Income">Passive Income</option>
+                  <option value="Active Income">Active Income</option>
+                  <option value="Rental Income">Rental Income</option>
+                  <option value="Royalty Income">Royalty Income</option>
+                  <option value="Dividends">Dividends</option>
+                  <option value="Interest">Interest</option>
+                  <option value="Profit Income">Profit Income</option>
+                  <option value="Salary">Salary</option>
+                  <option value="Commission">Commission</option>
+                  <option value="Government Payments">
+                    Government Payments
+                  </option>
+                  <option value="Others">Others</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="dateInput" class="form-label">Date</label>
+                <input
+                  type="date"
+                  th:field="*{date}"
+                  class="form-control"
+                  id="dateInput"
+                  placeholder="Enter date"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="descriptionInput" class="form-label"
+                  >Description</label
+                >
+                <textarea
+                  class="form-control"
+                  th:field="*{description}"
+                  id="descriptionInput"
+                  rows="3"
+                  placeholder="Enter description"
+                ></textarea>
+              </div>
+              <div
+                class="modal-footer"
+                style="justify-content: left; margin-top: 30px"
+              >
+                <button type="submit" class="btn">Update</button>
+                <button class="btn-red" id="deleteButton">Delete</button>
+                <button
+                  type="button"
+                  class="btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="sidebar">
       <div
         class="user-info"
@@ -311,14 +430,34 @@
                               </thead>
                               <tbody>
                                 <tr th:each="income : ${recentIncomes}">
-                                  <td th:text="${income.category}" style="width: 10px;"></td>
-                                  <td th:text="${income.description}" style="width: 10px;"></td>
-                                  <td th:text="${income.date}" style="width: 10px;"></td>
-                                  <td th:text="${income.amount}" style="width: 10px;"></td>
-                                  <td style="width: 10px;">
+                                  <td
+                                    id="editCategory"
+                                    th:text="${income.category}"
+                                    style="width: 10px"
+                                  ></td>
+                                  <td
+                                    id="editDescription"
+                                    th:text="${income.description}"
+                                    style="width: 10px"
+                                  ></td>
+                                  <td
+                                    id="editDate"
+                                    th:text="${income.date}"
+                                    style="width: 10px"
+                                  ></td>
+                                  <td
+                                    id="editAmount"
+                                    th:text="${income.amount}"
+                                    style="width: 10px"
+                                  ></td>
+                                  <td style="width: 10px">
                                     <button
                                       type="button"
                                       class="btn btn-danger btn-sm px-3"
+                                      th:attr="data-category=${income.category},data-description=${income.description},data-date=${income.date},data-amount=${income.amount},data-id=${income.id}"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#exampleModalEdit"
+                                      onclick="populateEditForm(this)"
                                     >
                                       <i
                                         class="fa-regular fa-pen-to-square"
@@ -345,5 +484,7 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+    <script src="js/editIncome.js" defer></script>
+    <script src="js/deleteIncome.js" defer></script>
   </body>
 </html>
