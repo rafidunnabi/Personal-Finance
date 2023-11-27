@@ -40,6 +40,7 @@ public class ExpenseRepositoryImpl implements ExpenseRepository{
                 "ORDER BY i.expense_date DESC";
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             Expense expense = new Expense();
+            expense.setId(rs.getInt("id"));
             expense.setAmount(rs.getDouble("amount"));
             expense.setDescription(rs.getString("description"));
             expense.setDate(rs.getString("expense_date")); // You might need to convert this to LocalDate
@@ -69,5 +70,18 @@ public class ExpenseRepositoryImpl implements ExpenseRepository{
 
         return jdbcTemplate.query(sql, new Object[] { startDate, endDate, category, user_Id },
                 new BeanPropertyRowMapper<>(Expense.class));
+    }
+
+    @Override
+    public void editExpense(Integer id, Double amount, String category, LocalDate localDate, String description, Integer userId) {
+        String sql = "UPDATE expense SET amount = ?, expense_category_id = (SELECT id FROM expense_categories WHERE expense_category_name = ?), " +
+                "description = ?, expense_date = ?, user_id = ? WHERE id = ?";
+        jdbcTemplate.update(sql, amount, category, description, localDate, userId, id);
+    }
+
+    @Override
+    public void deleteExpense(Integer id, Integer userId) {
+        String sql = "DELETE FROM expense WHERE id = ? AND user_id = ?";
+        jdbcTemplate.update(sql, id, userId);
     }
 }

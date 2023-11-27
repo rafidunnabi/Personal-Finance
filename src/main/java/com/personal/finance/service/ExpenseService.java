@@ -36,4 +36,11 @@ public class ExpenseService {
                                                           Integer user_id) {
         return expenseRepository.getExpenseByCustomDateAndCategory(startDate, endDate, category, user_id);
     }
+    public void editExpenseRecord(Integer id, Double amount, String category, LocalDate localDate, String description, Integer userId) {
+        expenseRepository.editExpense(id, amount, category, localDate, description, userId);
+    }
+
+    public void deleteExpenseRecord(Integer id, Integer userId) {
+        expenseRepository.deleteExpense(id, userId);
+    }
 }

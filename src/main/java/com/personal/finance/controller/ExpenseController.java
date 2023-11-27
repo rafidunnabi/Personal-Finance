@@ -1,6 +1,7 @@
 package com.personal.finance.controller;
 
 import com.personal.finance.model.Expense;
+import com.personal.finance.model.Income;
 import com.personal.finance.repository.UserRepository;
 import com.personal.finance.service.ExpenseService;
 import org.springframework.security.core.Authentication;
@@ -65,6 +66,38 @@ public class ExpenseController {
         List<Expense> recentExpenses = expenseService.getRecentExpenses(userId);
 
         model.addAttribute("recentExpenses", recentExpenses);
+
+        return "redirect:/addExpense";
+    }
+
+    @PostMapping("/editExpense")
+    public String editIncome(@ModelAttribute("expense") Expense expense,
+                             Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+        if (userId != null) {
+            LocalDate localDate = LocalDate.parse(expense.getDate());
+            System.out.println(expense.getId());
+            expenseService.editExpenseRecord(expense.getId(), expense.getAmount(), expense.getCategory(), localDate, expense.getDescription(), userId);
+            model.addAttribute("userId", userId);
+        } else {
+        }
+        return "redirect:/addExpense";
+    }
+
+    @PostMapping("/deleteExpense")
+    public String deleteIncome(@ModelAttribute("expense") Expense expense,
+                               Model model)
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+
+        if (userId != null) {
+            expenseService.deleteExpenseRecord(expense.getId(), userId);
+            model.addAttribute("userId", userId);
+        } else {
+            // Handle the case where the user ID is null
+        }
 
         return "redirect:/addExpense";
     }

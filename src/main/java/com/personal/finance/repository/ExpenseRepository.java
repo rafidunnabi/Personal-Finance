@@ -18,4 +18,8 @@ public interface ExpenseRepository {
 
     List<Expense> getExpenseByCustomDateAndCategory(LocalDate startDate, LocalDate endDate, String category,
                                                   Integer user_Id);
+
+    void editExpense(Integer id, Double amount, String category, LocalDate localDate, String description, Integer userId);
+
+    void deleteExpense(Integer id, Integer userId);
 }
