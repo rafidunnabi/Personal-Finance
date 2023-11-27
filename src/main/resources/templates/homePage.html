@@ -559,6 +559,17 @@
         categorySelect.disabled = !this.checked;
     });
     </script>
+      <!-- In your HTML template -->
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  var chartData = {
+      labels: /*[[${chartData.labels}]]*/ "default",
+      incomeData: /*[[${chartData.incomeData}]]*/ "default",
+      expenseData: /*[[${chartData.expenseData}]]*/ "default"
+  };
+  /*]]>*/
+</script>
+
     <script src="js/script.js" defer></script>
     <script src="js/financeMonthlyChart.js" defer></script>
     <script src="js/barChartMonth.js" defer></script>
