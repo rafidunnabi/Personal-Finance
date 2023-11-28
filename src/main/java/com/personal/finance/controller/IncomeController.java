@@ -37,6 +37,7 @@ public class IncomeController {
 
         return "addIncome";
     }
+
     @PostMapping("/addIncome")
     public String addIncomeRecord(
             @ModelAttribute("income") Income income,
@@ -48,7 +49,8 @@ public class IncomeController {
         if (userId != null) {
             LocalDate localDate = LocalDate.parse(income.getDate());
 
-            incomeService.addIncomeRecord(income.getAmount(), income.getCategory(), localDate, income.getDescription(), userId);
+            incomeService.addIncomeRecord(income.getAmount(), income.getCategory(), localDate, income.getDescription(),
+                    userId);
             model.addAttribute("userId", userId);
         } else {
         }
@@ -69,13 +71,14 @@ public class IncomeController {
 
     @PostMapping("/editIncome")
     public String editIncome(@ModelAttribute("income") Income income,
-                             Model model){
+            Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Integer userId = userRepository.findUserIdByEmail(authentication.getName());
         if (userId != null) {
             LocalDate localDate = LocalDate.parse(income.getDate());
             System.out.println(income.getId());
-            incomeService.editIncomeRecord(income.getId(), income.getAmount(), income.getCategory(), localDate, income.getDescription(), userId);
+            incomeService.editIncomeRecord(income.getId(), income.getAmount(), income.getCategory(), localDate,
+                    income.getDescription(), userId);
             model.addAttribute("userId", userId);
         } else {
         }
@@ -84,8 +87,7 @@ public class IncomeController {
 
     @PostMapping("/deleteIncome")
     public String deleteIncome(@ModelAttribute("income") Income income,
-                               Model model)
-    {
+            Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Integer userId = userRepository.findUserIdByEmail(authentication.getName());
         System.out.println("Delete controller e ashche.");
@@ -99,4 +101,34 @@ public class IncomeController {
 
         return "redirect:/addIncome";
     }
+
+    @GetMapping("/seeAllIncomes")
+    public String seeAllIncomes(Model model) {
+        model.addAttribute("income", new Income());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+
+        List<Income> recentIncomes = incomeService.getRecentIncomes(userId);
+        model.addAttribute("recentIncomes", recentIncomes);
+        double totalIncome = recentIncomes.stream().mapToDouble(Income::getAmount).sum();
+        model.addAttribute("totalIncome", totalIncome);
+
+        return "seeAllIncomes";
+    }
+
+    @PostMapping("/deleteSeeAllIncomes")
+    public String deleteSeeAllIncome(@ModelAttribute("income") Income income,
+            Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+        if (userId != null) {
+            incomeService.deleteIncomeRecord(income.getId(), userId);
+            model.addAttribute("userId", userId);
+        } else {
+            // Handle the case where the user ID is null
+        }
+
+        return "redirect:/seeAllIncomes";
+    }
+
 }

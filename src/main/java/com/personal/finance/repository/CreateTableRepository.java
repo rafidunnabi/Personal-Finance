@@ -10,4 +10,6 @@ public interface CreateTableRepository {
 
     void createExpenseTable();
     void createExpenseCategoriesTable();
+
+    void createBudgetCategoriesTable();
 }

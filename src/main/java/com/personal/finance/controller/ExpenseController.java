@@ -72,13 +72,14 @@ public class ExpenseController {
 
     @PostMapping("/editExpense")
     public String editIncome(@ModelAttribute("expense") Expense expense,
-                             Model model){
+            Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Integer userId = userRepository.findUserIdByEmail(authentication.getName());
         if (userId != null) {
             LocalDate localDate = LocalDate.parse(expense.getDate());
             System.out.println(expense.getId());
-            expenseService.editExpenseRecord(expense.getId(), expense.getAmount(), expense.getCategory(), localDate, expense.getDescription(), userId);
+            expenseService.editExpenseRecord(expense.getId(), expense.getAmount(), expense.getCategory(), localDate,
+                    expense.getDescription(), userId);
             model.addAttribute("userId", userId);
         } else {
         }
@@ -87,8 +88,7 @@ public class ExpenseController {
 
     @PostMapping("/deleteExpense")
     public String deleteIncome(@ModelAttribute("expense") Expense expense,
-                               Model model)
-    {
+            Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Integer userId = userRepository.findUserIdByEmail(authentication.getName());
 
@@ -100,5 +100,36 @@ public class ExpenseController {
         }
 
         return "redirect:/addExpense";
+    }
+
+
+    @GetMapping("/seeAllExpenses")
+    public String seeAllExpenses(Model model) {
+        model.addAttribute("expense", new Expense());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+
+        List<Expense> recentExpenses = expenseService.getRecentExpenses(userId);
+        model.addAttribute("recentExpenses", recentExpenses);
+
+        Double totalExpense = recentExpenses.stream().mapToDouble(Expense::getAmount).sum();
+        model.addAttribute("totalExpense", totalExpense);
+        return "seeAllExpenses";
+    }
+
+    @PostMapping("/deleteSeeAllExpenses")
+    public String deleteSeeAllExpenses(@ModelAttribute("expense") Expense expense,
+            Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+
+        if (userId != null) {
+            expenseService.deleteExpenseRecord(expense.getId(), userId);
+            model.addAttribute("userId", userId);
+        } else {
+            // Handle the case where the user ID is null
+        }
+
+        return "redirect:/seeAllExpenses";
     }
 }

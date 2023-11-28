@@ -311,25 +311,13 @@
         <a th:href="@{/addExpense}">
           <i class="fa-solid fa-plus" style="margin-right: 5px"></i> Add Expense</a
         >
-
-        <div>
-          <a
-                  class="dropdown-toggle"
-                  href="#"
-                  role="button"
-                  id="dropdownMenuLink5"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-          >
-            <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i>Record
-          </a>
-
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">Income Record</a>
-            <a class="dropdown-item" href="#">Expense Record</a>
-          </div>
-        </div>
+        <a th:href="@{/seeAllIncomes}">
+          <i class="fa-solid fa-money-bill-1-wave" style="margin-right: 5px"></i> View Incomes</a
+        >
+        <a th:href="@{/seeAllExpenses}">
+          <i class="fa-solid fa-circle-dollar-to-slot" style="margin-right: 5px"></i> 
+          View Expenses</a
+        >
         <!-- Default dropend button -->
         <div class="dropend" style="display: flex; justify-content: left; width: 230px">
           <a
@@ -339,7 +327,7 @@
                   aria-expanded="false"
                   style="width: 230px; background: none; border: none; outline: none"
           >
-            <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i>Income
+          <i class="fa-regular fa-calendar" style="margin-right: 10px"></i>Income
             By Date
           </a>
           <ul class="dropdown-menu" style="background-color: #24272e">
@@ -352,7 +340,6 @@
               >Choose Date</a
               >
             </li>
-            <li><a class="dropdown-item" href="#">Current Week</a></li>
             <li><a class="dropdown-item" href="#">Current Month</a></li>
             <li><a class="dropdown-item" href="#">Last 6 Months</a></li>
             <li><a class="dropdown-item" href="#">Current Year</a></li>
@@ -379,7 +366,6 @@
               >Choose Date</a
               >
             </li>
-            <li><a class="dropdown-item" href="#">Current Week</a></li>
             <li><a class="dropdown-item" href="#">Current Month</a></li>
             <li><a class="dropdown-item" href="#">Last 6 Months</a></li>
             <li><a class="dropdown-item" href="#">Current Year</a></li>

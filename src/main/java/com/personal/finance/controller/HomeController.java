@@ -1,7 +1,7 @@
 package com.personal.finance.controller;
 
 import com.fasterxml.jackson.databind.type.ClassStack;
-import com.personal.finance.dto.ChartDataDto;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.personal.finance.dto.ChartDataDto;
 import com.personal.finance.repository.UserRepository;
 
 import java.text.SimpleDateFormat;
@@ -42,7 +43,6 @@ public class HomeController {
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         Date firstDayOfPreviousMonth = calendar.getTime();
 
-
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
         Date lastDayOfPreviousMonth = calendar.getTime();
 
@@ -58,10 +58,9 @@ public class HomeController {
                         "WHERE user_id = ? " +
                         "GROUP BY income_date " +
                         ") AS incomes " +
-                         "WHERE income_date BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) " +
+                        "WHERE income_date BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) " +
                         "ORDER BY income_date",
-                userId, formattedFirstDay, formattedLastDay
-        );
+                userId, formattedFirstDay, formattedLastDay);
 
         // Retrieve expense data from the database for the previous month
         List<Map<String, Object>> expenseData = jdbcTemplate.queryForList(
@@ -74,8 +73,7 @@ public class HomeController {
                         ") AS expenses " +
                         "WHERE expense_date BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) " +
                         "ORDER BY expense_date",
-                userId, formattedFirstDay, formattedLastDay
-        );
+                userId, formattedFirstDay, formattedLastDay);
         System.out.println(incomeData);
         System.out.println(expenseData);
         ChartDataDto chartData = new ChartDataDto(incomeData, expenseData);

@@ -65,4 +65,14 @@ public class CreateTableRepositoryImpl implements CreateTableRepository {
                 + ")";
         jdbcTemplate.execute(sql);
     }
+
+    @Override
+    public void createBudgetCategoriesTable() {
+        String createTableQuery = "CREATE TABLE budget_categories ("
+                + "id SERIAL PRIMARY KEY,"
+                + "category_name VARCHAR(255) NOT NULL"
+                + ")";
+
+        jdbcTemplate.execute(createTableQuery);
+    }
 }
