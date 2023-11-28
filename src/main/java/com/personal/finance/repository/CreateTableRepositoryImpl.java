@@ -68,9 +68,28 @@ public class CreateTableRepositoryImpl implements CreateTableRepository {
 
     @Override
     public void createBudgetCategoriesTable() {
-        String createTableQuery = "CREATE TABLE budget_categories ("
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS budget_categories ("
                 + "id SERIAL PRIMARY KEY,"
                 + "category_name VARCHAR(255) NOT NULL"
+                + ")";
+
+        jdbcTemplate.execute(createTableQuery);
+    }
+
+    @Override
+    public void createBudgetTable() {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS budget ("
+                + "id SERIAL PRIMARY KEY,"
+                + "user_id INT,"
+                + "amount DOUBLE PRECISION NOT NULL,"
+                + "budget_category_id INT,"
+                + "description VARCHAR(255),"
+                + "start_date DATE,"
+                + "end_date DATE,"
+                + "spent_amount DOUBLE PRECISION DEFAULT 0,"
+                + "remaining_amount DOUBLE PRECISION,"
+                + "FOREIGN KEY (user_id) REFERENCES users(id),"
+                + "FOREIGN KEY (budget_category_id) REFERENCES budget_categories(id)"
                 + ")";
 
         jdbcTemplate.execute(createTableQuery);

@@ -1,0 +1,109 @@
+<div th:fragment="sidebar-fragment">
+  <div class="sidebar">
+    <div
+      class="user-info"
+      style="margin-left: 23px; margin-top: 35px; margin-bottom: 15px"
+      xmlns:th="http://www.thymeleaf.org"
+    >
+      <h5 class="username" style="color: white">
+        <i class="fa-solid fa-user" style="margin-right: 15px"> </i
+        ><span th:text="${username}"></span>
+      </h5>
+    </div>
+    <div class="user-info" style="margin-left: 24px; margin-bottom: 30px">
+      <h6 class="username" style="color: white">
+        Balance: <span style="color: #04bade">$34534</span>
+      </h6>
+    </div>
+    <a th:href="@{/}">
+      <i class="fa-solid fa-house" style="margin-right: 5px"></i> Home</a
+    >
+    <a th:href="@{/addIncome}">
+      <i class="fa-solid fa-plus" style="margin-right: 5px"></i> Add Income</a
+    >
+    <a th:href="@{/addExpense}">
+      <i class="fa-solid fa-plus" style="margin-right: 5px"></i> Add Expense</a
+    >
+    <a th:href="@{/budget}">
+      <i class="fa-solid fa-bars-progress" style="margin-right: 5px"></i>
+      Budget</a
+    >
+    <a th:href="@{/seeAllIncomes}">
+      <i class="fa-solid fa-money-bill-1-wave" style="margin-right: 5px"></i>
+      View Incomes</a
+    >
+    <a th:href="@{/seeAllExpenses}">
+      <i
+        class="fa-solid fa-circle-dollar-to-slot"
+        style="margin-right: 5px"
+      ></i>
+      View Expenses</a
+    >
+    <!-- Default dropend button -->
+    <div
+      class="dropend"
+      style="display: flex; justify-content: left; width: 230px"
+    >
+      <a
+        href="#"
+        class="dropdown-toggle border-0"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        style="width: 230px; background: none; border: none; outline: none"
+      >
+        <i class="fa-regular fa-calendar" style="margin-right: 10px"></i>Income
+        By Date
+      </a>
+      <ul class="dropdown-menu" style="background-color: #24272e">
+        <li>
+          <a
+            href="#"
+            class="dropdown-item"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            >Choose Date</a
+          >
+        </li>
+        <li><a class="dropdown-item" href="#">Current Month</a></li>
+        <li><a class="dropdown-item" href="#">Last 6 Months</a></li>
+        <li><a class="dropdown-item" href="#">Current Year</a></li>
+      </ul>
+    </div>
+    <div
+      class="dropend"
+      style="display: flex; justify-content: left; width: 230px"
+    >
+      <a
+        href="#"
+        class="dropdown-toggle border-0"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        style="width: 230px; background: none; border: none; outline: none"
+      >
+        <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i
+        >Expense By Date
+      </a>
+      <ul class="dropdown-menu" style="background-color: #24272e">
+        <li>
+          <a
+            href="#"
+            class="dropdown-item"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModalExpense"
+            >Choose Date</a
+          >
+        </li>
+        <li><a class="dropdown-item" href="#">Current Month</a></li>
+        <li><a class="dropdown-item" href="#">Last 6 Months</a></li>
+        <li><a class="dropdown-item" href="#">Current Year</a></li>
+      </ul>
+    </div>
+    <a href="#"
+      ><i class="fa-solid fa-circle-info" style="margin-right: 5px"></i>About</a
+    >
+    <a href="/logout"
+      ><i class="fa-solid fa-right-from-bracket" style="margin-right: 8px"></i
+      >Logout</a
+    >
+  </div>
+</div>
