@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="/css/body.css" />
     <link rel="stylesheet" href="/css/button.css" />
     <link rel="stylesheet" href="/css/buttonRed.css" />
+    <link rel="stylesheet" href="/css/buttonGreen.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -199,11 +200,7 @@
       <div>
         <span style="font-size: 40px; margin-left: 40px"
           ><strong
-            ><i
-              class="fa-solid fa-comments-dollar"
-              style="margin-right: 20px"
-            ></i
-            >Budget Overview:</strong
+            ><i class="fa-solid fa-bars-progress" style="margin-right: 20px"></i>Budget Overview:</strong
           >
         </span>
         <!--<span
@@ -319,14 +316,14 @@
             </div>
             <button
               type="submit"
-              class="btn"
+              class="btn-green"
               style="margin-left: 5px; margin-right: 5px; font-size: 15px"
             >
               Add
             </button>
           </form>
         </div>
-        <!--
+        
         <div
           style="
             display: flex;
@@ -384,11 +381,11 @@
                                   <td style="width: 10px">
                                     <button
                                       type="button"
-                                      class="btn btn-danger btn-sm px-3"
+                                      class="btn-green btn-danger btn-sm px-3"
                                       th:attr="data-category=${budget.category},data-description=${budget.description},data-startDate=${budget.startDate},data-amount=${budget.amount},data-id=${budget.id}"
                                       data-bs-toggle="modal"
                                       data-bs-target="#exampleModalEdit"
-                                      onclick="populateEditForm(this)"
+                                      onclick="populateEditBudgetForm(this)"
                                     >
                                       <i
                                         class="fa-regular fa-pen-to-square"
@@ -408,7 +405,7 @@
             </div>
           </section>
         </div>
-    -->
+
       </div>
     </div>
 

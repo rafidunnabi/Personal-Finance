@@ -1,7 +1,6 @@
 package com.personal.finance.controller;
 
 import com.personal.finance.model.Budget;
-import com.personal.finance.model.Income;
 import com.personal.finance.repository.UserRepository;
 import com.personal.finance.service.BudgetService;
 import org.springframework.security.core.Authentication;
