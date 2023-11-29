@@ -1,0 +1,143 @@
+<div th:fragment="addBudget-fragment">
+  <div
+    class="modal fade"
+    id="addBudgetModal"
+    aria-labelledby="addBudgetModalLabel"
+    aria-hidden="true"
+    style="padding: 30px"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content" style="padding: 20px">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <strong>Personalise Budget</strong>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+            <div
+            class="form-expense-container"
+            style="margin-top: 40px; width: 420px"
+          >
+            <h3>
+              <strong
+                ><i
+                  class="fa-solid fa-money-check-dollar"
+                  style="margin-right: 17px"
+                ></i
+                >Add Budget</strong
+              >
+            </h3>
+            <form
+              style="margin-top: 30px"
+              method="post"
+              th:action="@{/addBudget}"
+              th:object="${budget}"
+            >
+              <div class="mb-3">
+                <label for="amountInput" class="form-label">Amount</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="amountInputBudget"
+                  placeholder="Enter amount"
+                  th:field="*{amount}"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="categorySelect" class="form-label">Category</label>
+                <select
+                  class="form-select"
+                  id="categorySelectBudget"
+                  th:field="*{category}"
+                >
+                  <option value="Education">Education</option>
+                  <option value="Electricity Bill">Electricity Bill</option>
+                  <option value="Fitness">Fitness</option>
+                  <option value="Food & Beverage">Food & Beverage</option>
+                  <option value="Fun & Entertainment">Fun & Entertainment</option>
+                  <option value="Gas Bill">Gas Bill</option>
+                  <option value="Gifts & Donations">Gifts & Donations</option>
+                  <option value="Home Maintenance">Home Maintenance</option>
+                  <option value="Home Services">Home Services</option>
+                  <option value="Houseware">Houseware</option>
+                  <option value="Insurances">Insurances</option>
+                  <option value="Internet Bill">Internet Bill</option>
+                  <option value="Investment">Investment</option>
+                  <option value="Makeup">Makeup</option>
+                  <option value="Medical Check-up">Medical Check-up</option>
+                  <option value="Utility Bills">Utility Bills</option>
+                  <option value="Outgoing Transfer">Outgoing Transfer</option>
+                  <option value="Pay Interest">Pay Interest</option>
+                  <option value="Personal Items">Personal Items</option>
+                  <option value="Pets">Pets</option>
+                  <option value="Phone Bill">Phone Bill</option>
+                  <option value="Rentals">Rentals</option>
+                  <option value="Streaming Service">Streaming Service</option>
+                  <option value="Television Bill">Television Bill</option>
+                  <option value="Transportation">Transportation</option>
+                  <option value="Vehicle Maintenance">Vehicle Maintenance</option>
+                  <option value="Water Bills">Water Bills</option>
+                  <option value="Others">Others</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="dateInput" class="form-label">Start Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="startDateInputBudget"
+                  placeholder="Enter date"
+                  th:field="*{startDate}"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="dateInput" class="form-label">End Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="endDateInputBudget"
+                  placeholder="Enter date"
+                  th:field="*{endDate}"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="descriptionInput" class="form-label"
+                  >Description</label
+                >
+                <textarea
+                  class="form-control"
+                  id="descriptionInputBudget"
+                  rows="3"
+                  placeholder="Enter description"
+                  th:field="*{description}"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="btn-green"
+                style="margin-left: 5px; margin-right: 5px; font-size: 15px"
+              >
+                Add
+              </button>
+              <button
+                type="button"
+                class="btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </form>
+          </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

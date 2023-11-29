@@ -9,4 +9,6 @@ public interface BudgetRepository {
     List<Budget> getAllBudget(Integer user_id);
 
     void addBudget(double amount, String category, LocalDate startDate, LocalDate endDate, String description, Integer userId);
+
+    List<Budget> getBudgetsByDateRangeAndUser(List<Budget> budgets, Integer userId);
 }

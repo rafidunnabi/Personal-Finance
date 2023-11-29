@@ -21,4 +21,14 @@ public class BudgetService {
     public void addBudgetRecord(double amount, String category, LocalDate startDate, LocalDate endDate, String description, Integer userId) {
         budgetRepository.addBudget(amount, category, startDate, endDate, description, userId);
     }
+
+    public List<Budget> getBudgetsAndUpdateAmounts(List<Budget> budgets, Integer userId) {
+
+        if (!budgets.isEmpty()) {
+            Budget firstBudget = budgets.get(0);
+            return budgetRepository.getBudgetsByDateRangeAndUser(budgets, userId);
+        } else {
+            return budgets;
+        }
+    }
 }

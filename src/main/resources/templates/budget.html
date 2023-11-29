@@ -24,9 +24,8 @@
     <link rel="stylesheet" href="/css/table.css" />
     <link rel="stylesheet" href="/css/sidebar.css" />
     <link rel="stylesheet" href="/css/body.css" />
-    <link rel="stylesheet" href="/css/button.css" />
-    <link rel="stylesheet" href="/css/buttonRed.css" />
     <link rel="stylesheet" href="/css/buttonGreen.css" />
+    <link rel="stylesheet" href="/css/buttonRed.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -194,209 +193,133 @@
       </div>
     </div>
     -->
+    <div th:replace="fragments/addBudgetModal :: addBudget-fragment"></div>
     <div th:replace="fragments/sidebar :: sidebar-fragment"></div>
 
     <div class="content">
-      <div>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        "
+      >
         <span style="font-size: 40px; margin-left: 40px"
           ><strong
-            ><i class="fa-solid fa-bars-progress" style="margin-right: 20px"></i>Budget Overview:</strong
+            ><i class="fa-solid fa-bars-progress" style="margin-right: 20px"></i
+            >Budget Overview:</strong
           >
         </span>
-        <!--<span
-          style="color: #04bade; font-size: 40px"
-          th:text="${totalIncome}"
-        ></span> -->
+        <button
+          type="button"
+          class="btn-green"
+          style="margin-right: 70px"
+          data-bs-toggle="modal"
+          data-bs-target="#addBudgetModal"
+        >
+          Add Budget
+        </button>
       </div>
 
       <div
         style="
           display: flex;
           flex-direction: row;
-          justify-content: space-evenly;
+          justify-content: flex-start;
         "
       >
-        <div
-          class="form-expense-container"
-          style="margin-top: 40px; width: 420px"
-        >
-          <h3>
-            <strong
-              ><i
-                class="fa-solid fa-money-check-dollar"
-                style="margin-right: 17px"
-              ></i
-              >Add Budget</strong
-            >
-          </h3>
-          <form
-            style="margin-top: 30px"
-            method="post"
-            th:action="@{/addBudget}"
-            th:object="${budget}"
-          >
-            <div class="mb-3">
-              <label for="amountInput" class="form-label">Amount</label>
-              <input
-                type="number"
-                class="form-control"
-                id="amountInputBudget"
-                placeholder="Enter amount"
-                th:field="*{amount}"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="categorySelect" class="form-label">Category</label>
-              <select
-                class="form-select"
-                id="categorySelectBudget"
-                th:field="*{category}"
-              >
-                <option value="Education">Education</option>
-                <option value="Electricity Bill">Electricity Bill</option>
-                <option value="Fitness">Fitness</option>
-                <option value="Food & Beverage">Food & Beverage</option>
-                <option value="Fun & Entertainment">Fun & Entertainment</option>
-                <option value="Gas Bill">Gas Bill</option>
-                <option value="Gifts & Donations">Gifts & Donations</option>
-                <option value="Home Maintenance">Home Maintenance</option>
-                <option value="Home Services">Home Services</option>
-                <option value="Houseware">Houseware</option>
-                <option value="Insurances">Insurances</option>
-                <option value="Internet Bill">Internet Bill</option>
-                <option value="Investment">Investment</option>
-                <option value="Makeup">Makeup</option>
-                <option value="Medical Check-up">Medical Check-up</option>
-                <option value="Utility Bills">Utility Bills</option>
-                <option value="Outgoing Transfer">Outgoing Transfer</option>
-                <option value="Pay Interest">Pay Interest</option>
-                <option value="Personal Items">Personal Items</option>
-                <option value="Pets">Pets</option>
-                <option value="Phone Bill">Phone Bill</option>
-                <option value="Rentals">Rentals</option>
-                <option value="Streaming Service">Streaming Service</option>
-                <option value="Television Bill">Television Bill</option>
-                <option value="Transportation">Transportation</option>
-                <option value="Vehicle Maintenance">Vehicle Maintenance</option>
-                <option value="Water Bills">Water Bills</option>
-                <option value="Others">Others</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="dateInput" class="form-label">Start Date</label>
-              <input
-                type="date"
-                class="form-control"
-                id="startDateInputBudget"
-                placeholder="Enter date"
-                th:field="*{startDate}"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="dateInput" class="form-label">End Date</label>
-              <input
-                type="date"
-                class="form-control"
-                id="endDateInputBudget"
-                placeholder="Enter date"
-                th:field="*{endDate}"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="descriptionInput" class="form-label"
-                >Description</label
-              >
-              <textarea
-                class="form-control"
-                id="descriptionInputBudget"
-                rows="3"
-                placeholder="Enter description"
-                th:field="*{description}"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              class="btn-green"
-              style="margin-left: 5px; margin-right: 5px; font-size: 15px"
-            >
-              Add
-            </button>
-          </form>
-        </div>
-        
         <div
           style="
             display: flex;
             flex-direction: column;
             margin-top: 40px;
-            padding-left: 40px;
-            width: 800px;
+            width: 1200px;
           "
         >
-          <h3 style="margin-left: 10px"><strong>Budgets</strong></h3>
-          <section class="intro">
+          <h3 style="margin-left: 60px; margin-bottom: 30px;"><strong>Budgets</strong></h3>
+          <section class="intro" style="margin-left: 20px;">
             <div class="bg-image h-100" style="margin-top: 10px">
               <div
                 class="mask d-flex h-100"
                 style="display: flex; justify-content: flex-start"
               >
                 <div class="container">
-                  <div class="row justify-content-center">
-                    <div class="col-12">
-                      <div class="card shadow-2-strong">
+                  <div class="row ">
+                    <div class="col-12" style="display: flex; flex-direction: row;">
+                      <!-- Loop through each budget -->
+                      <div style="display: flex;
+                      flex-wrap: wrap;
+                      justify-content: flex-start; ">
+                      <div
+                        th:each="budget : ${recentBudgets}"
+                        class="card shadow-2-strong "
+                        style="width: 500px; margin-bottom: 50px; margin-right: 50px;"
+                      >
                         <div class="card-body">
-                          <div class="table-responsive">
-                            <table class="table table-borderless mb-0">
-                              <thead>
-                                <tr>
-                                  <th scope="col">Category</th>
-                                  <th scope="col">Description</th>
-                                  <th scope="col">Date</th>
-                                  <th scope="col">Amount</th>
-                                  <th scope="col">Edit</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr th:each="budget : ${recentBudgets}">
-                                  <td
-                                    id="editCategory"
-                                    th:text="${budget.category}"
-                                    style="width: 10px"
-                                  ></td>
-                                  <td
-                                    id="editDescription"
-                                    th:text="${budget.description}"
-                                    style="width: 10px"
-                                  ></td>
-                                  <td
-                                    id="editDate"
-                                    th:text="${budget.startDate}"
-                                    style="width: 10px"
-                                  ></td>
-                                  <td
-                                    id="editAmount"
-                                    th:text="${budget.amount}"
-                                    style="width: 10px"
-                                  ></td>
-                                  <td style="width: 10px">
-                                    <button
-                                      type="button"
-                                      class="btn-green btn-danger btn-sm px-3"
-                                      th:attr="data-category=${budget.category},data-description=${budget.description},data-startDate=${budget.startDate},data-amount=${budget.amount},data-id=${budget.id}"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#exampleModalEdit"
-                                      onclick="populateEditBudgetForm(this)"
-                                    >
-                                      <i
-                                        class="fa-regular fa-pen-to-square"
-                                      ></i>
-                                    </button>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
+                          <p class="card-text">
+                            <strong th:text="${budget.startDate} + '  - ' + ${budget.endDate}"></strong>
+                          </p>
+                          <div
+                            style="
+                              display: flex;
+                              flex-direction: row;
+                              justify-content: space-between;
+                            "
+                          >
+                          
+                            <p class="card-text">
+                              <strong th:text="${budget.category}"></strong>
+                            </p>
+                            <p class="card-text">
+                              <strong th:text="'$' + ${budget.amount}"></strong>
+                            </p>
                           </div>
+                          <!-- Progress bar -->
+                          <div class="progress mt-3" style="height: 8px">
+                            <!-- Calculate the progress percentage -->
+                            <div
+                              class="progress-bar"
+                              role="progressbar"
+                              th:style="'height: 8px;' + 'width: ' + ${ (budget.spentAmount / budget.amount) * 100 } + '%; background-color: ' + (${(budget.spentAmount / budget.amount) * 100 >= 95} ? '#FF474D' : (${(budget.spentAmount / budget.amount) * 100 >= 60} ? 'orange' : '#50c878')) + ';'"
+                              aria-valuenow="${(budget.spentAmount / budget.amount) * 100}"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            ></div>
+                          </div>
+
+                          <!-- Display spent and left amounts -->
+                          <div
+                            style="
+                              display: flex;
+                              flex-direction: row;
+                              justify-content: space-between;
+                              margin-top: 3px;
+                            "
+                          >
+                            <p
+                              class="card-text"
+                              th:text="'Spent: ' + '$' + ${budget.spentAmount}"
+                            ></p>
+                            <p
+                              class="card-text"
+                              th:text="'Remaining: ' + '$' + ${budget.remainingAmount}"
+                            ></p>
+                          </div>
+
+                          <!-- Edit button -->
+                          <button
+                            type="button"
+                            class="btn-red"
+                            th:attr="data-category=${budget.category}, data-description=${budget.description}, data-startDate=${budget.startDate}, data-amount=${budget.amount}, data-id=${budget.id}"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModalEdit"
+                            onclick="populateEditBudgetForm(this)"
+                          >
+                            <i class="fa-regular fa-pen-to-square"></i>
+                          </button>
                         </div>
+                      </div>
+                    </div>
                       </div>
                     </div>
                   </div>
@@ -405,7 +328,6 @@
             </div>
           </section>
         </div>
-
       </div>
     </div>
 
