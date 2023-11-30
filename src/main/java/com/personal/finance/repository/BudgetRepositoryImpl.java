@@ -115,4 +115,24 @@ public class BudgetRepositoryImpl implements BudgetRepository{
 
         return budgets;
     }
+
+    @Override
+    public void deleteBudgetById(Integer id, Integer userId) {
+        String sql = "DELETE FROM budget WHERE id = ? AND user_id = ?";
+        jdbcTemplate.update(sql, id, userId);
+    }
+
+    @Override
+    public void editBudget(Double amount, String category, LocalDate localStartDate, LocalDate localEndDate, String description, Integer userId, Integer id) {
+        System.out.println("Amount : " + amount);
+        System.out.println("Category : " + category);
+        System.out.println("StartDate : " + localStartDate);
+        System.out.println("End Date : " + localEndDate);
+        System.out.println("Description : " + description);
+        System.out.println("UserId : " + userId);
+        System.out.println("Id : " + id);
+        String sql = "UPDATE budget SET amount = ?, budget_category_id = (SELECT id FROM budget_categories WHERE category_name = ?), " +
+                "start_date = ?, end_date = ?, description = ?, user_id = ? WHERE id = ?";
+        jdbcTemplate.update(sql, amount, category, localStartDate, localEndDate, description, userId, id);
+    }
 }

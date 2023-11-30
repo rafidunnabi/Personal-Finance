@@ -21,4 +21,6 @@ public interface IncomeRepository {
     void editIncome(Integer id, Double amount, String category, LocalDate localDate, String description, Integer userId);
 
     void deleteIncome(Integer id, Integer userId);
+
+    List<Income> searchIncomeByCategory(String selectedCategory, Integer userId);
 }

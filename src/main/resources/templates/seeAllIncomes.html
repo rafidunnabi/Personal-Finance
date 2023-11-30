@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="/css/body.css" />
     <link rel="stylesheet" href="/css/button.css" />
     <link rel="stylesheet" href="/css/buttonRed.css" />
+    <link rel="stylesheet" href="/css/buttonGreen.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -210,10 +211,12 @@
       </div>
     </div>
 
+    <!-- Modal Income Category-->
+    <div
+      th:replace="fragments/incomeCategoryModal :: incomeModalCategory-fragment"
+    ></div>
     <!-- Modal Income-->
     <div th:replace="fragments/incomeModal :: incomeModal-fragment"></div>
-    <!-- Modal Expense-->
-    <div th:replace="fragments/expenseModal :: expenseModal-fragment"></div>
     <!-- Sidebar-->
     <div th:replace="fragments/sidebar :: sidebar-fragment"></div>
     <div class="content">
@@ -250,7 +253,57 @@
             width: 1150px;
           "
         >
-          <h3 style="margin-left: 10px"><strong>All Incomes</strong></h3>
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+            "
+          >
+            <h3 style="margin-left: 10px">
+              <strong
+                ><i
+                  class="fa-solid fa-money-check-dollar"
+                  style="margin-right: 17px"
+                ></i
+                >All Incomes</strong
+              >
+            </h3>
+            <div style="display: flex; align-items: flex-start">
+              <button
+                type="button"
+                class="btn-green"
+                style="margin-right: 15px"
+                data-bs-toggle="modal"
+                data-bs-target="#incomeModalCategory"
+              >
+                <i class="fa-solid fa-list" style="margin-right: 5px"></i>
+                Category
+              </button>
+              <button
+                type="button"
+                class="btn-green"
+                style="margin-right: 15px"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                <i
+                  class="fa-regular fa-calendar-days"
+                  style="margin-right: 5px"
+                ></i>
+                Date
+              </button>
+              <button
+                type="button"
+                class="btn"
+                style="margin-right: 20px"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                <i class="fa-solid fa-plus" style="margin-right: 5px"></i>Add
+              </button>
+            </div>
+          </div>
           <section class="intro">
             <div class="bg-image h-100" style="margin-top: 10px">
               <div
@@ -329,7 +382,16 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+    <script>
+      document
+        .getElementById("enableCategoryIncome")
+        .addEventListener("change", function () {
+          var categorySelect = document.getElementById("categorySelectIncome");
+          categorySelect.disabled = !this.checked;
+        });
+    </script>
     <script src="js/editIncome.js" defer></script>
     <script src="js/deleteSeeAllIncome.js" defer></script>
+    <script src="js/validateDates.js" defer></script>
   </body>
 </html>

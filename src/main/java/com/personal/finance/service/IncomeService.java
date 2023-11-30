@@ -43,4 +43,8 @@ public class IncomeService {
     public void deleteIncomeRecord(Integer id, Integer userId) {
         incomeRepository.deleteIncome(id, userId);
     }
+
+    public List<Income> searchIncomeByCategory(String selectedCategory, Integer userId) {
+        return incomeRepository.searchIncomeByCategory(selectedCategory,userId);
+    }
 }

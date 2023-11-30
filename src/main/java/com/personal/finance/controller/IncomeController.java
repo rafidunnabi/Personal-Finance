@@ -131,4 +131,19 @@ public class IncomeController {
         return "redirect:/seeAllIncomes";
     }
 
+    @PostMapping("/searchIncomeByCategory")
+    public String searchIncomeByCategory(@RequestParam("selectedCategory") String selectedCategory, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+
+        if (userId != null) {
+            List<Income> incomeByCategoryList = incomeService.searchIncomeByCategory(selectedCategory, userId);
+            model.addAttribute("incomeByCategoryList", incomeByCategoryList);
+        } else {
+        }
+        return "seeAllIncomes";
+    }
+
+
 }

@@ -84,4 +84,16 @@ public class IncomeRepositoryImpl implements IncomeRepository {
         jdbcTemplate.update(sql, id, userId);
     }
 
+    @Override
+    public List<Income> searchIncomeByCategory(String selectedCategory, Integer userId) {
+        String sql = "SELECT i.id, i.amount, ic.income_category_name as category, i.description, i.income_date as date "
+                +
+                "FROM income i " +
+                "JOIN income_categories ic ON i.income_category_id = ic.id " +
+                "WHERE ic.income_category_name = ? AND i.user_id = ? ";
+
+        return jdbcTemplate.query(sql, new Object[] { selectedCategory,userId },
+                new BeanPropertyRowMapper<>(Income.class));
+    }
+
 }

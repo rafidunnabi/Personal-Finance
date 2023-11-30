@@ -58,8 +58,6 @@
     </style>
   </head>
   <body>
-    <!-- Modal Income-->
-    <div th:replace="fragments/incomeModal :: incomeModal-fragment"></div>
     <!-- Modal Expense-->
     <div th:replace="fragments/expenseModal :: expenseModal-fragment"></div>
     <!-- Sidebar-->
@@ -212,22 +210,7 @@
       </div>
     </div>
     <script>
-      function validateDates() {
-        var startDate = document.getElementById("startDateInput").value;
-        var endDate = document.getElementById("endDateInput").value;
-
-        if (startDate > endDate) {
-          alert("End date must be equal to or after the start date.");
-          return false; // Prevent form submission
-        }
-
-        return true; // Allow form submission
-      }
-
-      document.getElementById('enableCategory').addEventListener('change', function () {
-        var categorySelect = document.getElementById('categorySelect');
-        categorySelect.disabled = !this.checked;
-    });
+      
     </script>
       <!-- In your HTML template -->
 <script th:inline="javascript">
@@ -239,6 +222,14 @@
   };
   /*]]>*/
 </script>
+<!--<script>
+  document
+.getElementById("enableCategory")
+.addEventListener("change", function () {
+  var categorySelect = document.getElementById("categorySelect");
+  categorySelect.disabled = !this.checked;
+});
+</script>-->
 
     <script src="js/script.js" defer></script>
     <script src="js/financeMonthlyChart.js" defer></script>
@@ -246,6 +237,7 @@
     <script src="js/barChartYear.js" defer></script>
     <script src="js/barChartDay.js" defer></script>
     <script src="js/barChartWeek.js" defer></script>
+    <script src="js/validateDates.js" defer></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

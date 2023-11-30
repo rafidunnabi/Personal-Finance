@@ -1,0 +1,136 @@
+<div th:fragment="budgetEdit-fragment">
+  <div
+    class="modal fade"
+    id="budgetEditModal"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div
+          class="modal-body"
+          style="padding-top: 20px; padding-left: 40px; padding-right: 40px"
+        >
+          <h3>
+            <strong
+              ><i
+                class="fa-solid fa-money-check-dollar"
+                style="margin-right: 17px"
+              ></i
+              >Edit Budget</strong
+            >
+          </h3>
+          <form
+            style="margin-top: 30px"
+            method="post"
+            th:action="@{/editBudget}"
+            th:object="${budget}"
+            id="budgetModalEditForm"
+          >
+            <input type="hidden" id="budgetId" th:field="*{id}" th:name="id" />
+            <div class="mb-3">
+              <label for="budgetAmount" class="form-label">Amount</label>
+              <input
+                type="number"
+                th:field="*{amount}"
+                class="form-control"
+                id="budgetAmount"
+                placeholder="Enter amount"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="budgetCategory" class="form-label">Category</label>
+              <select
+                class="form-select"
+                id="budgetCategory"
+                th:field="*{category}"
+              >
+                <option value="Education">Education</option>
+                <option value="Electricity Bill">Electricity Bill</option>
+                <option value="Fitness">Fitness</option>
+                <option value="Food & Beverage">Food & Beverage</option>
+                <option value="Fun & Entertainment">Fun & Entertainment</option>
+                <option value="Gas Bill">Gas Bill</option>
+                <option value="Gifts & Donations">Gifts & Donations</option>
+                <option value="Home Maintenance">Home Maintenance</option>
+                <option value="Home Services">Home Services</option>
+                <option value="Houseware">Houseware</option>
+                <option value="Insurances">Insurances</option>
+                <option value="Internet Bill">Internet Bill</option>
+                <option value="Investment">Investment</option>
+                <option value="Makeup">Makeup</option>
+                <option value="Medical Check-up">Medical Check-up</option>
+                <option value="Utility Bills">Utility Bills</option>
+                <option value="Outgoing Transfer">Outgoing Transfer</option>
+                <option value="Pay Interest">Pay Interest</option>
+                <option value="Personal Items">Personal Items</option>
+                <option value="Pets">Pets</option>
+                <option value="Phone Bill">Phone Bill</option>
+                <option value="Rentals">Rentals</option>
+                <option value="Streaming Service">Streaming Service</option>
+                <option value="Television Bill">Television Bill</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Vehicle Maintenance">Vehicle Maintenance</option>
+                <option value="Water Bills">Water Bills</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="budgetStartDate" class="form-label">Start Date</label>
+              <input
+                type="date"
+                class="form-control"
+                th:field="*{startDate}"
+                id="budgetStartDate"
+                placeholder="Enter date"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="budgetEndDate" class="form-label">End Date</label>
+              <input
+                type="date"
+                class="form-control"
+                th:field="*{endDate}"
+                id="budgetEndDate"
+                placeholder="Enter date"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="budgetDescription" class="form-label"
+                >Description</label
+              >
+              <textarea
+                class="form-control"
+                id="budgetDescription"
+                rows="3"
+                placeholder="Enter description"
+                th:field="*{description}"
+              ></textarea>
+            </div>
+            <div
+              class="modal-footer"
+              style="justify-content: left; margin-top: 30px"
+            >
+              <button type="submit" class="btn-green">Update</button>
+              <button
+                type="button"
+                class="btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

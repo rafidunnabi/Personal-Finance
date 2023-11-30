@@ -1,7 +1,7 @@
-<div th:fragment="incomeModal-fragment">
+<div th:fragment="incomeModalCategory-fragment">
   <div
     class="modal fade"
-    id="exampleModal"
+    id="incomeModalCategory"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
@@ -21,49 +21,23 @@
         <div class="modal-body">
           <h3 style="color: #04bade">
             <i class="fa-solid fa-calendar-days" style="margin-right: 13px"></i
-            >Choose Date
+            >Choose Category
           </h3>
           <form
-            th:action="@{/customHistoryIncome}"
+            th:action="@{/searchIncomeByCategory}"
             method="post"
             style="margin-top: 30px"
-            onsubmit="return validateDates()"
           >
             <div class="mb-3">
-              <label for="startDateInput" class="form-label"
-                ><storng>Start Date</storng></label
-              >
-              <input
-                type="date"
-                class="form-control"
-                id="startDateInput"
-                placeholder="Enter date"
-                th:name="startDate"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="endDateInput" class="form-label"
-                ><storng>End Date</storng></label
-              >
-              <input
-                type="date"
-                class="form-control"
-                id="endDateInput"
-                placeholder="Enter date"
-                th:name="endDate"
-              />
-            </div>
-            <div class="mb-3">
-              <input type="checkbox" id="enableCategoryIncome" />
-              <label for="enableCategoryIncome" class="form-label"
-                ><storng>Category (Optional)</storng></label
+              <label for="enableCategoryIncomeSearch" class="form-label"
+                ><strong>Category</strong></label
               >
               <select
                 class="form-select"
-                id="categorySelectIncome"
-                th:name="category"
-                disabled
+                id="categorySelectIncomeSearch"
+                name="selectedCategory"
               >
+                <option value="Capital Gains">All</option>
                 <option value="Capital Gains">Capital Gains</option>
                 <option value="Passive Income">Passive Income</option>
                 <option value="Active Income">Active Income</option>

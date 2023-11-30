@@ -31,4 +31,12 @@ public class BudgetService {
             return budgets;
         }
     }
+
+    public void deleteBudgetById(Integer id, Integer userId) {
+        budgetRepository.deleteBudgetById(id, userId);
+    }
+
+    public void editBudget( Double amount, String category, LocalDate localStartDate, LocalDate localEndDate, String description, Integer userId, Integer id) {
+        budgetRepository.editBudget(amount, category, localStartDate, localEndDate, description, userId, id);
+    }
 }

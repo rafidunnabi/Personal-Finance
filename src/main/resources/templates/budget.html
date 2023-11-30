@@ -24,8 +24,10 @@
     <link rel="stylesheet" href="/css/table.css" />
     <link rel="stylesheet" href="/css/sidebar.css" />
     <link rel="stylesheet" href="/css/body.css" />
+    <link rel="stylesheet" href="/css/button.css" />
     <link rel="stylesheet" href="/css/buttonGreen.css" />
     <link rel="stylesheet" href="/css/buttonRed.css" />
+    <link rel="stylesheet" href="/css/buttonOrange.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -74,6 +76,7 @@
     </style>
   </head>
   <body>
+    
     <!--Modal Edit-->
     <!--
     <div
@@ -193,10 +196,17 @@
       </div>
     </div>
     -->
+    <div th:replace="fragments/budgetEditModal :: budgetEdit-fragment"></div>
     <div th:replace="fragments/addBudgetModal :: addBudget-fragment"></div>
     <div th:replace="fragments/sidebar :: sidebar-fragment"></div>
 
     <div class="content">
+      <div th:if="${param.deleted}">
+        <div id="deleteAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Budget has been deleted successfully!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
       <div
         style="
           display: flex;
@@ -274,6 +284,17 @@
                               <strong th:text="'$' + ${budget.amount}"></strong>
                             </p>
                           </div>
+                          <div
+                            style="
+                              display: flex;
+                              flex-direction: row;
+                              justify-content: space-between;
+                            "
+                          >
+                          
+                            <p class="card-text" th:text="${budget.description}">
+                            </p>
+                          </div>
                           <!-- Progress bar -->
                           <div class="progress mt-3" style="height: 8px">
                             <!-- Calculate the progress percentage -->
@@ -305,18 +326,31 @@
                               th:text="'Remaining: ' + '$' + ${budget.remainingAmount}"
                             ></p>
                           </div>
-
-                          <!-- Edit button -->
+                          
+                          <div style="display: flex; flex-direction: row;">
+                            <!-- Edit button -->
                           <button
-                            type="button"
-                            class="btn-red"
-                            th:attr="data-category=${budget.category}, data-description=${budget.description}, data-startDate=${budget.startDate}, data-amount=${budget.amount}, data-id=${budget.id}"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModalEdit"
-                            onclick="populateEditBudgetForm(this)"
-                          >
-                            <i class="fa-regular fa-pen-to-square"></i>
-                          </button>
+                          type="button"
+                          class="btn"
+                          th:attr="budget-category=${budget.category}, budget-description=${budget.description}, budget-startDate=${budget.startDate}, budget-endDate=${budget.endDate}, budget-amount=${budget.amount}, budget-id=${budget.id}"
+                          data-bs-toggle="modal"
+                          data-bs-target="#budgetEditModal"
+                          onclick="populateEditBudgetForm(this)"
+                        >
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                        <!-- Delete button -->
+                        <form th:action="@{/deleteBudget}" th:method="post" style="margin-left: 10px;">
+                          <input type="hidden" name="id" th:value="${budget.id}">
+                          <button
+                          type="submit"
+                          class="btn-orange"
+                        >
+                          <i class="fa-solid fa-trash"></i>
+                        </button>
+                      </form>
+                          </div>
+                          
                         </div>
                       </div>
                     </div>
@@ -338,5 +372,7 @@
     ></script>
     <!-- <script src="js/editIncome.js" defer></script>
     <script src="js/deleteIncome.js" defer></script> -->
+    <script src="js/removeAlert.js" defer></script>
+    <script src="js/budgetEdit.js" defer></script>
   </body>
 </html>
