@@ -14,6 +14,7 @@ import com.personal.finance.repository.UserRepository;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -74,15 +75,115 @@ public class HomeController {
                         "WHERE expense_date BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) " +
                         "ORDER BY expense_date",
                 userId, formattedFirstDay, formattedLastDay);
-        System.out.println(incomeData);
-        System.out.println(expenseData);
         ChartDataDto chartData = new ChartDataDto(incomeData, expenseData);
-
         // Add the data to the model
         model.addAttribute("chartData", chartData);
-        System.out.println(chartData);
+
+
+
+
+
+        //Monthly Update Bar Chart
+        LocalDate firstDayOfCurrentMonthBar = LocalDate.now().withDayOfMonth(1);
+        LocalDate firstDayOfPreviousMonthBar = firstDayOfCurrentMonthBar.minusMonths(1);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String firstDayFormatted = firstDayOfPreviousMonthBar.format(formatter);
+        String lastDayFormatted = firstDayOfCurrentMonthBar.minusDays(1).format(formatter);
+
+        String firstDayCurrentFormatted = firstDayOfCurrentMonthBar.format(formatter);
+        String lastDayCurrentFormatted = firstDayOfCurrentMonthBar.withDayOfMonth(firstDayOfCurrentMonthBar.lengthOfMonth()).format(formatter);
+
+        List<Map<String, Object>> incomeDataMonthlyBar = jdbcTemplate.queryForList(
+                "SELECT SUM(amount) as total FROM income i " +
+                        "WHERE i.income_date BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) AND user_id = ? ",
+                firstDayFormatted, lastDayFormatted, userId
+        );
+        List<Map<String, Object>> expenseDataMonthlyBar = jdbcTemplate.queryForList(
+                "SELECT SUM(amount) as total FROM expense e " +
+                        "WHERE e.expense_date BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) AND user_id = ? ",
+                firstDayFormatted, lastDayFormatted, userId
+        );
+
+
+
+        List<Map<String, Object>> incomeDataMonthlyBarCurrent = jdbcTemplate.queryForList(
+                "SELECT SUM(amount) as total FROM income i " +
+                        "WHERE i.income_date BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) AND user_id = ? ",
+                firstDayCurrentFormatted, lastDayCurrentFormatted, userId
+        );
+        List<Map<String, Object>> expenseDataMonthlyBarCurrent = jdbcTemplate.queryForList(
+                "SELECT SUM(amount) as total FROM expense e " +
+                        "WHERE e.expense_date BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) AND user_id = ? ",
+                firstDayCurrentFormatted, lastDayCurrentFormatted, userId
+        );
+
+
+
+        model.addAttribute("incomeDataMonthlyBar", incomeDataMonthlyBar);
+        model.addAttribute("expenseDataMonthlyBar", expenseDataMonthlyBar);
+        model.addAttribute("incomeDataCurrentMonth", incomeDataMonthlyBarCurrent);
+        model.addAttribute("expenseDataCurrentMonth", expenseDataMonthlyBarCurrent);
+        model.addAttribute("BarTitleMonthlyBar", firstDayOfPreviousMonthBar.getMonth().toString());
+        model.addAttribute("BarTitleCurrentMonth", firstDayOfCurrentMonthBar.getMonth().toString());
+
+
+
+
+
+
+
+
+
+
+
+        LocalDate firstDayOfCurrentYearBar = LocalDate.now().withDayOfYear(1);
+        LocalDate firstDayOfPreviousYearBar = firstDayOfCurrentYearBar.minusYears(1);
+
+        DateTimeFormatter formatterYear = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String firstDayFormattedYear = firstDayOfPreviousYearBar.format(formatterYear);
+        String lastDayFormattedYear = firstDayOfCurrentYearBar.minusDays(1).format(formatterYear);
+
+        String firstDayCurrentFormattedYear = firstDayOfCurrentYearBar.format(formatterYear);
+        String lastDayCurrentFormattedYear = firstDayOfCurrentYearBar.withDayOfYear(firstDayOfCurrentYearBar.lengthOfYear()).format(formatterYear);
+
+        List<Map<String, Object>> incomeDataYearlyBar = jdbcTemplate.queryForList(
+                "SELECT SUM(amount) as total FROM income i " +
+                        "WHERE i.income_date BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) AND user_id = ? ",
+                firstDayFormattedYear, lastDayFormattedYear, userId
+        );
+        List<Map<String, Object>> expenseDataYearlyBar = jdbcTemplate.queryForList(
+                "SELECT SUM(amount) as total FROM expense e " +
+                        "WHERE e.expense_date BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) AND user_id = ? ",
+                firstDayFormattedYear, lastDayFormattedYear, userId
+        );
+
+        List<Map<String, Object>> incomeDataYearlyBarCurrent = jdbcTemplate.queryForList(
+                "SELECT SUM(amount) as total FROM income i " +
+                        "WHERE i.income_date BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) AND user_id = ? ",
+                firstDayCurrentFormattedYear, lastDayCurrentFormattedYear, userId
+        );
+        List<Map<String, Object>> expenseDataYearlyBarCurrent = jdbcTemplate.queryForList(
+                "SELECT SUM(amount) as total FROM expense e " +
+                        "WHERE e.expense_date BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) AND user_id = ? ",
+                firstDayCurrentFormattedYear, lastDayCurrentFormattedYear, userId
+        );
+
+        model.addAttribute("incomeDataYearlyBar", incomeDataYearlyBar);
+        model.addAttribute("expenseDataYearlyBar", expenseDataYearlyBar);
+        model.addAttribute("incomeDataCurrentYear", incomeDataYearlyBarCurrent);
+        model.addAttribute("expenseDataCurrentYear", expenseDataYearlyBarCurrent);
+        model.addAttribute("BarTitleYearlyBar", firstDayOfPreviousYearBar.getYear());
+        model.addAttribute("BarTitleCurrentYear", firstDayOfCurrentYearBar.getYear());
+
+
+
+
+
         return "homePage";
     }
+
+
 
     @GetMapping("/chooseDate")
     public String chooseDatePage() {

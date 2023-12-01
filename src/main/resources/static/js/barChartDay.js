@@ -14,8 +14,8 @@ const barCanvasDay = document.getElementById('barDay');
                 }, {
                     label: 'Expense',
                     data: [1200, 1000],
-                    backgroundColor: '#ddc9b0',
-                    borderColor: '#ddc9b0',
+                    backgroundColor: '#7FB8A1',
+                    borderColor: '#7FB8A1',
                     categoryPercentage: 0.7,
                     barPercentage: 0.5,
                 }]

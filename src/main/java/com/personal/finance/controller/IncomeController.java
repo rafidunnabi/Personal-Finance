@@ -121,6 +121,7 @@ public class IncomeController {
             Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+
         if (userId != null) {
             incomeService.deleteIncomeRecord(income.getId(), userId);
             model.addAttribute("userId", userId);
@@ -136,7 +137,7 @@ public class IncomeController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Integer userId = userRepository.findUserIdByEmail(authentication.getName());
-
+        model.addAttribute("income", new Income());
         if (userId != null) {
             List<Income> incomeByCategoryList = incomeService.searchIncomeByCategory(selectedCategory, userId);
             model.addAttribute("incomeByCategoryList", incomeByCategoryList);

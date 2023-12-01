@@ -3,17 +3,17 @@ const barCanvas = document.getElementById('barMonth');
         const barChart = new Chart(ctxBar, {
             type: 'bar',
             data: {
-                labels: ['This Month', 'Last Month'],
+                labels: [BarTitleMonthlyBar, BarTitleCurrentMonth],
                 datasets: [{
                     label: 'Income',
-                    data: [2000, 1500],
-                    backgroundColor: '#FF5733',
-                    borderColor: '#FF5733',
+                    data: [incomeDataMonthlyBar.map(data => data.total)[0],incomeDataCurrentMonth.map(data => data.total)[0]],
+                    backgroundColor: '#04bade',
+                    borderColor: '#04bade',
                     categoryPercentage: 0.7,
                     barPercentage: 0.5,
                 }, {
                     label: 'Expense',
-                    data: [1200, 1000],
+                    data: [expenseDataMonthlyBar.map(data => data.total)[0], expenseDataCurrentMonth.map(data => data.total)[0]],
                     backgroundColor: '#ddc9b0',
                     borderColor: '#ddc9b0',
                     categoryPercentage: 0.7,

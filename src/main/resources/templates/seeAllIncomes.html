@@ -326,7 +326,7 @@
                                   <th scope="col">Edit</th>
                                 </tr>
                               </thead>
-                              <tbody>
+                              <tbody id="tableBody">
                                 <tr th:each="income : ${recentIncomes}">
                                   <td
                                     id="editCategory"
@@ -393,5 +393,6 @@
     <script src="js/editIncome.js" defer></script>
     <script src="js/deleteSeeAllIncome.js" defer></script>
     <script src="js/validateDates.js" defer></script>
+    <script src="js/updateIncomeListByCategory.js" defer></script>
   </body>
 </html>

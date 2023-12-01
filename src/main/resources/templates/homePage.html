@@ -68,7 +68,7 @@
           <div style="display: flex; flex-direction: row;">
             <img style="width: 60px; height: 60px; margin-right: 27px;" src="/images/title_money.png">
             <h2 style="font-size: 40px;">
-            <strong>EMPOWER YOUR <span style="color: #e92a32">FINANCIAL</span> JOURNEY</strong>
+            <strong>Empower Your <span style="color: #e92a32">Financial</span> Journey</strong>
             </h2>
           </div>
           
@@ -222,6 +222,25 @@
   };
   /*]]>*/
 </script>
+<script th:inline="javascript">
+  var incomeDataMonthlyBar = /*[[${incomeDataMonthlyBar}]]*/ [];
+  var incomeDataCurrentMonth = /*[[${incomeDataCurrentMonth}]]*/ [];
+  var expenseDataMonthlyBar = /*[[${expenseDataMonthlyBar}]]*/ [];
+  var expenseDataCurrentMonth = /*[[${expenseDataCurrentMonth}]]*/ [];
+  var BarTitleMonthlyBar = /*[[${BarTitleMonthlyBar}]]*/ '';
+  var BarTitleCurrentMonth = /*[[${BarTitleCurrentMonth}]]*/ '';
+  
+</script>
+
+    <script th:inline="javascript">
+      var incomeDataYearlyBar = /*[[${incomeDataYearlyBar}]]*/ [];
+      var incomeDataCurrentYear = /*[[${incomeDataCurrentYear}]]*/ [];
+      var expenseDataYearlyBar = /*[[${expenseDataYearlyBar}]]*/ [];
+      var expenseDataCurrentYear = /*[[${expenseDataCurrentYear}]]*/ [];
+      var BarTitleYearlyBar = /*[[${BarTitleYearlyBar}]]*/ '';
+      var BarTitleCurrentYear = /*[[${BarTitleCurrentYear}]]*/ '';
+
+    </script>
 <!--<script>
   document
 .getElementById("enableCategory")

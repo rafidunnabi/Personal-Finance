@@ -4,19 +4,19 @@ const barCanvasYear = document.getElementById('barYear');
         const barChartYear = new Chart(ctxBarYear, {
             type: 'bar',
             data: {
-                labels: ['This Year', 'Last Year'],
+                labels: [BarTitleYearlyBar, BarTitleCurrentYear],
                 datasets: [{
                     label: 'Income',
-                    data: [2000, 1500],
-                    backgroundColor: '#ED1D24',
-                    borderColor: '#ED1D24',
+                    data: [incomeDataYearlyBar.map(data => data.total)[0],incomeDataCurrentYear.map(data => data.total)[0]],
+                    backgroundColor: '#20B2AA',
+                    borderColor: '#20B2AA',
                     categoryPercentage: 0.7,
                     barPercentage: 0.5,
                 }, {
                     label: 'Expense',
-                    data: [1200, 1000],
-                    backgroundColor: 'cyan',
-                    borderColor: 'cyan',
+                    data: [expenseDataYearlyBar.map(data => data.total)[0], expenseDataCurrentYear.map(data => data.total)[0]],
+                    backgroundColor: 'orange',
+                    borderColor: 'orange',
                     categoryPercentage: 0.7,
                     barPercentage: 0.5,
                 }]

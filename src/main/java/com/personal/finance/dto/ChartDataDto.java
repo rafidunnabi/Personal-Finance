@@ -28,13 +28,13 @@ public class ChartDataDto {
         for (Map<String, Object> entry : incomeData) {
             Date date = (Date) entry.get("income_date");
             this.labels.add(formatDate(date));
-            this.incomeData.add((Double) entry.get("amount"));
+            this.incomeData.add((Double) entry.get("total_income"));
         }
 
         // Convert expense data
         for (Map<String, Object> entry : expenseData) {
             Date date = (Date) entry.get("expense_date");
-            this.expenseData.add((Double) entry.get("amount"));
+            this.expenseData.add((Double) entry.get("total_expense"));
         }
 
         // Fill in missing dates with zero amounts for expenses
@@ -49,7 +49,7 @@ public class ChartDataDto {
             if (!labels.contains(formattedDate)) {
                 labels.add(formattedDate);
                 incomeData.add(0.0);
-                this.expenseData.add((Double) entry.get("amount"));
+                this.expenseData.add((Double) entry.get("total_expense"));
             }
         }
     }
