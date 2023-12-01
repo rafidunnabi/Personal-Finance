@@ -146,5 +146,4 @@ public class IncomeController {
         return "seeAllIncomes";
     }
 
-
 }

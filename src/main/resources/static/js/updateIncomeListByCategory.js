@@ -2,7 +2,6 @@ document.getElementById('incomeSearchForm').addEventListener('submit', function(
     
     var tableBody = document.getElementById("tableBody");
     tableBody.innerHTML = "Hello There Moshi Moshi";
-
 });
 
 
