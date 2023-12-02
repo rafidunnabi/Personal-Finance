@@ -84,4 +84,16 @@ public class ExpenseRepositoryImpl implements ExpenseRepository{
         String sql = "DELETE FROM expense WHERE id = ? AND user_id = ?";
         jdbcTemplate.update(sql, id, userId);
     }
+
+    @Override
+    public List<Expense> searchExpenseByCategory(String selectedCategory, Integer userId) {
+        String sql = "SELECT e.id, e.amount, ec.expense_category_name as category, e.description, e.expense_date as date "
+                +
+                "FROM expense e " +
+                "JOIN expense_categories ec ON e.expense_category_id = ec.id " +
+                "WHERE ec.expense_category_name = ? AND e.user_id = ? ";
+
+        return jdbcTemplate.query(sql, new Object[] { selectedCategory,userId },
+                new BeanPropertyRowMapper<>(Expense.class));
+    }
 }

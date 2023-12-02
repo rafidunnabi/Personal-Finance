@@ -22,4 +22,6 @@ public interface ExpenseRepository {
     void editExpense(Integer id, Double amount, String category, LocalDate localDate, String description, Integer userId);
 
     void deleteExpense(Integer id, Integer userId);
+
+    List<Expense> searchExpenseByCategory(String selectedCategory, Integer userId);
 }

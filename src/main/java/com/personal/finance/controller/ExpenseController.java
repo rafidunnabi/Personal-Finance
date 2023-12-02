@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -130,6 +131,39 @@ public class ExpenseController {
             // Handle the case where the user ID is null
         }
 
+        return "redirect:/seeAllExpenses";
+    }
+
+    @PostMapping("/searchExpenseByCategory")
+    public String searchExpenseByCategory(@RequestParam("selectedCategory") String selectedCategory, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+        model.addAttribute("expense", new Expense());
+        if (userId != null) {
+            List<Expense> expenseByCategoryList = expenseService.searchExpenseByCategory(selectedCategory, userId);
+            model.addAttribute("expenseList", expenseByCategoryList);
+            model.addAttribute("isCategoryClickedExpense", true);
+
+        } else {
+        }
+        return "seeAllExpenses";
+    }
+
+
+
+    @PostMapping("/editExpenseSearchByDate")
+    public String editExpenseSearchByDate(@ModelAttribute("expense") Expense expense,
+                                         Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+        if (userId != null) {
+            LocalDate localDate = LocalDate.parse(expense.getDate());
+
+            expenseService.editExpenseRecord(expense.getId(), expense.getAmount(), expense.getCategory(), localDate,
+                    expense.getDescription(), userId);
+        } else {
+        }
         return "redirect:/seeAllExpenses";
     }
 }

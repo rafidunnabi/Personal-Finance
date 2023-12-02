@@ -51,13 +51,15 @@
               />
             </div>
             <div class="mb-3">
-              <label for="categorySelect" class="form-label"
-                >Category (Optional)</label
+              <input type="checkbox" id="enableCategoryExpense" />
+              <label for="enableCategoryExpense" class="form-label"
+                ><storng>Category (Optional)</storng></label
               >
               <select
                 class="form-select"
-                id="categorySelect"
+                id="categorySelectExpense"
                 th:name="category"
+                disabled
               >
                 <option value="Education">Education</option>
                 <option value="Electricity Bill">Electricity Bill</option>

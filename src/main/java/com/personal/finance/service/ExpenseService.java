@@ -43,4 +43,8 @@ public class ExpenseService {
     public void deleteExpenseRecord(Integer id, Integer userId) {
         expenseRepository.deleteExpense(id, userId);
     }
+
+    public List<Expense> searchExpenseByCategory(String selectedCategory, Integer userId) {
+        return expenseRepository.searchExpenseByCategory(selectedCategory,userId);
+    }
 }

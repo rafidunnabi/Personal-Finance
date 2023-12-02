@@ -75,7 +75,7 @@ public class HistoryController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Integer userId = userRepository.findUserIdByEmail(authentication.getName());
-
+        model.addAttribute("expense", new Expense());
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         LocalDate parsedStartDate = LocalDate.parse(startDate, inputFormatter);
@@ -86,8 +86,8 @@ public class HistoryController {
         String formattedStartDate = parsedStartDate.format(outputFormatter);
         String formattedEndDate = parsedEndDate.format(outputFormatter);
 
-        model.addAttribute("startDate", formattedStartDate);
-        model.addAttribute("endDate", formattedEndDate);
+        model.addAttribute("startDateExpense", formattedStartDate);
+        model.addAttribute("endDateExpense", formattedEndDate);
 
         List<Expense> expenseList;
 
@@ -102,6 +102,6 @@ public class HistoryController {
         double totalExpense = expenseList.stream().mapToDouble(Expense::getAmount).sum();
         model.addAttribute("totalExpense", totalExpense);
 
-        return "customHistoryExpense";
+        return "seeAllExpenses";
     }
 }

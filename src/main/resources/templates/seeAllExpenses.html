@@ -116,7 +116,7 @@
             <form
               style="margin-top: 30px"
               method="post"
-              th:action="@{/editExpense}"
+              th:action="@{/editIncomeSearchByDate}"
               th:object="${expense}"
               id="exampleModalEditForm"
             >
@@ -213,6 +213,8 @@
         </div>
       </div>
     </div>
+    <!-- Modal Expense Category-->
+<div th:replace="fragments/expenseCategoryModal :: expenseModalCategory-fragment"></div>
     <!-- Modal Expense-->
     <div th:replace="fragments/expenseModal :: expenseModal-fragment"></div>
     <!-- Sidebar-->
@@ -243,7 +245,44 @@
             width: 1150px;
           "
         >
-          <h3 style="margin-left: 10px"><strong>All Expenses</strong></h3>
+        <div style="
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+            ">
+          <h3 style="margin-left: 10px"><strong>All Expenses
+            <div th:if="${startDateExpense}">
+              <span
+                      style="font-size: 14px; color: #e92a32; margin-left: 20px"
+                      th:text="${startDateExpense}"
+              ></span>
+              -
+              <span
+                      style="font-size: 14px; color: #e92a32"
+                      th:text="${endDateExpense}"
+              ></span>
+          </div>
+          </strong></h3>
+          <div style="display: flex; align-items: flex-start">
+            <button type="button"
+                    class="btn-red"
+                    style="margin-right: 15px"
+                    data-bs-toggle="modal"
+                    data-bs-target="#expenseModalCategory">
+                <i class="fa-solid fa-list" style="margin-right: 5px"></i>
+                Category
+            </button>
+            <button type="button"
+                    class="btn-red"
+                    style="margin-right: 15px"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModalExpense">
+                <i class="fa-regular fa-calendar-days"
+                   style="margin-right: 5px"></i>
+                Date
+            </button>
+        </div>
+      </div>
           <section class="intro">
             <div class="bg-image h-100" style="margin-top: 10px">
               <div
@@ -310,6 +349,14 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+    <script>
+      document
+          .getElementById("enableCategoryExpense")
+          .addEventListener("change", function () {
+              var categorySelect = document.getElementById("categorySelect");
+              categorySelect.disabled = !this.checked;
+          });
+  </script>
     <script src="js/editExpense.js" defer></script>
     <script src="js/deleteSeeAllExpenses.js" defer></script>
   </body>
