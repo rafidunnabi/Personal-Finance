@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Data
@@ -38,20 +35,39 @@ public class ChartDataDto {
         }
 
         // Fill in missing dates with zero amounts for expenses
-        fillMissingDates(expenseData);
+        fillMissingDates(incomeData, expenseData);
     }
 
-    private void fillMissingDates(List<Map<String, Object>> expenseData) {
+    private void fillMissingDates(List<Map<String, Object>> incomeData, List<Map<String, Object>> expenseData) {
+
+        for (Map<String, Object> entry : incomeData) {
+            Date date = (Date) entry.get("income_date");
+            String formattedDate = formatDate(date);
+
+            if (!labels.contains(formattedDate)) {
+                labels.add(formattedDate);
+                this.expenseData.add(0.0);
+                this.incomeData.add((Double) entry.get("total_income")); // Create a zero expense entry
+            }
+        }
+
+
         for (Map<String, Object> entry : expenseData) {
             Date date = (Date) entry.get("expense_date");
             String formattedDate = formatDate(date);
 
             if (!labels.contains(formattedDate)) {
                 labels.add(formattedDate);
-                incomeData.add(0.0);
+                this.incomeData.add(0.0);
                 this.expenseData.add((Double) entry.get("total_expense"));
             }
         }
+    }
+    private Map<String, Object> createZeroExpenseEntry(Date date) {
+        Map<String, Object> zeroExpenseEntry = new HashMap<>();
+        zeroExpenseEntry.put("expense_date", date);
+        zeroExpenseEntry.put("total_expense", 0.0);
+        return zeroExpenseEntry;
     }
     private String formatDate(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("d-MMM");

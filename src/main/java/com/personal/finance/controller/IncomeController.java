@@ -140,7 +140,9 @@ public class IncomeController {
         model.addAttribute("income", new Income());
         if (userId != null) {
             List<Income> incomeByCategoryList = incomeService.searchIncomeByCategory(selectedCategory, userId);
-            model.addAttribute("incomeByCategoryList", incomeByCategoryList);
+            model.addAttribute("incomeList", incomeByCategoryList);
+            model.addAttribute("isCategoryClicked", true);
+
         } else {
         }
         return "seeAllIncomes";

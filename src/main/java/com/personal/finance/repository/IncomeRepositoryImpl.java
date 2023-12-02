@@ -50,7 +50,7 @@ public class IncomeRepositoryImpl implements IncomeRepository {
 
     @Override
     public List<Income> getIncomeByCustomDate(LocalDate startDate, LocalDate endDate, Integer user_Id) {
-        String sql = "SELECT i.amount, ic.income_category_name as category, i.description, i.income_date as date " +
+        String sql = "SELECT i.id, i.amount, ic.income_category_name as category, i.description, i.income_date as date " +
                 "FROM income i " +
                 "JOIN income_categories ic ON i.income_category_id = ic.id " +
                 "WHERE i.income_date BETWEEN ? AND ? AND i.user_id = ?";

@@ -38,7 +38,7 @@ public class HistoryController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Integer userId = userRepository.findUserIdByEmail(authentication.getName());
-
+        model.addAttribute("income", new Income());
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         LocalDate parsedStartDate = LocalDate.parse(startDate, inputFormatter);
@@ -65,7 +65,7 @@ public class HistoryController {
         double totalIncome = incomeList.stream().mapToDouble(Income::getAmount).sum();
         model.addAttribute("totalIncome", totalIncome);
 
-        return "customHistoryIncome";
+        return "seeAllIncomes";
     }
 
     @PostMapping("/customHistoryExpense")
