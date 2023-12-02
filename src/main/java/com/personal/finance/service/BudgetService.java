@@ -1,6 +1,7 @@
 package com.personal.finance.service;
 
 import com.personal.finance.model.Budget;
+import com.personal.finance.model.Expense;
 import com.personal.finance.model.Income;
 import com.personal.finance.repository.BudgetRepository;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,9 @@ public class BudgetService {
 
     public void editBudget( Double amount, String category, LocalDate localStartDate, LocalDate localEndDate, String description, Integer userId, Integer id) {
         budgetRepository.editBudget(amount, category, localStartDate, localEndDate, description, userId, id);
+    }
+
+    public List<Expense> seeExpenseForBudget(Integer id, Integer userId) {
+        return budgetRepository.seeExpenseForBudget(id,userId);
     }
 }

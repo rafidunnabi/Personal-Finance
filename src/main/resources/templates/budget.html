@@ -196,6 +196,7 @@
       </div>
     </div>
     -->
+    <div th:replace="fragments/seeBudgetExpenseModal :: seeBudgetExpense-fragment"></div>
     <div th:replace="fragments/budgetEditModal :: budgetEdit-fragment"></div>
     <div th:replace="fragments/addBudgetModal :: addBudget-fragment"></div>
     <div th:replace="fragments/sidebar :: sidebar-fragment"></div>
@@ -327,6 +328,7 @@
                             ></p>
                           </div>
                           
+                          <div style="display: flex; flex-direction: row; justify-content: space-between;">
                           <div style="display: flex; flex-direction: row;">
                             <!-- Edit button -->
                           <button
@@ -350,7 +352,18 @@
                         </button>
                       </form>
                           </div>
+                          <!-- See expense button -->
+                        <form th:action="@{/seeExpenseForBudget}" th:method="post" style="margin-left: 10px;">
+                          <input type="hidden" name="id" th:value="${budget.id}">
+                          <button
+                          type="submit"
+                          class="btn-green"
+                          style="background: none; font: inherit; color: rgb(243, 61, 55)"
                           
+                        >View Expense
+                        </button>
+                      </form>
+                        </div>
                         </div>
                       </div>
                     </div>

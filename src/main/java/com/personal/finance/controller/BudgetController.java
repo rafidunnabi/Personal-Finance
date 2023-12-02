@@ -100,4 +100,17 @@ public class BudgetController {
         }
         return "redirect:/budget";
     }
+
+    @PostMapping("/seeExpenseForBudget")
+    public String viewExpenseForBudget(@RequestParam ("id") Integer id, Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+
+        if (userId != null) {
+            List<Expense> seeExpenseForBudget = budgetService.seeExpenseForBudget(id, userId);
+            model.addAttribute("seeExpenseForBudget", seeExpenseForBudget);
+
+        }
+        return "seeExpenseForBudget";
+    }
 }

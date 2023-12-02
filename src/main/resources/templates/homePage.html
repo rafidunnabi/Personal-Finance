@@ -126,9 +126,9 @@
               >
                 <div style="display: flex; flex-direction: row;">
                   <img src="images/balance.png" style="width: 35px; height: 35px; margin-right: 10px;">
-                  <h3><strong>Balance</strong> </h3>
+                  <h3><strong>Income</strong> </h3>
                 </div>
-                <h1 style="color: #04bade">$234523</h1>
+                <h1 style="color: #04bade" th:text="'$' + ${totalIncomeGlobal}"></h1>
               </div>
             </div>
             <div
@@ -152,9 +152,9 @@
               >
                 <div style="display: flex; flex-direction: row;">
                   <img src="images/total_expense.png" style="width: 35px; height: 35px; margin-right: 10px;">
-                  <h3><strong>Total Expense</strong></h3>
+                  <h3><strong>Expense</strong></h3>
                 </div>
-                <h1 style="color: #e92a32">$2344</h1>
+                <h1 style="color: #e92a32" th:text="'$' + ${totalExpenseGlobal}"></h1>
               </div>
             </div>
           </div>

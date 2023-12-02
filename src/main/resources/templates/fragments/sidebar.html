@@ -12,7 +12,10 @@
     </div>
     <div class="user-info" style="margin-left: 24px; margin-bottom: 30px">
       <h6 class="username" style="color: white">
-        Balance: <span style="color: #04bade">$34534</span>
+        Income: <span style="color: #04bade" th:text="'$' + ${totalIncomeGlobal}"></span>
+      </h6>
+      <h6 class="username" style="color: white">
+        Expense: <span style="color: #e92a32" th:text="'$' + ${totalExpenseGlobal}"></span>
       </h6>
     </div>
     <a th:href="@{/}">
@@ -39,65 +42,6 @@
       ></i>
       View Expenses</a
     >
-    <!-- Default dropend button -->
-    <div
-      class="dropend"
-      style="display: flex; justify-content: left; width: 230px"
-    >
-      <a
-        href="#"
-        class="dropdown-toggle border-0"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        style="width: 230px; background: none; border: none; outline: none"
-      >
-        <i class="fa-regular fa-calendar" style="margin-right: 10px"></i>Income
-        By Date
-      </a>
-      <ul class="dropdown-menu" style="background-color: #24272e">
-        <li>
-          <a
-            href="#"
-            class="dropdown-item"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            >Choose Date</a
-          >
-        </li>
-        <li><a class="dropdown-item" href="#">Current Month</a></li>
-        <li><a class="dropdown-item" href="#">Last 6 Months</a></li>
-        <li><a class="dropdown-item" href="#">Current Year</a></li>
-      </ul>
-    </div>
-    <div
-      class="dropend"
-      style="display: flex; justify-content: left; width: 230px"
-    >
-      <a
-        href="#"
-        class="dropdown-toggle border-0"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        style="width: 230px; background: none; border: none; outline: none"
-      >
-        <i class="fa-solid fa-clipboard-list" style="margin-right: 10px"></i
-        >Expense By Date
-      </a>
-      <ul class="dropdown-menu" style="background-color: #24272e">
-        <li>
-          <a
-            href="#"
-            class="dropdown-item"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModalExpense"
-            >Choose Date</a
-          >
-        </li>
-        <li><a class="dropdown-item" href="#">Current Month</a></li>
-        <li><a class="dropdown-item" href="#">Last 6 Months</a></li>
-        <li><a class="dropdown-item" href="#">Current Year</a></li>
-      </ul>
-    </div>
     <a href="#"
       ><i class="fa-solid fa-circle-info" style="margin-right: 5px"></i>About</a
     >

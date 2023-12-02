@@ -148,4 +148,20 @@ public class IncomeController {
         return "seeAllIncomes";
     }
 
+    @PostMapping("/editIncomeSearchByDate")
+    public String editIncomeSearchByDate(@ModelAttribute("income") Income income,
+                             Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userRepository.findUserIdByEmail(authentication.getName());
+        if (userId != null) {
+            LocalDate localDate = LocalDate.parse(income.getDate());
+            System.out.println(income.getId());
+            incomeService.editIncomeRecord(income.getId(), income.getAmount(), income.getCategory(), localDate,
+                    income.getDescription(), userId);
+            model.addAttribute("userId", userId);
+        } else {
+        }
+        return "redirect:/seeAllIncomes";
+    }
+
 }

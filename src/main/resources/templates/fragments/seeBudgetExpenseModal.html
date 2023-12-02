@@ -1,0 +1,74 @@
+<div th:fragment="seeBudgetExpense-fragment">
+    <div
+    class="modal fade"
+    id="seeBudgetExpenseModal"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content" style="padding: 20px">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <strong>See Income History</strong>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <h3 style="color: #04bade">
+            <i class="fa-solid fa-calendar-days" style="margin-right: 13px"></i
+            >Choose Category
+          </h3>
+          <form
+            th:action="@{/searchIncomeByCategory}"
+            method="post"
+            style="margin-top: 30px"
+            id="incomeSearchForm"
+          >
+            <div class="mb-3">
+              <label for="enableCategoryIncomeSearch" class="form-label"
+                ><strong>Category</strong></label
+              >
+              <select
+                class="form-select"
+                id="categorySelectIncomeSearch"
+                name="selectedCategory"
+              >
+                <option value="All">All</option>
+                <option value="Capital Gains">Capital Gains</option>
+                <option value="Passive Income">Passive Income</option>
+                <option value="Active Income">Active Income</option>
+                <option value="Rental Income">Rental Income</option>
+                <option value="Royalty Income">Royalty Income</option>
+                <option value="Dividends">Dividends</option>
+                <option value="Interest">Interest</option>
+                <option value="Profit Income">Profit Income</option>
+                <option value="Salary">Salary</option>
+                <option value="Commission">Commission</option>
+                <option value="Government Payments">Government Payments</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+            <div
+              class="modal-footer"
+              style="justify-content: left; margin-top: 30px"
+            >
+              <button type="submit" class="btn">Go</button>
+              <button
+                type="button"
+                class="btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

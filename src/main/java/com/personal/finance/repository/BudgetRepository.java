@@ -1,6 +1,7 @@
 package com.personal.finance.repository;
 
 import com.personal.finance.model.Budget;
+import com.personal.finance.model.Expense;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,4 +16,6 @@ public interface BudgetRepository {
     void deleteBudgetById(Integer id, Integer userId);
 
     void editBudget(Double amount, String category, LocalDate localStartDate, LocalDate localEndDate, String description, Integer userId, Integer id);
+
+    List<Expense> seeExpenseForBudget(Integer id, Integer userId);
 }
