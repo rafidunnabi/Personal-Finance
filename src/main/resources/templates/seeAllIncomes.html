@@ -196,7 +196,7 @@
                 </strong>
             </span>
         <span style="color: #04bade; font-size: 40px"
-              th:text="${totalIncome}"></span>
+              th:text="'$' + ${totalIncome}"></span>
     </div>
 
     <div style="
@@ -236,6 +236,14 @@
                     </strong>
                 </h3>
                 <div style="display: flex; align-items: flex-start">
+                    <form th:action="@{/seeAllIncomes}" method="get">
+                    <button type="submit"
+                            class="btn-green"
+                            style="margin-right: 15px">
+                        <i class="fa-regular fa-eye" style="margin-right: 5px"></i>
+                        All
+                    </button>
+                    </form>
                     <button type="button"
                             class="btn-green"
                             style="margin-right: 15px"
@@ -252,13 +260,6 @@
                         <i class="fa-regular fa-calendar-days"
                            style="margin-right: 5px"></i>
                         Date
-                    </button>
-                    <button type="button"
-                            class="btn"
-                            style="margin-right: 20px"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                        <i class="fa-solid fa-plus" style="margin-right: 5px"></i>Add
                     </button>
                 </div>
             </div>

@@ -52,7 +52,7 @@ public class ExpenseRepositoryImpl implements ExpenseRepository{
     @Override
     public List<Expense> getExpenseByCustomDate(LocalDate startDate, LocalDate endDate, Integer user_Id) {
         String sql = "SELECT e.amount, ec.expense_category_name as category, e.description, e.expense_date as date " +
-                "FROM expense e" +
+                "FROM expense e " +
                 "JOIN expense_categories ec ON e.expense_category_id = ec.id " +
                 "WHERE e.expense_date BETWEEN ? AND ? AND e.user_id = ?";
         return jdbcTemplate.query(sql, new Object[] { startDate, endDate, user_Id },

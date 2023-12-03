@@ -135,15 +135,21 @@ public class ExpenseController {
     }
 
     @PostMapping("/searchExpenseByCategory")
-    public String searchExpenseByCategory(@RequestParam("selectedCategory") String selectedCategory, Model model) {
+    public String searchExpenseByCategory(@RequestParam("selectedCategoryExpense") String selectedCategory, Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Integer userId = userRepository.findUserIdByEmail(authentication.getName());
         model.addAttribute("expense", new Expense());
         if (userId != null) {
+            if(selectedCategory.equals("All"))
+            {
+                return "redirect:/seeAllExpenses";
+            }
             List<Expense> expenseByCategoryList = expenseService.searchExpenseByCategory(selectedCategory, userId);
             model.addAttribute("expenseList", expenseByCategoryList);
             model.addAttribute("isCategoryClickedExpense", true);
+            double totalExpense = expenseByCategoryList.stream().mapToDouble(Expense::getAmount).sum();
+            model.addAttribute("totalExpense", totalExpense);
 
         } else {
         }

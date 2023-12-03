@@ -139,11 +139,17 @@ public class IncomeController {
         Integer userId = userRepository.findUserIdByEmail(authentication.getName());
         model.addAttribute("income", new Income());
         if (userId != null) {
+
+            if(selectedCategory.equals("All"))
+            {
+                return "redirect:/seeAllIncomes";
+            }
             List<Income> incomeByCategoryList = incomeService.searchIncomeByCategory(selectedCategory, userId);
             model.addAttribute("incomeList", incomeByCategoryList);
             model.addAttribute("isCategoryClicked", true);
+            double totalIncome = incomeByCategoryList.stream().mapToDouble(Income::getAmount).sum();
+            model.addAttribute("totalIncome", totalIncome);
 
-        } else {
         }
         return "seeAllIncomes";
     }

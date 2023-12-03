@@ -81,7 +81,7 @@
     <!--Modal Edit-->
     <div
       class="modal fade"
-      id="exampleModalEdit"
+      id="exampleModalEditExpense"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
@@ -116,9 +116,9 @@
             <form
               style="margin-top: 30px"
               method="post"
-              th:action="@{/editIncomeSearchByDate}"
+              th:action="@{/editExpenseSearchByDate}"
               th:object="${expense}"
-              id="exampleModalEditForm"
+              id="exampleModalEditFormExpense"
             >
               <input type="hidden" id="idInput" th:field="*{id}" th:name="id" />
               <div class="mb-3">
@@ -230,8 +230,8 @@
             >Total Expense:</strong
           >
         </span>
-        <span style="color: #e92a32; font-size: 40px" th:text="${totalExpense}"
-          >$1,200.00</span
+        <span style="color: #e92a32; font-size: 40px" th:text="'$' + ${totalExpense}"
+          ></span
         >
       </div>
 
@@ -264,6 +264,14 @@
           </div>
           </strong></h3>
           <div style="display: flex; align-items: flex-start">
+            <form th:action="@{/seeAllExpenses}" method="get">
+              <button type="submit"
+                      class="btn-red"
+                      style="margin-right: 15px">
+                <i class="fa-regular fa-eye" style="margin-right: 5px"></i>
+                All
+              </button>
+            </form>
             <button type="button"
                     class="btn-red"
                     style="margin-right: 15px"
@@ -309,7 +317,7 @@
                                   <th scope="col" style="width: 7%">Edit</th>
                                 </tr>
                               </thead>
-                              <tbody>
+                              <tbody id="tableBodyExpense">
                                 <tr th:each="expense : ${recentExpenses}">
                                   <td th:text="${expense.category}"></td>
                                   <td th:text="${expense.description}"></td>
@@ -321,7 +329,7 @@
                                       class="btn-red btn-danger btn-sm px-3"
                                       th:attr="data-category=${expense.category},data-description=${expense.description},data-date=${expense.date},data-amount=${expense.amount},data-id=${expense.id}"
                                       data-bs-toggle="modal"
-                                      data-bs-target="#exampleModalEdit"
+                                      data-bs-target="#exampleModalEditExpense"
                                       onclick="populateEditForm(this)"
                                     >
                                       <i
@@ -353,11 +361,16 @@
       document
           .getElementById("enableCategoryExpense")
           .addEventListener("change", function () {
-              var categorySelect = document.getElementById("categorySelect");
-              categorySelect.disabled = !this.checked;
+              var categorySelectExpense = document.getElementById("categorySelectExpense");
+              categorySelectExpense.disabled = !this.checked;
           });
   </script>
+    <script th:inline="javascript">
+      var expenseList = /*[[${expenseList}]]*/ [];
+      var isCategoryClickedExpense = /*[[${isCategoryClickedExpense}]]*/ false;
+    </script>
     <script src="js/editExpense.js" defer></script>
     <script src="js/deleteSeeAllExpenses.js" defer></script>
+    <script src="js/updateExpenseListByCategory.js"></script>
   </body>
 </html>
