@@ -209,7 +209,7 @@
         </span>
         <span
           style="color: #04bade; font-size: 40px"
-          th:text="${totalIncome}"
+          th:text="'$' + ${totalIncome}"
         ></span>
       </div>
 
@@ -247,6 +247,7 @@
                 class="form-control"
                 id="amountInput"
                 placeholder="Enter amount"
+                required
               />
             </div>
             <div class="mb-3">
@@ -255,6 +256,7 @@
                 class="form-select"
                 id="categorySelect"
                 th:field="*{category}"
+                required
               >
                 <option value="Capital Gains">Capital Gains</option>
                 <option value="Passive Income">Passive Income</option>
@@ -278,6 +280,7 @@
                 class="form-control"
                 id="dateInput"
                 placeholder="Enter date"
+                required
               />
             </div>
             <div class="mb-3">
@@ -383,6 +386,7 @@
           </section>
         </div>
       </div>
+
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

@@ -228,8 +228,8 @@
             >Total Expense:</strong
           >
         </span>
-        <span style="color: #e92a32; font-size: 40px" th:text="${totalExpense}"
-          >$1,200.00</span
+        <span style="color: #e92a32; font-size: 40px" th:text="'$' + ${totalExpense}"
+          ></span
         >
       </div>
 
@@ -267,6 +267,7 @@
                 class="form-control"
                 id="amountInput"
                 placeholder="Enter amount"
+                required
               />
             </div>
             <div class="mb-3">
@@ -275,6 +276,7 @@
                 class="form-select"
                 id="categorySelect"
                 th:field="*{category}"
+                required
               >
                 <option value="Education">Education</option>
                 <option value="Electricity Bill">Electricity Bill</option>
@@ -314,6 +316,7 @@
                 class="form-control"
                 id="dateInput"
                 placeholder="Enter date"
+                required
               />
             </div>
             <div class="mb-3">
@@ -333,7 +336,7 @@
               class="btn-red"
               style="margin-left: 5px; margin-right: 5px; font-size: 15px"
             >
-              SUBMIT
+              Submit
             </button>
           </form>
         </div>

@@ -36,14 +36,6 @@ public class BudgetController {
         Integer userId = userRepository.findUserIdByEmail(authentication.getName());
 
         List<Budget> recentBudgets = budgetService.getRecentBudgets(userId);
-//        for (Budget budget : recentBudgets) {
-//            LocalDate localStartDate = LocalDate.parse(budget.getStartDate());
-//            budget.setStartDate(localStartDate.format(DateTimeFormatter.ofPattern("d MMM, yyyy")));
-//
-//            LocalDate localEndDate = LocalDate.parse(budget.getEndDate());
-//            budget.setEndDate(localEndDate.format(DateTimeFormatter.ofPattern("d MMM, yyyy")));
-//        }
-
         List<Budget> updatedBudgets = budgetService.getBudgetsAndUpdateAmounts(recentBudgets, userId);
 
         model.addAttribute("budget", new Budget());

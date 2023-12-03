@@ -21,7 +21,6 @@ public class HistoryController {
 
     private final UserRepository userRepository;
     private final IncomeService incomeService;
-
     private final ExpenseService expenseService;
 
     public HistoryController(UserRepository userRepository, IncomeService incomeService,

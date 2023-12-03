@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.personal.finance.dto.ChartDataDto;
 import com.personal.finance.repository.UserRepository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -79,10 +80,6 @@ public class HomeController {
         // Add the data to the model
         model.addAttribute("chartData", chartData);
 
-
-
-
-
         //Monthly Update Bar Chart
         LocalDate firstDayOfCurrentMonthBar = LocalDate.now().withDayOfMonth(1);
         LocalDate firstDayOfPreviousMonthBar = firstDayOfCurrentMonthBar.minusMonths(1);
@@ -105,8 +102,6 @@ public class HomeController {
                 firstDayFormatted, lastDayFormatted, userId
         );
 
-
-
         List<Map<String, Object>> incomeDataMonthlyBarCurrent = jdbcTemplate.queryForList(
                 "SELECT SUM(amount) as total FROM income i " +
                         "WHERE i.income_date BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) AND user_id = ? ",
@@ -118,24 +113,12 @@ public class HomeController {
                 firstDayCurrentFormatted, lastDayCurrentFormatted, userId
         );
 
-
-
         model.addAttribute("incomeDataMonthlyBar", incomeDataMonthlyBar);
         model.addAttribute("expenseDataMonthlyBar", expenseDataMonthlyBar);
         model.addAttribute("incomeDataCurrentMonth", incomeDataMonthlyBarCurrent);
         model.addAttribute("expenseDataCurrentMonth", expenseDataMonthlyBarCurrent);
         model.addAttribute("BarTitleMonthlyBar", firstDayOfPreviousMonthBar.getMonth().toString());
         model.addAttribute("BarTitleCurrentMonth", firstDayOfCurrentMonthBar.getMonth().toString());
-
-
-
-
-
-
-
-
-
-
 
         LocalDate firstDayOfCurrentYearBar = LocalDate.now().withDayOfYear(1);
         LocalDate firstDayOfPreviousYearBar = firstDayOfCurrentYearBar.minusYears(1);
@@ -176,10 +159,6 @@ public class HomeController {
         model.addAttribute("BarTitleYearlyBar", firstDayOfPreviousYearBar.getYear());
         model.addAttribute("BarTitleCurrentYear", firstDayOfCurrentYearBar.getYear());
 
-
-
-
-
         return "homePage";
     }
 
@@ -193,5 +172,10 @@ public class HomeController {
     @GetMapping("/register")
     public String register() {
         return "register";
+    }
+
+    @GetMapping("/aboutUs")
+    public String aboutUs() {
+        return "aboutUs";
     }
 }
