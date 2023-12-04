@@ -126,13 +126,16 @@
                                th:field="*{amount}"
                                class="form-control"
                                id="amountInput"
-                               placeholder="Enter amount"/>
+                               placeholder="Enter amount"
+                               required
+                        />
                     </div>
                     <div class="mb-3">
                         <label for="categorySelect" class="form-label">Category</label>
                         <select class="form-select"
                                 id="categorySelect"
-                                th:field="*{category}">
+                                th:field="*{category}"
+                                required>
                             <option value="Capital Gains">Capital Gains</option>
                             <option value="Passive Income">Passive Income</option>
                             <option value="Active Income">Active Income</option>
@@ -155,7 +158,8 @@
                                th:field="*{date}"
                                class="form-control"
                                id="dateInput"
-                               placeholder="Enter date"/>
+                               placeholder="Enter date"
+                                required/>
                     </div>
                     <div class="mb-3">
                         <label for="descriptionInput" class="form-label">Description</label>

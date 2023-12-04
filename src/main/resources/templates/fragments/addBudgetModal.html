@@ -38,15 +38,17 @@
               method="post"
               th:action="@{/addBudget}"
               th:object="${budget}"
+              onsubmit="return validateAddBudgetDates()"
             >
               <div class="mb-3">
-                <label for="amountInput" class="form-label">Amount</label>
+                <label for="amountInputBudget" class="form-label">Amount</label>
                 <input
                   type="number"
                   class="form-control"
                   id="amountInputBudget"
                   placeholder="Enter amount"
                   th:field="*{amount}"
+                  required
                 />
               </div>
               <div class="mb-3">
@@ -55,6 +57,7 @@
                   class="form-select"
                   id="categorySelectBudget"
                   th:field="*{category}"
+                  required
                 >
                   <option value="All">All</option>
                   <option value="Education">Education</option>
@@ -88,27 +91,29 @@
                 </select>
               </div>
               <div class="mb-3">
-                <label for="dateInput" class="form-label">Start Date</label>
+                <label for="startDateInputBudget" class="form-label">Start Date</label>
                 <input
                   type="date"
                   class="form-control"
                   id="startDateInputBudget"
                   placeholder="Enter date"
                   th:field="*{startDate}"
+                  required
                 />
               </div>
               <div class="mb-3">
-                <label for="dateInput" class="form-label">End Date</label>
+                <label for="endDateInputBudget" class="form-label">End Date</label>
                 <input
                   type="date"
                   class="form-control"
                   id="endDateInputBudget"
                   placeholder="Enter date"
                   th:field="*{endDate}"
+                  required
                 />
               </div>
               <div class="mb-3">
-                <label for="descriptionInput" class="form-label"
+                <label for="descriptionInputBudget" class="form-label"
                   >Description</label
                 >
                 <textarea

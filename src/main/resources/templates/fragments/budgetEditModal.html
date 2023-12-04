@@ -44,6 +44,7 @@
                 class="form-control"
                 id="budgetAmount"
                 placeholder="Enter amount"
+                required
               />
             </div>
             <div class="mb-3">
@@ -52,6 +53,7 @@
                 class="form-select"
                 id="budgetCategory"
                 th:field="*{category}"
+                required
               >
                 <option value="Education">Education</option>
                 <option value="Electricity Bill">Electricity Bill</option>
@@ -91,6 +93,7 @@
                 th:field="*{startDate}"
                 id="budgetStartDate"
                 placeholder="Enter date"
+                required
               />
             </div>
             <div class="mb-3">
@@ -101,6 +104,7 @@
                 th:field="*{endDate}"
                 id="budgetEndDate"
                 placeholder="Enter date"
+                required
               />
             </div>
             <div class="mb-3">

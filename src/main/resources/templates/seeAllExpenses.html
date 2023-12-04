@@ -129,6 +129,7 @@
                   class="form-control"
                   id="amountInput"
                   placeholder="Enter amount"
+                  required
                 />
               </div>
               <div class="mb-3">
@@ -137,6 +138,7 @@
                   class="form-select"
                   id="categorySelect"
                   th:field="*{category}"
+                  required
                 >
                   <option value="Education">Education</option>
                   <option value="Electricity Bill">Electricity Bill</option>
@@ -180,6 +182,7 @@
                   class="form-control"
                   id="dateInput"
                   placeholder="Enter date"
+                  required
                 />
               </div>
               <div class="mb-3">
@@ -371,6 +374,7 @@
     </script>
     <script src="js/editExpense.js" defer></script>
     <script src="js/deleteSeeAllExpenses.js" defer></script>
+    <script src="js/validateExpenseDates.js" defer></script>
     <script src="js/updateExpenseListByCategory.js"></script>
   </body>
 </html>

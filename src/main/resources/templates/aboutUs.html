@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="/css/modal.css"/>
     <link rel="stylesheet" href="/css/button.css"/>
     <link rel="stylesheet" href="/css/buttonRed.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/about.css">
     <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -36,7 +37,6 @@
         }
         .content {
           margin-left: 250px;
-          margin-top: 50px;
         }
         .btn-expense {
           background-color: #e92a32;
@@ -65,15 +65,41 @@
 
 <div class="content">
     <div class="centering">
-        <h2 style="font-size: 40px;">
-            <strong>About Us</strong>
-        </h2>
+        <div class="heading">'
+            <h1> About Us</h1>
+            <p> Welcome to Personal Finance, your trusted partner on the journey
+                to financial well-being. At Personal finance, we understand that
+                managing personal finances can be a complex and sometimes overwhelming
+                task. That's why we're here to simplify the process, providing you with
+                the tools, resources, and guidance you need to make informed decisions and
+                achieve your financial goals.</p>
+        </div>
+
+        <div class="container">
+            <section class="about">
+                <div class="about-image">
+                    <img src="/images/aboutPage.png">
+
+                </div>
+                <div class=" about-content">
+                    <h2> Start your financial journey with us</h2>
+                    <p> We strive to demystify financial concepts, breaking them down into
+                        easy-to-understand language. Through our articles, guides, and
+                        interactive tools, we aim to empower you with the knowledge and skills necessary to take
+                        control of your financial future. Navigating the world of personal finance can be challenging,
+                        but it doesn't have to be a solitary journey. Here, we foster a community where individuals can share their experiences, insights, and tips. We believe in the power of collective wisdom and the strength that
+                        comes from supporting one another on the path to financial success. </p>
+                </div>
+
+            </section>
+
+
+        </div>
 
     </div>
 
 
 </div>
-<div th:replace="fragments/footer :: footer-fragment"></div>
 </div>
 
 <script src="js/script.js" defer></script>
