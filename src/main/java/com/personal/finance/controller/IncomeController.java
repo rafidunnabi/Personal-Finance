@@ -96,7 +96,7 @@ public class IncomeController {
             incomeService.deleteIncomeRecord(income.getId(), userId);
             model.addAttribute("userId", userId);
         } else {
-            // Handle the case where the user ID is null
+
         }
 
         return "redirect:/addIncome";
@@ -126,7 +126,6 @@ public class IncomeController {
             incomeService.deleteIncomeRecord(income.getId(), userId);
             model.addAttribute("userId", userId);
         } else {
-            // Handle the case where the user ID is null
         }
 
         return "redirect:/seeAllIncomes";

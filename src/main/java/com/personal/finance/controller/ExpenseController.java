@@ -82,7 +82,6 @@ public class ExpenseController {
             expenseService.editExpenseRecord(expense.getId(), expense.getAmount(), expense.getCategory(), localDate,
                     expense.getDescription(), userId);
             model.addAttribute("userId", userId);
-        } else {
         }
         return "redirect:/addExpense";
     }
@@ -96,8 +95,6 @@ public class ExpenseController {
         if (userId != null) {
             expenseService.deleteExpenseRecord(expense.getId(), userId);
             model.addAttribute("userId", userId);
-        } else {
-            // Handle the case where the user ID is null
         }
 
         return "redirect:/addExpense";
@@ -127,8 +124,6 @@ public class ExpenseController {
         if (userId != null) {
             expenseService.deleteExpenseRecord(expense.getId(), userId);
             model.addAttribute("userId", userId);
-        } else {
-            // Handle the case where the user ID is null
         }
 
         return "redirect:/seeAllExpenses";
