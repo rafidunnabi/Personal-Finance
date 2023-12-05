@@ -44,7 +44,7 @@ public class HistoryController {
         LocalDate parsedEndDate = LocalDate.parse(endDate, inputFormatter);
 
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM, yyyy");
-
+        System.out.println("Output formatter: " + outputFormatter);
         String formattedStartDate = parsedStartDate.format(outputFormatter);
         String formattedEndDate = parsedEndDate.format(outputFormatter);
 

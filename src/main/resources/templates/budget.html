@@ -24,10 +24,11 @@
     <link rel="stylesheet" href="/css/table.css" />
     <link rel="stylesheet" href="/css/sidebar.css" />
     <link rel="stylesheet" href="/css/body.css" />
-    <link rel="stylesheet" href="/css/button.css" />
+    <link rel="stylesheet" href="/css/editBlueButton.css" />
     <link rel="stylesheet" href="/css/buttonGreen.css" />
     <link rel="stylesheet" href="/css/buttonRed.css" />
     <link rel="stylesheet" href="/css/buttonOrange.css" />
+    <link rel="stylesheet" href="/css/editOrangeButton.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -247,7 +248,7 @@
             <button
                     type="button"
                     class="btn-green"
-                    style="margin-right: 15vh"
+                    style="margin-right: 10vh"
                     data-bs-toggle="modal"
                     data-bs-target="#addBudgetModal"
             >
@@ -263,19 +264,19 @@
               >
                 <div class="container">
                   <div class="row ">
-                    <div class="col-12" style="display: flex; flex-direction: row;">
+                    <div class="col-13" style="width: 1000vh; display: flex; flex-direction: row; justify-content: center">
                       <!-- Loop through each budget -->
                       <div style="display: flex;
                       flex-wrap: wrap;
-                      justify-content: flex-start; ">
+                      justify-content: flex-start; margin: auto">
                       <div
                         th:each="budget : ${recentBudgets}"
                         class="card shadow-2-strong "
                         style="width: 500px; margin-bottom: 50px; margin-right: 50px;"
                       >
                         <div class="card-body">
-                          <p class="card-text">
-                            <strong th:text="${budget.startDate} + '  - ' + ${budget.endDate}"></strong>
+                          <p class="card-text" th:text="${budget.startDate} + '  - ' + ${budget.endDate}">
+
                           </p>
                           <div
                             style="
@@ -340,22 +341,22 @@
                             <!-- Edit button -->
                           <button
                           type="button"
-                          class="btn"
+                          class="btn-editBlue"
                           th:attr="budget-category=${budget.category}, budget-description=${budget.description}, budget-startDate=${budget.startDate}, budget-endDate=${budget.endDate}, budget-amount=${budget.amount}, budget-id=${budget.id}"
                           data-bs-toggle="modal"
                           data-bs-target="#budgetEditModal"
                           onclick="populateEditBudgetForm(this)"
                         >
-                          <i class="fa-regular fa-pen-to-square"></i>
+                          <i class="fa-regular fa-pen-to-square" style="font-size: 17px;"></i>
                         </button>
                         <!-- Delete button -->
-                        <form th:action="@{/deleteBudget}" th:method="post" style="margin-left: 10px;">
+                        <form th:action="@{/deleteBudget}" th:method="post" style="margin-left: 3px;">
                           <input type="hidden" name="id" th:value="${budget.id}">
                           <button
                           type="submit"
-                          class="btn-orange"
+                          class="btn-editOrange"
                         >
-                          <i class="fa-solid fa-trash"></i>
+                        <i class="fa-regular fa-trash-can" style="font-size: 17px;"></i>
                         </button>
                       </form>
                           </div>
@@ -390,8 +391,6 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-    <!-- <script src="js/editIncome.js" defer></script>
-    <script src="js/deleteIncome.js" defer></script> -->
     <script src="js/removeAlert.js" defer></script>
     <script src="js/budgetEdit.js" defer></script>
     <script src="js/validateAddBudgetDates.js" defer></script>

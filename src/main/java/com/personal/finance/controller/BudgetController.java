@@ -39,6 +39,12 @@ public class BudgetController {
         List<Budget> updatedBudgets = budgetService.getBudgetsAndUpdateAmounts(recentBudgets, userId);
 
         model.addAttribute("budget", new Budget());
+        for(Budget budget: updatedBudgets)
+        {
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM, yyyy");
+            budget.setStartDate(LocalDate.parse(budget.getStartDate()).format(outputFormatter));
+            budget.setEndDate(LocalDate.parse(budget.getEndDate()).format(outputFormatter));
+        }
         model.addAttribute("recentBudgets", updatedBudgets);
 
         return "budget";

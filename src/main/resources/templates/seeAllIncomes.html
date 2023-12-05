@@ -159,7 +159,7 @@
                                class="form-control"
                                id="dateInput"
                                placeholder="Enter date"
-                                required/>
+                               required/>
                     </div>
                     <div class="mb-3">
                         <label for="descriptionInput" class="form-label">Description</label>
@@ -241,12 +241,12 @@
                 </h3>
                 <div style="display: flex; align-items: flex-start">
                     <form th:action="@{/seeAllIncomes}" method="get">
-                    <button type="submit"
-                            class="btn-green"
-                            style="margin-right: 15px">
-                        <i class="fa-regular fa-eye" style="margin-right: 5px"></i>
-                        All
-                    </button>
+                        <button type="submit"
+                                class="btn-green"
+                                style="margin-right: 15px">
+                            <i class="fa-regular fa-eye" style="margin-right: 5px"></i>
+                            All
+                        </button>
                     </form>
                     <button type="button"
                             class="btn-green"
@@ -287,33 +287,32 @@
                                                         <th scope="col">Edit</th>
                                                     </tr>
                                                     </thead>
-                                                        <tbody id="tableBody">
-                                                        <tr th:each="income : ${recentIncomes}">
-                                                            <td id="editCategory"
-                                                                th:text="${income.category}"
-                                                                style="width: 10px"></td>
-                                                            <td id="editDescription"
-                                                                th:text="${income.description}"
-                                                                style="width: 10px"></td>
-                                                            <td id="editDate"
-                                                                th:text="${income.date}"
-                                                                style="width: 10px"></td>
-                                                            <td id="editAmount"
-                                                                th:text="${income.amount}"
-                                                                style="width: 10px"></td>
-                                                            <td style="width: 10px">
-                                                                <button type="button"
-                                                                        class="btn btn-danger btn-sm px-3"
-                                                                        th:attr="data-category=${income.category},data-description=${income.description},data-date=${income.date},data-amount=${income.amount},data-id=${income.id}"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#exampleModalEdit"
-                                                                        onclick="populateEditForm(this)">
-                                                                    <i class="fa-regular fa-pen-to-square"></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </div>
+                                                    <tbody id="tableBody">
+                                                    <tr th:each="income : ${recentIncomes}">
+                                                        <td id="editCategory"
+                                                            th:text="${income.category}"
+                                                            style="width: 10px"></td>
+                                                        <td id="editDescription"
+                                                            th:text="${income.description}"
+                                                            style="width: 10px"></td>
+                                                        <td id="editDate"
+                                                            th:text="${income.date}"
+                                                            style="width: 10px"></td>
+                                                        <td id="editAmount"
+                                                            th:text="${income.amount}"
+                                                            style="width: 10px"></td>
+                                                        <td style="width: 10px">
+                                                            <button type="button"
+                                                                    class="btn btn-danger btn-sm px-3"
+                                                                    th:attr="data-category=${income.category},data-description=${income.description},data-date=${income.date},data-amount=${income.amount},data-id=${income.id}"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#exampleModalEdit"
+                                                                    onclick="populateEditForm(this)">
+                                                                <i class="fa-regular fa-pen-to-square"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>

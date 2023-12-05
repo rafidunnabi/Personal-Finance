@@ -1,0 +1,13 @@
+.btn-editBlue {
+
+    background-color: #04bade;
+    background: transparent;
+    border: none;
+    color: #04bade;
+    border-radius: 4px;
+    height: 30px;
+  }
+
+  .btn-editBlue:hover {
+    color: #077B97;
+  }
