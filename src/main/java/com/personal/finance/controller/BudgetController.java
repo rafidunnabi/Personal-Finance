@@ -4,7 +4,6 @@ import com.personal.finance.model.Budget;
 import com.personal.finance.model.Expense;
 import com.personal.finance.repository.UserRepository;
 import com.personal.finance.service.BudgetService;
-import org.springframework.cglib.core.Local;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -65,7 +64,6 @@ public class BudgetController {
                     budget.getDescription(),
                     userId);
             model.addAttribute("userId", userId);
-        } else {
         }
         return "redirect:/budget";
     }
@@ -80,7 +78,6 @@ public class BudgetController {
             LocalDate localEndDate = LocalDate.parse(budget.getEndDate());
             budgetService.editBudget(budget.getAmount(), budget.getCategory(), localStartDate, localEndDate,
                     budget.getDescription(), userId, budget.getId());
-        } else {
         }
         return "redirect:/budget";
     }
@@ -93,8 +90,6 @@ public class BudgetController {
         if (userId != null) {
             budgetService.deleteBudgetById(id, userId);
             redirectAttributes.addAttribute("deleted", true);
-        } else {
-            // Handle the case where the user ID is null
         }
         return "redirect:/budget";
     }

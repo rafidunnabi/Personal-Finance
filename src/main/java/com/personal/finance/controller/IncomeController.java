@@ -148,7 +148,6 @@ public class IncomeController {
             model.addAttribute("isCategoryClicked", true);
             double totalIncome = incomeByCategoryList.stream().mapToDouble(Income::getAmount).sum();
             model.addAttribute("totalIncome", totalIncome);
-
         }
         return "seeAllIncomes";
     }

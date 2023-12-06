@@ -53,14 +53,23 @@
   </head>
   <body>
     <div th:replace="fragments/sidebar :: sidebar-fragment"></div>
-
+    <div th:replace="fragments/addGoalModal :: addGoal-fragment"></div>
     <div class="content">
       <div th:if="${param.deleted}">
-        <div id="deleteAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Goal has been deleted successfully!</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div
+          id="deleteAlert"
+          class="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Goal has been deleted successfully!</strong>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
         </div>
-    </div>
+      </div>
       <div
         style="
           display: flex;
@@ -77,11 +86,7 @@
       </div>
 
       <div
-        style="
-          display: flex;
-          flex-direction: row;
-          justify-content: flex-start;
-        "
+        style="display: flex; flex-direction: row; justify-content: flex-start"
       >
         <div
           style="
@@ -91,142 +96,182 @@
             width: 1200px;
           "
         >
-          <div style="
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        ">
-            <h3 style="margin-left: 50px; align-items: center"><strong>Goal</strong></h3>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <h3 style="margin-left: 50px; align-items: center">
+              <strong>Goal</strong>
+            </h3>
             <button
-                    type="button"
-                    class="btn-green"
-                    style="margin-right: 10vh"
-                    data-bs-toggle="modal"
-                    data-bs-target="#addBudgetModal"
+              type="button"
+              class="btn-green"
+              style="margin-right: 10vh"
+              data-bs-toggle="modal"
+              data-bs-target="#addGoalModal"
             >
               Add Goal
             </button>
           </div>
 
-          <section class="intro" style="margin-left: 20px;">
+          <section class="intro" style="margin-left: 20px">
             <div class="bg-image h-100" style="margin-top: 10px">
               <div
                 class="mask d-flex h-100"
                 style="display: flex; justify-content: flex-start"
               >
                 <div class="container">
-                  <div class="row ">
-                    <div class="col-13" style="width: 1000vh; display: flex; flex-direction: row; justify-content: center">
-                      <!-- Loop through each budget -->
-                      <div style="display: flex;
-                      flex-wrap: wrap;
-                      justify-content: center;">
+                  <div class="row">
+                    <div
+                      class="col-13"
+                      style="
+                        width: 1000vh;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                      "
+                    >
+                      <!-- Loop through each goal -->
                       <div
-                        th:each="budget : ${recentBudgets}"
-                        class="card shadow-2-strong "
-                        style="width: 800px; margin-bottom: 50px; margin-right: 50px;"
+                        style="
+                          display: flex;
+                          flex-wrap: wrap;
+                          justify-content: center;
+                        "
                       >
-                        <div class="card-body">
-                          <p class="card-text" th:text="${budget.startDate} + '  - ' + ${budget.endDate}">
-
-                          </p>
-                          <div
-                            style="
-                              display: flex;
-                              flex-direction: row;
-                              justify-content: space-between;
-                            "
-                          >
-                          
-                            <p class="card-text">
-                              <strong th:text="${budget.category}"></strong>
-                            </p>
-                            <p class="card-text">
-                              <strong th:text="'$' + ${budget.amount}"></strong>
-                            </p>
-                          </div>
-                          <div
-                            style="
-                              display: flex;
-                              flex-direction: row;
-                              justify-content: space-between;
-                            "
-                          >
-                          
-                            <p class="card-text" th:text="${budget.description}">
-                            </p>
-                          </div>
-                          <!-- Progress bar -->
-                          <div class="progress mt-3" style="height: 8px">
-                            <!-- Calculate the progress percentage -->
+                        <div
+                          th:each="goal : ${recentGoals}"
+                          class="card shadow-2-strong"
+                          style="
+                            width: 800px;
+                            margin-bottom: 50px;
+                            margin-right: 50px;
+                          "
+                        >
+                          <div class="card-body">
+                            <p class="card-text" th:text="Hello"></p>
                             <div
-                              class="progress-bar"
-                              role="progressbar"
-                              th:style="'height: 8px;' + 'width: ' + ${ (budget.spentAmount / budget.amount) * 100 } + '%; background-color: ' + (${(budget.spentAmount / budget.amount) * 100 >= 95} ? '#FF474D' : (${(budget.spentAmount / budget.amount) * 100 >= 60} ? 'orange' : '#50c878')) + ';'"
-                              aria-valuenow="${(budget.spentAmount / budget.amount) * 100}"
-                              aria-valuemin="0"
-                              aria-valuemax="100"
-                            ></div>
-                          </div>
+                              style="
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                              "
+                            >
+                              <p class="card-text">
+                                <strong th:text="Category"></strong>
+                              </p>
+                              <p class="card-text">
+                                <strong th:text="Amount"></strong>
+                              </p>
+                            </div>
+                            <div
+                              style="
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                              "
+                            >
+                              <p class="card-text" th:text="Description"></p>
+                            </div>
+                            <!-- Progress bar -->
+                            <div class="progress mt-3" style="height: 8px">
+                              <!-- Calculate the progress percentage -->
+                              <div
+                                class="progress-bar"
+                                role="progressbar"
+                                th:style="height: 8px; width: 12px"
+                                aria-valuenow=""
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                              ></div>
+                            </div>
 
-                          <!-- Display spent and left amounts -->
-                          <div
-                            style="
-                              display: flex;
-                              flex-direction: row;
-                              justify-content: space-between;
-                              margin-top: 3px;
-                            "
-                          >
-                            <p
-                              class="card-text"
-                              th:text="'Spent: ' + '$' + ${budget.spentAmount}"
-                            ></p>
-                            <p
-                              class="card-text"
-                              th:text="'Remaining: ' + '$' + ${budget.remainingAmount}"
-                            ></p>
+                            <!-- Display spent and left amounts -->
+                            <div
+                              style="
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                margin-top: 3px;
+                              "
+                            >
+                              <p class="card-text" th:text="Spent Amount"></p>
+                              <p
+                                class="card-text"
+                                th:text="Remaining Amount"
+                              ></p>
+                            </div>
+
+                            <div
+                              style="
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                              "
+                            >
+                              <div style="display: flex; flex-direction: row">
+                                <!-- Edit button -->
+                                <button
+                                  type="button"
+                                  class="btn-editBlue"
+                                  th:attr=""
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#goalEditModal"
+                                  onclick="populateEditGoalForm(this)"
+                                >
+                                  <i
+                                    class="fa-regular fa-pen-to-square"
+                                    style="font-size: 17px"
+                                  ></i>
+                                </button>
+                                <!-- Delete button -->
+                                <form
+                                  th:action="@{/deleteGoal}"
+                                  th:method="post"
+                                  style="margin-left: 3px"
+                                >
+                                  <input
+                                    type="hidden"
+                                    name="id"
+                                    th:value="${goal.id}"
+                                  />
+                                  <button type="submit" class="btn-editOrange">
+                                    <i
+                                      class="fa-regular fa-trash-can"
+                                      style="font-size: 17px"
+                                    ></i>
+                                  </button>
+                                </form>
+                              </div>
+                              <!-- See expense button -->
+                              <form
+                                th:action="@{/seeExpenseForBudget}"
+                                th:method="post"
+                                style="margin-left: 10px"
+                              >
+                                <input
+                                  type="hidden"
+                                  name="id"
+                                  th:value="${goal.id}"
+                                />
+                                <button
+                                  type="submit"
+                                  class="btn-green"
+                                  style="
+                                    background: none;
+                                    font: inherit;
+                                    color: rgb(243, 61, 55);
+                                  "
+                                >
+                                  View Goal
+                                </button>
+                              </form>
+                            </div>
                           </div>
-                          
-                          <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                          <div style="display: flex; flex-direction: row;">
-                            <!-- Edit button -->
-                          <button
-                          type="button"
-                          class="btn-editBlue"
-                          th:attr="budget-category=${budget.category}, budget-description=${budget.description}, budget-startDate=${budget.startDate}, budget-endDate=${budget.endDate}, budget-amount=${budget.amount}, budget-id=${budget.id}"
-                          data-bs-toggle="modal"
-                          data-bs-target="#budgetEditModal"
-                          onclick="populateEditBudgetForm(this)"
-                        >
-                          <i class="fa-regular fa-pen-to-square" style="font-size: 17px;"></i>
-                        </button>
-                        <!-- Delete button -->
-                        <form th:action="@{/deleteBudget}" th:method="post" style="margin-left: 3px;">
-                          <input type="hidden" name="id" th:value="${budget.id}">
-                          <button
-                          type="submit"
-                          class="btn-editOrange"
-                        >
-                        <i class="fa-regular fa-trash-can" style="font-size: 17px;"></i>
-                        </button>
-                      </form>
-                          </div>
-                          <!-- See expense button -->
-                        <form th:action="@{/seeExpenseForBudget}" th:method="post" style="margin-left: 10px;">
-                          <input type="hidden" name="id" th:value="${budget.id}">
-                          <button
-                          type="submit"
-                          class="btn-green"
-                          style="background: none; font: inherit; color: rgb(243, 61, 55)"
-                          
-                        >View Expense
-                        </button>
-                      </form>
                         </div>
-                        </div>
-                      </div>
-                    </div>
                       </div>
                     </div>
                   </div>
