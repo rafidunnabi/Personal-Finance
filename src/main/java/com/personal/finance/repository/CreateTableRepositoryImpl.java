@@ -94,4 +94,41 @@ public class CreateTableRepositoryImpl implements CreateTableRepository {
 
         jdbcTemplate.execute(createTableQuery);
     }
+
+    @Override
+    public void createGoalTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS goal (id SERIAL PRIMARY KEY, " +
+                "user_id INT NOT NULL," +
+                "title VARCHAR(255) NOT NULL," +
+                "target_amount DECIMAL(10, 2) NOT NULL," +
+                "current_amount DECIMAL(10, 2) NOT NULL," +
+                "target_date DATE NOT NULL," +
+                "goal_category_id INT NOT NULL," +
+                "status VARCHAR(255) NOT NULL," +
+                "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
+                "updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
+
+        jdbcTemplate.execute(sql);
+    }
+
+    @Override
+    public void createGoalCategoriesTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS goal_categories ("
+                + "id SERIAL PRIMARY KEY,"
+                + "goal_category_name VARCHAR(255) NOT NULL"
+                + ")";
+        jdbcTemplate.execute(sql);
+    }
+
+    @Override
+    public void createContributionTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS contribution (" +
+                "id SERIAL PRIMARY KEY," +
+                "goal_id INT NOT NULL," +
+                "amount DECIMAL(10, 2) NOT NULL," +
+                "transaction_date DATE NOT NULL," +
+                "notes TEXT," +
+                "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
+        jdbcTemplate.execute(sql);
+    }
 }

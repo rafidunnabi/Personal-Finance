@@ -14,4 +14,10 @@ public interface CreateTableRepository {
     void createBudgetCategoriesTable();
 
     void createBudgetTable();
+
+    void createGoalTable();
+
+    void createGoalCategoriesTable();
+
+    void createContributionTable();
 }
